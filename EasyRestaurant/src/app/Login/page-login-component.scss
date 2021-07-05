@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap:15px;
 
 }
 
@@ -15,11 +16,17 @@
 }
 
 @keyframes show-animation {
-    from {opacity: 0;
-    transform: scale(0);}
-    to {opacity:  1;
-        transform: scale(1);}
-  }
+
+    from {
+        opacity: 0;
+        transform: scale(0);
+        
+    }   
+    to {
+        opacity:  1;
+        transform: scale(1);
+    }
+}
 
 .page-login-container{
     height: 100%;
@@ -34,15 +41,13 @@
         background-color: rgb(123,72,215,0.3);
         @include flex-column-center ;
         border-radius: 10px;
-        border: 1px solid #d7436e;
+        border: 2px solid #d7436e;
         box-shadow: 0px 0px 20px 3px #d7436e;
-        animation-name: show-animation;
-        animation-duration: 6s;
-
+        animation: show-animation 6s;
+        
         .form{
             height: 80%;
             width: 85%;
-            // background-color: chocolate;
             @include flex-column-center ;
             justify-content: flex-end;
             gap: 40px;
@@ -61,14 +66,25 @@
                 text-transform: uppercase;
                 }
             }
-            .input{
+            .input-container{
                 width: 200px;
                 height: 40px;
                 border-radius: 10px;
                 background-color: transparent;
-                font-size: 0.9rem;
-                font-weight: 600;
-               text-align: center;
+                @include flex-row-center;
+
+                .icon{
+                    transform: scale(0.8);
+                    width: 30px;
+                    border-right: 2px solid #26B373;
+                }
+                .input{
+                    background-color: transparent;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    text-align: justify;
+                    width: 125px;
+                }
             }
 
             .input-green{
@@ -79,6 +95,7 @@
 
             .input-red{
                 border: 2px solid #D7436E;
+                justify-content: center;
             }
             .input-red:hover{
                 cursor: pointer;
