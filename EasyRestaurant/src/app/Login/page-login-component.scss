@@ -1,0 +1,89 @@
+@mixin flex-row-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+@mixin flex-column-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+@keyframes show-animation {
+    from {opacity: 0;
+    transform: scale(0);}
+    to {opacity:  1;
+        transform: scale(1);}
+  }
+
+.page-login-container{
+    height: 100%;
+    width: 100%;
+    @include flex-column-center ;
+    background: rgb(2,0,36);
+    background: radial-gradient(circle, #020024 10%, #6d317d 109%, #5E2D7F 98%);
+
+    .login-card{
+        height: 400px;
+        width: 300px;
+        background-color: rgb(123,72,215,0.3);
+        @include flex-column-center ;
+        border-radius: 10px;
+        border: 1px solid #d7436e;
+        box-shadow: 0px 0px 20px 3px #d7436e;
+        animation-name: show-animation;
+        animation-duration: 6s;
+
+        .form{
+            height: 80%;
+            width: 85%;
+            // background-color: chocolate;
+            @include flex-column-center ;
+            justify-content: flex-end;
+            gap: 40px;
+
+            .logo-container{
+                width: 200px;
+              
+                .img-logo{
+                    width: 100%;
+                }
+
+                .logo-title{
+                text-align: center;
+                font-size: 1.45rem;
+                font-weight: 400;
+                text-transform: uppercase;
+                }
+            }
+            .input{
+                width: 200px;
+                height: 40px;
+                border-radius: 10px;
+                background-color: transparent;
+                font-size: 0.9rem;
+                font-weight: 600;
+               text-align: center;
+            }
+
+            .input-green{
+                border: 2px solid #26B373;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            .input-red{
+                border: 2px solid #D7436E;
+            }
+            .input-red:hover{
+                cursor: pointer;
+            }
+            
+        }
+    }
+}
