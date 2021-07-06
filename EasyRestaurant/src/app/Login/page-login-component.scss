@@ -127,6 +127,10 @@
                 border: 2px solid #C959E1;
                 animation: show-animation-in-login-btn 1s ;
             }
+            .input-red:active{
+               position: relative;
+               top: 2px;
+            }
         }
     }
 }
