@@ -1,0 +1,108 @@
+ul {
+    list-style-type: none;
+}
+
+
+.page-home-container {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(2,0,36);
+    background: radial-gradient(circle, #020024 10%, #6d317d 109%, #5E2D7F 98%);
+
+    .navbar-container {
+    
+        margin: 0 2rem ;
+        border-bottom: 2px solid rgba(43, 106, 197, 1);
+        /*box-shadow: 0px 2px 0.5px 0px rgb(8, 241, 136);*/
+
+        .navbar-item-container {
+            margin: 0;
+            padding: 0;
+            height: 4.25rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            .navbar-item {
+                color: white;
+                font-size: 0.87rem;
+                padding: 0px 8rem 0px 0px;
+                
+            }
+
+            .navbar-container-buttons {
+
+                width: 13rem;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .navbar-button {
+                    background-color: transparent;
+                    border-radius: 10px;
+                    height: 2.5rem;
+                    width: 6rem;
+                    font-size: 0.87rem;
+                    
+                }
+
+                .navbar-receitas-button {
+                    color: rgba(43, 106, 197, 1);
+                    border: 2px solid rgba(43, 106, 197, 1);
+                    /*box-shadow: 0px 0px 2px 0px rgb(7, 105, 241);*/
+
+                }
+
+                .navbar-sair-button {
+                    color: rgba(215, 67, 110, 1);
+                    border: 2px solid rgba(215, 67, 110, 1);
+                    /*box-shadow: 0px 0px 2px 0px rgb(235, 13, 76);*/
+
+                }
+            }
+
+            
+            
+        }
+    }
+
+    .main-container {
+        display: flex;
+        justify-content: space-between;
+        height: 85%;
+        margin: 0 2rem ;
+        padding: 1.5rem 0;
+        border-bottom: 2px solid rgba(43, 106, 197, 1);
+        
+
+        .home-menu {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(201, 89, 225, 1);
+            border-radius: 0.62rem;
+            align-items: center;
+            width: 12%;
+
+            .hone-menu-item {
+                color: white;
+                font-size: 0.87rem;
+            }  
+        }
+
+        .informacoes {
+
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(201, 89, 225, 1);
+            border-radius: 0.62rem;
+            align-items: center;
+            width: 12%;
+        }
+    }
+}
