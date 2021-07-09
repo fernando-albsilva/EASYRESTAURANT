@@ -7,6 +7,7 @@ import { EventEmitter } from '@angular/core';
 export class PageRouterService {
 
   pageHome  = new EventEmitter<any>();
+  pageLogin = new EventEmitter<any>();
  
 
   constructor() { }
@@ -14,5 +15,10 @@ export class PageRouterService {
   chamaHomePage(){
    this.pageHome.emit("true");
    
+  }
+
+  chamaLoginPage() {
+
+    this.pageLogin.emit("true");
   }
 }
