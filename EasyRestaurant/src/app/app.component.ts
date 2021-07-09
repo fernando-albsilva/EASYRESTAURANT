@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.pageRouterService.pageHome.subscribe((teste : string)=>{
       this.trocaPageHome(teste);
+    });
+    this.pageRouterService.pageLogin.subscribe((teste : string) => {
+      this.trocaPageLogin(teste);
     })
   }
 
@@ -26,6 +29,16 @@ export class AppComponent implements OnInit {
       this.pageHome=true;
       this.pageLogin=false;
     }
+  }
+
+  trocaPageLogin(teste: string) {
+
+    if(teste === "true") {
+
+      this.pageHome=false;
+      this.pageLogin=true;
+    }
+
   }
 
 
