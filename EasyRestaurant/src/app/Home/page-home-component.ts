@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { PageRouterService } from '../Service/page-router-service.service';
 
 @Component({
   selector: 'page-home',
