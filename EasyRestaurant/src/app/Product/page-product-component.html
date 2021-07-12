@@ -1,3 +1,19 @@
 <div class="bg-color-default">
-<button (click)="getProducts()">get</button>
+    <div class="container" >
+        <div *ngFor="let product of productList" class="product-card-container">
+            <p>
+              Id : {{product.id}}
+
+            </p>
+            <p>
+            Nome :  {{product.name}}
+        </p>
+            <p>
+           Valor Únitario : {{product.unitValue}}
+        </p>
+            <p>
+          Custo Unitario :  {{product.cost}}
+        </p>
+        </div>
+    </div>
 </div>
