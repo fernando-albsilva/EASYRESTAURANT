@@ -1,5 +1,6 @@
 import { PageRouterService } from './../Service/page-router-service.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'page-login',
@@ -8,10 +9,11 @@ import { Component } from '@angular/core';
 })
 export class PageLoginComponent {
 
-  constructor (private pageRouterService:PageRouterService) {}
+  constructor (private pageRouterService:PageRouterService,
+    private router: Router) {}
 
-  chamaQuandoClica()
+  navigateToHomePage()
   {
-    this.pageRouterService.chamaHomePage()
+    this.router.navigate(['page-home']);
   }
 }
