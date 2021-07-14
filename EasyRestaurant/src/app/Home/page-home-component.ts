@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageRouterService } from '../Service/page-router-service.service';
 
 @Component({
@@ -8,10 +9,11 @@ import { PageRouterService } from '../Service/page-router-service.service';
 })
 export class PageHomeComponent {
 
-  constructor(private pageRouterService: PageRouterService){}
+  constructor(private router: Router) {}
 
-  chamaLoginPage() {
-    this.pageRouterService.chamaLoginPage();
-    
+  navigateToLoginPage()
+  {
+    this.router.navigate(['']);
   }
+
 }
