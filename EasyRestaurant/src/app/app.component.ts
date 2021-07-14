@@ -41,6 +41,6 @@ export class AppComponent implements OnInit {
 
   }
 
-
+//TODO salvar comando -> ng serve --proxy-config proxy.config.js -o
 
 }

@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { PageHomeComponent } from './Home/page-home-component';
 import { PageLoginComponent } from './Login/page-login-component';
 import { PageProuctComponent } from './Product/page-product-component';
+import { ProductCardComponent } from './Product/product-card/er-product-card-component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageLoginComponent,
     PageHomeComponent,
-    PageProuctComponent
+    PageProuctComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
