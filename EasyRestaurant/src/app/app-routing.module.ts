@@ -6,9 +6,9 @@ import { PageLoginComponent } from './Login/page-login-component';
 
 const routes: Routes = [
   { path: "", component: PageLoginComponent },
-  { path: 'home', component: PageHomeComponent },
-  { path: 'product', component: PageProuctComponent },
-  { path: 'page-home', component: PageHomeComponent }
+  { path: 'home', component: PageHomeComponent }
+  // { path: 'product', component: PageProuctComponent },
+  // { path: 'page-home', component: PageHomeComponent }
 ];
 
 @NgModule({
