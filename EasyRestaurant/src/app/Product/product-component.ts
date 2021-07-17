@@ -1,13 +1,13 @@
 import { ProductApi } from './api/product-api';
-import { PageRouterService } from './../Service/page-router-service.service';
+
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from './models/Product.model';
 @Component({
-  selector: 'page-product',
-  templateUrl: 'page-product-component.html',
-  styleUrls: ['page-product-component.scss']
+  selector: 'product',
+  templateUrl: 'product-component.html',
+  styleUrls: ['product-component.scss']
 })
-export class PageProuctComponent implements OnInit {
+export class ProductComponent implements OnInit {
 
     public productList : Array<ProductModel> = []
     constructor(private productApi:ProductApi){}

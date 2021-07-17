@@ -1,0 +1,61 @@
+
+<div class="header-menu-container">
+ 
+  <div class="top-row-container">
+
+    <div class="logo">
+      <span class="logo-text green">EASY</span>
+      <span class="logo-text red">RESTAURANT</span>
+    </div>
+
+    <span routerLink="/login" class="material-icons-outlined icon">exit_to_app</span>
+
+  </div>
+
+  <div class="bottom-row-container">
+
+    <div class="bottom-row-left-chield-container">
+
+        <div class="left-chield">
+          <span class="material-icons-outlined icon">home</span>
+          <span routerLink="/home" class="chield-text">Home</span>
+        </div>
+
+        <div class="left-chield">
+          <span class="material-icons-outlined icon">fastfood</span>
+          <span routerLink="/product" class="chield-text">Product</span>
+        </div>
+
+        <div class="left-chield">
+          <span class="material-icons-outlined icon">badge</span>
+          <span class="chield-text">Funcionario</span>
+        </div>
+
+    </div>
+
+    <div class="bottom-row-right-chield-container">
+
+      <div class="right-chield">
+        <span class="material-icons-outlined icon">account_box</span>
+        <span class="chield-text">Admin</span>
+      </div>
+  
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+<div class="bg-color-default">
+
+    <div class="container" >
+    
+          <product-card *ngFor="let product of productList" [product]="product"></product-card>
+      
+    </div>
+</div>

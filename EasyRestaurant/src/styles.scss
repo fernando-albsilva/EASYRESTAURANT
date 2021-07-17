@@ -1,4 +1,4 @@
-html,body,app-root,page-product{
+html,body,app-root{
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
@@ -10,6 +10,10 @@ a,input,button{
     outline-style: none;
     text-decoration: none;
     border:none;
+}
+
+div,span{
+    box-sizing: border-box;
 }
 
 .green{
@@ -45,3 +49,13 @@ a,input,button{
     background: radial-gradient(circle, #020024 10%, #6d317d 109%, #5E2D7F 98%);
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+  
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(201, 89, 225,0.8); 
+    // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); 
+}
