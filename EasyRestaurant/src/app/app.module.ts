@@ -1,4 +1,3 @@
-import { LoginModule } from './Login/login.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,8 +6,11 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { HomeModule } from './Home/home.module';
+import { LoginModule } from './Login/login.module';
 import { AppComponent } from './app.component';
 import { ProductApi } from './Product/api/product-api';
+import { SharedModule } from './Shared/shared.module';
 import { ProductModule } from './Product/product.module';
 
 
@@ -22,7 +24,10 @@ import { ProductModule } from './Product/product.module';
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
-    LoginModule
+    LoginModule,
+    SharedModule,
+    ProductModule,
+    HomeModule
   
   ],
   providers: [

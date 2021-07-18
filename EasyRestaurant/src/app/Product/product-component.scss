@@ -2,15 +2,18 @@
 .bg-color-default{
     height: calc(100vh - 90px);
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;  
     background: linear-gradient(14deg , #7E4C78 0%, #403763 100%);
+    padding: 20px;
   
     .container{
-        height: 80%;
-        width: 80%;
+        height: 100%;
+        width: 90%;
         overflow-y: auto;
 
     }
     
 }
+

@@ -17,13 +17,16 @@ div,span{
 }
 
 .green{
+    transition: color 0.7s ease-in-out;
     color: #26B373;
 }
 .green-bg{
+    
     background-color: #26B373;
 }
 
 .red{
+    transition: color 0.7s ease-in-out;
     color: #D7436E;
 }
 .red-bg{
@@ -31,6 +34,7 @@ div,span{
 }
 
 .purple{
+    transition: color 0.7s ease-in-out;
     color: #C959E1;
 }
 .purple-bg{
@@ -38,10 +42,19 @@ div,span{
 }
 
 .blue{
+    transition: color 0.7s ease-in-out;
     color: #2B6AC5;
 }
 .blue-bg{
     background-color: #2B6AC5;
+}
+
+.orange{
+    transition: color 0.7s ease-in-out;
+    color: #DC703A;
+}
+.orange-bg{
+    background-color: #DC703A;
 }
 
 .bg-color-default{
