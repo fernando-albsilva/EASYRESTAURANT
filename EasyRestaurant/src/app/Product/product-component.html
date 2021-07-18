@@ -11,7 +11,8 @@
     
           <product-card *ngFor="let product of productList" [product]="product"
            (itemSelected)="selectItem($event)"
-           [classSelected]="classSelected" >
+          [changeClass]="classSelected"
+           >
           </product-card>
       
     </div>

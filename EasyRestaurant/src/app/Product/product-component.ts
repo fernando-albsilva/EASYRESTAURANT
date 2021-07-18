@@ -1,7 +1,8 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProductApi } from './api/product-api';
 
-import { Component, Input, OnInit } from '@angular/core';
 import { ProductModel } from './models/Product.model';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'product',
   templateUrl: 'product-component.html',
@@ -13,13 +14,16 @@ export class ProductComponent implements OnInit {
     public selectedItemList : Array<string> = [];
     @Input() public itemSelected : boolean = false;
     // public classSelected : string = "";
-    @Input() public classSelected : string = "";
+    classSelected:Subject<string> = new Subject();
 
 
     constructor(private productApi:ProductApi){}
 
     ngOnInit(): void {
         this.getProducts();
+       
+        
+        
     }
     getProducts(){
        this.productList = this.productApi.getProducts();
@@ -30,7 +34,7 @@ export class ProductComponent implements OnInit {
     public selectItem(id:string){
       console.log(id);
       let test:boolean = false;
-      
+      this.classSelected.next(id);
       this.selectedItemList = this.selectedItemList.filter( (element )=>{
         if(element===id)
         {
@@ -42,11 +46,11 @@ export class ProductComponent implements OnInit {
 
       if(!test)
       {
-        this.classSelected=id+"true";
+        // this.classSelected=id+"true";
         this.selectedItemList.push(id);
         
       }else{
-        this.classSelected=id+"false";
+        // this.classSelected=id+"false";
       }
      
       this.itemIsSelected(id);
@@ -80,4 +84,6 @@ export class ProductComponent implements OnInit {
     public removeElement(){
       alert("chamou pai remove");
     }
+
+
 }

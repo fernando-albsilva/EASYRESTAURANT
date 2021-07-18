@@ -1,7 +1,7 @@
 <div 
   [ngClass]="{
               'product-card':true,
-               'card-selected' : (product.id+true === classSelected)
+               'card-selected' : (isSelected)
                }" 
   (click)=sendItemId(product.id) >
   

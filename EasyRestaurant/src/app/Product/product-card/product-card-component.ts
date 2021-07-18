@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { ProductModel } from 'src/app/Product/models/Product.model';
 
@@ -11,13 +12,14 @@ export class ProductCardComponent implements OnInit {
 
     @Input() public product: ProductModel = new ProductModel();
     @Output() public itemSelected = new EventEmitter();
-
-    @Input() public classSelected:string="";
+    @Input() changeClass : Subject<string>= new Subject();
+   
     
     public productId:string="";
     public productName:string="";
     public unitValue:number=0.0;
     public unitCost:number=0.0;
+    public isSelected:boolean=false;
     // public product: ProductModel = new ProductModel();
 
     constructor (){
@@ -33,15 +35,27 @@ export class ProductCardComponent implements OnInit {
         this.unitCost = this.product.cost;
       }
 
+      this.changeClass.subscribe( element =>{
+        this.changeClassSelected(element);
+      });
     }
 
     public sendItemId(id:string){
       this.itemSelected.emit(id);
     }
 
-    public isClassSelected(classSelected:string)
-    {
+   
+    public changeClassSelected(id:string){
+      if(this.productId === id && this.isSelected === true)
+      {
+        this.isSelected = false;
+      }else{
 
+        if(this.productId === id && this.isSelected === false)
+        {
+          this.isSelected=true;
+        }
+      }
     }
 
 }
