@@ -1,4 +1,9 @@
-<div class="product-card" >
+<div 
+  [ngClass]="{
+              'product-card': (x),
+               'product-card card-selected' : (!x)
+               }" 
+  (click)=sendItemId(product.id) >
   
   <span class="material-icons-round icon">lunch_dining</span>
   

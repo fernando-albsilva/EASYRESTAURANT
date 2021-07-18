@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { ProductModel } from 'src/app/Product/models/Product.model';
 
@@ -10,7 +10,16 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
 export class ProductCardComponent implements OnInit {
 
     @Input() public product: ProductModel = new ProductModel();
-    
+    @Output() public itemSelected = new EventEmitter();
+
+    @Input() public classSelected:any =(teste:boolean)=>{ 
+      alert("entrou");
+      this.x=teste
+    };
+
+    public x:boolean=false ;
+
+    public productId:string="";
     public productName:string="";
     public unitValue:number=0.0;
     public unitCost:number=0.0;
@@ -20,13 +29,19 @@ export class ProductCardComponent implements OnInit {
       
     }
 
-  ngOnInit(): void {
-    if(this.product.name !== "")
-    {
-      this.productName = this.product.name;
-      this.unitValue = this.product.unitValue;
-      this.unitCost = this.product.cost;
+    ngOnInit(): void {
+      if(this.product.name !== "")
+      {
+        this.productId = this.product.id;
+        this.productName = this.product.name;
+        this.unitValue = this.product.unitValue;
+        this.unitCost = this.product.cost;
+      }
+
     }
-  }
+
+    public sendItemId(id:string){
+      this.itemSelected.emit(id);
+    }
 
 }

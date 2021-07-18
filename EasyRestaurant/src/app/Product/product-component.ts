@@ -1,6 +1,6 @@
 import { ProductApi } from './api/product-api';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProductModel } from './models/Product.model';
 @Component({
   selector: 'product',
@@ -9,7 +9,10 @@ import { ProductModel } from './models/Product.model';
 })
 export class ProductComponent implements OnInit {
 
-    public productList : Array<ProductModel> = []
+    public productList : Array<ProductModel> = [];
+    public selectedItemList : Array<string> = [];
+    @Input() public itemSelected : boolean = false;
+
     constructor(private productApi:ProductApi){}
 
     ngOnInit(): void {
@@ -19,6 +22,39 @@ export class ProductComponent implements OnInit {
        this.productList = this.productApi.getProducts();
        console.log("nova lista");
        console.log(this.productList);
+    }
+
+    public selectItem(id:string){
+      console.log(id);
+      let test:boolean = false;
+      
+      this.selectedItemList = this.selectedItemList.filter( (element )=>{
+        if(element===id)
+        {
+          test=true;
+          return false;
+        }
+        return true;
+      });
+
+      if(!test)
+      {
+        this.selectedItemList.push(id);
+      }
+      this.itemSelected=true;
+      this.itemIsSelected(id);
+      console.log(this.selectedItemList);
+    }
+
+    public itemIsSelected(id:string):boolean{
+      let test:boolean = false;
+      this.selectedItemList.filter( (element )=>{
+        if(element===id)
+        {
+          test=true;
+        }
+      });
+      return true;
     }
 
     public addElement(){
