@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 
 @Component({
@@ -8,7 +8,26 @@ import { Component } from '@angular/core';
 })
 export class ErLeftSideMenu {
 
+  @Output() addElement = new EventEmitter<any>();
+  @Output() editElement = new EventEmitter<any>();
+  @Output() searchElement = new EventEmitter<any>();
+  @Output() removeElement = new EventEmitter<any>();
+
   constructor () {}
 
-  
+  public callFatherAddElement(){
+    this.addElement.emit();
+  }
+
+  public callFatherEditElement(){
+    this.editElement.emit();
+  }
+
+  public callFatherSearchElement(){
+    this.searchElement.emit();
+  }
+
+  public callFatherRemoveElement(){
+    this.removeElement.emit();
+  }
 }

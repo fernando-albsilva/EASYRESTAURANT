@@ -20,4 +20,20 @@ export class ProductComponent implements OnInit {
        console.log("nova lista");
        console.log(this.productList);
     }
+
+    public addElement(){
+      alert("chamou pai add");
+    }
+
+    public editElement(){
+      alert("chamou pai edit");
+    }
+
+    public searchElement(){
+      alert("chamou pai search");
+    }
+
+    public removeElement(){
+      alert("chamou pai remove");
+    }
 }

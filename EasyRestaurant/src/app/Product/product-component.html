@@ -1,6 +1,11 @@
 <er-top-menu></er-top-menu>
 <div class="bg-color-default">
-  <er-left-side-menu></er-left-side-menu>
+  <er-left-side-menu 
+    (addElement)="addElement()"
+    (editElement)="editElement()"
+    (searchElement)="searchElement()"
+    (removeElement)="removeElement()">
+  </er-left-side-menu>
 
     <div class="container" >
     
