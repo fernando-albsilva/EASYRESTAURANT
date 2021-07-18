@@ -10,9 +10,7 @@ import { LoginComponent } from './login-component';
     CommonModule,
     RouterModule
   ],
-  exports:[
-    LoginComponent
-  ],
+  exports:[],
   declarations: [
     LoginComponent
   ],

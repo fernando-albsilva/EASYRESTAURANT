@@ -19,11 +19,9 @@ import { ProductModule } from './Product/product.module';
     AppComponent,
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule,
     LoginModule,
     SharedModule,
     ProductModule,

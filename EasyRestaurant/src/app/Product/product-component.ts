@@ -12,6 +12,9 @@ export class ProductComponent implements OnInit {
     public productList : Array<ProductModel> = [];
     public selectedItemList : Array<string> = [];
     @Input() public itemSelected : boolean = false;
+    // public classSelected : string = "";
+    @Input() public classSelected : string = "";
+
 
     constructor(private productApi:ProductApi){}
 
@@ -39,9 +42,13 @@ export class ProductComponent implements OnInit {
 
       if(!test)
       {
+        this.classSelected=id+"true";
         this.selectedItemList.push(id);
+        
+      }else{
+        this.classSelected=id+"false";
       }
-      this.itemSelected=true;
+     
       this.itemIsSelected(id);
       console.log(this.selectedItemList);
     }
@@ -52,6 +59,7 @@ export class ProductComponent implements OnInit {
         if(element===id)
         {
           test=true;
+          
         }
       });
       return true;

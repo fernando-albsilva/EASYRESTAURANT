@@ -12,13 +12,8 @@ export class ProductCardComponent implements OnInit {
     @Input() public product: ProductModel = new ProductModel();
     @Output() public itemSelected = new EventEmitter();
 
-    @Input() public classSelected:any =(teste:boolean)=>{ 
-      alert("entrou");
-      this.x=teste
-    };
-
-    public x:boolean=false ;
-
+    @Input() public classSelected:string="";
+    
     public productId:string="";
     public productName:string="";
     public unitValue:number=0.0;
@@ -42,6 +37,11 @@ export class ProductCardComponent implements OnInit {
 
     public sendItemId(id:string){
       this.itemSelected.emit(id);
+    }
+
+    public isClassSelected(classSelected:string)
+    {
+
     }
 
 }

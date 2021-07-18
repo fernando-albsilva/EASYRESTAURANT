@@ -13,10 +13,7 @@ import { ProductComponent } from './product-component';
     ProductRoutingModule,
     SharedModule
     ],
-  exports:[
-    ProductComponent,
-    ProductCardComponent
-  ],
+  exports:[ ],
   declarations: [
     ProductComponent,
     ProductCardComponent

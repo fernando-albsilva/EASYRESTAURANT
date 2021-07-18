@@ -10,8 +10,12 @@
     <div class="container" >
     
           <product-card *ngFor="let product of productList" [product]="product"
-           (itemSelected)="selectItem($event)" [classSelected]="itemSelected">
+           (itemSelected)="selectItem($event)"
+           [classSelected]="classSelected" >
           </product-card>
       
     </div>
 </div>
+
+
+<!-- [classSelected]="classSelected" -->
