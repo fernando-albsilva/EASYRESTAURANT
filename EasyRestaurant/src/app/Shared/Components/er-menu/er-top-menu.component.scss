@@ -12,7 +12,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        
+        position: fixed;
 
         .logo{
 
@@ -47,7 +47,8 @@
         align-items: center;
         box-shadow: 0px 2px 3px 1px #000000;
         position: fixed;
-        
+        top: 50px;
+    
         .bottom-row-left-chield-container{
             display: flex;
             flex-direction: row;
