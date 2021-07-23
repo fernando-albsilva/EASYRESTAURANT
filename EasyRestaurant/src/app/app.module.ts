@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HomeModule } from './Home/home.module';
@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { ProductApi } from './Product/api/product-api';
 import { SharedModule } from './Shared/shared.module';
 import { ProductModule } from './Product/product.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -22,6 +23,8 @@ import { ProductModule } from './Product/product.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
     LoginModule,
     SharedModule,
     ProductModule,

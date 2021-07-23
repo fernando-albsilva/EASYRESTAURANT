@@ -1,7 +1,7 @@
 .side-left-menu-container{
     height:calc(100vh - 140px);
     width: 80px;
-    background-color: #282A36;
+    background-color: #00062b;
     border-radius: 5px;
     box-shadow: 1px 2px 2px 1px #000000;
     display: flex;
@@ -23,6 +23,7 @@
             transform: scale(1.4);
         }
         span:hover{
+            transform: scale(1.5);
             transition: color 0.7s ease-in-out;
             color:#d2a3dd ;
         }

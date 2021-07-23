@@ -1,6 +1,8 @@
+import { ProductCreateDialog } from './product-crreate-dialog/product-create-dialog-component';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProductApi } from './api/product-api';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
+import { ProductApi } from './api/product-api';
 import { ProductModel } from './models/Product.model';
 import { Subject } from 'rxjs';
 @Component({
@@ -17,7 +19,10 @@ export class ProductComponent implements OnInit {
     classSelected:Subject<string> = new Subject();
 
 
-    constructor(private productApi:ProductApi){}
+    constructor(
+      private productApi:ProductApi,
+      public dialog: MatDialog
+      ){}
 
     ngOnInit(): void {
         this.getProducts();
@@ -68,9 +73,15 @@ export class ProductComponent implements OnInit {
       });
       return true;
     }
+  
 
     public addElement(){
-      alert("chamou pai add");
+      const dialogRef = this.dialog.open(ProductCreateDialog, {
+        height: '460px',
+        width: '600px'
+      });
+
+     
     }
 
     public editElement(){
@@ -83,7 +94,10 @@ export class ProductComponent implements OnInit {
 
     public removeElement(){
       alert("chamou pai remove");
+      let id:string=this.productList[0].id;
+      this.productApi.deleteProduct(id);
     }
 
 
 }
+
