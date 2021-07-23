@@ -63,9 +63,15 @@ mat-dialog-container{
 }
 
 .bg-color-default{
-    background: rgb(2,0,36);
+   
     background: radial-gradient(circle, #020024 10%, #6d317d 109%, #5E2D7F 98%);
 }
+
+.bg-color-login{
+    background: radial-gradient(circle, #020024 10%, #410052 109%, #5E2D7F 98%);
+   
+}
+
 
 ::-webkit-scrollbar {
     width: 5px;
