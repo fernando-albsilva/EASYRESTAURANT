@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

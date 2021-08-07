@@ -80,7 +80,7 @@ export class FunctionComponent implements OnInit {
     }
 
     public editElement(){
-      alert("chamou pai edit");
+      // alert("chamou pai edit");
     }
 
     public searchElement(){

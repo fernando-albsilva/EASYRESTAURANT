@@ -1,9 +1,8 @@
 import {MatDialog,} from '@angular/material/dialog';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { ProductApi } from 'src/app/Product/api/product-api';
-import { ProductCreateDialog } from 'src/app/Product/product-crreate-dialog/product-create-dialog-component';
 import { FunctionApi } from 'src/app/Function/api/function-api';
 
 @Component({
@@ -13,9 +12,12 @@ import { FunctionApi } from 'src/app/Function/api/function-api';
 })
 export class ErPageList implements OnInit {
 
-    public contextList = {
-
-    };
+    
+    @Output() addElementEvent = new EventEmitter<any>();
+    @Output() editElementEvent = new EventEmitter<any>();
+    @Output() searchElementEvent = new EventEmitter<any>();
+    @Output() removeElementEvent = new EventEmitter<any>();
+    @Output() selectedItemListEvent = new EventEmitter<any>();
 
     @Input() public context : string="";
     @Input() public itemSelected : boolean = false;
@@ -68,6 +70,8 @@ export class ErPageList implements OnInit {
      
       this.itemIsSelected(id);
       console.log(this.selectedItemList);
+      this.selectedItemListEvent.emit(this.selectedItemList);
+
     }
 
     public itemIsSelected(id:string):boolean{
@@ -83,24 +87,19 @@ export class ErPageList implements OnInit {
   
 
     public addElement(){
-      const dialogRef = this.dialog.open(ProductCreateDialog, {
-        height: '460px',
-        width: '600px'
-      });
+      this.addElementEvent.emit();
     }
 
     public editElement(){
-      alert("chamou pai edit");
+      this.editElementEvent.emit();
     }
 
     public searchElement(){
-      alert("chamou pai search");
+      this.searchElementEvent.emit();
     }
 
     public removeElement(){
-      alert("chamou pai remove");
-      let id:string=this.elementList[0].id;
-      this.productApi.deleteProduct(id);
+      this.removeElementEvent.emit();
     }
 
 

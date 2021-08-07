@@ -23,7 +23,7 @@ export class ProductApi {
             let productModel = new ProductModel();
             items.map( (item:any)=>{
                 productModel.id = item.id;
-                productModel.name = item.name;
+                productModel.name = item.name.trim();
                 productModel.unitValue = item.unitValue;
                 productModel.cost = item.cost;
                 productList.push(productModel);

@@ -1,7 +1,7 @@
-import { Component } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
+import { Component, Inject, OnInit } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
-import { ProductApi } from './../api/product-api';
+import { ProductApi } from '../api/product-api';
 import { ProductModel } from 'src/app/Product/models/Product.model';
 
 
@@ -12,17 +12,24 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
   styleUrls: ['product-create-dialog-component.scss']
 })
 
-export class ProductCreateDialog {
+export class ProductCreateDialog implements OnInit{
 
   public product : ProductModel = new ProductModel();
 
+
   constructor(
     public dialogRef: MatDialogRef<ProductCreateDialog>,
-    private api : ProductApi
-    ) {}
+    private api : ProductApi,
+    @Inject(MAT_DIALOG_DATA) public data: ProductModel) {}
+  
+  
+  ngOnInit(): void {
+    if(this.data){
+      this.product = this.data;
+    }
+  }
 
   public onCancel = (): void => {
-    alert("entrou");
     this.dialogRef.close();
   }
 
