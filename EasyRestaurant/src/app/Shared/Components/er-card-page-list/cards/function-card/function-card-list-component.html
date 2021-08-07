@@ -1,0 +1,21 @@
+<div 
+  [ngClass]="{
+              'product-card':true,
+               'card-selected' : (isSelected)
+               }" 
+  (click)=sendItemId(function.id) >
+  
+  <span class="material-icons-round icon">assignment_ind</span>
+  
+  <div class="card-chield-container">
+    <span class="card-child-title">Código</span>
+    <span class="card-child-text">{{functionId}}</span>
+  </div>
+
+  <div class="card-chield-container">
+    <span class="card-child-title">Função</span>
+    <span class="card-child-text">{{functionType}}</span>
+  </div>
+
+  
+</div>

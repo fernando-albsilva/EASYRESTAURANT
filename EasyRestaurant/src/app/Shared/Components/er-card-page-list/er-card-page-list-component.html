@@ -1,0 +1,25 @@
+<div 
+  [ngClass]="{
+              'product-card':true,
+               'card-selected' : (isSelected)
+               }" 
+  (click)=sendItemId(product.id) >
+  
+  <span class="material-icons-round icon">lunch_dining</span>
+  
+  <div class="card-chield-container">
+    <span class="card-child-title">Nome</span>
+    <span class="card-child-text">{{productName}}</span>
+  </div>
+
+  <div class="card-chield-container">
+    <span class="card-child-title">Valor Unitário</span>
+    <span class="card-child-text">R$ {{unitValue}}</span>
+  </div>
+
+  <div class="card-chield-container">
+    <span class="card-child-title">Custo Unitário</span>
+    <span class="card-child-text">R$ {{unitCost}}</span>
+  </div>
+  
+</div>

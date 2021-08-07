@@ -1,40 +1,51 @@
-import { ProductCreateDialog } from './product-crreate-dialog/product-create-dialog-component';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {MatDialog,} from '@angular/material/dialog';
+import { Component, Input, OnInit, Output } from '@angular/core';
 
-import { ProductApi } from './api/product-api';
-import { ProductModel } from './models/Product.model';
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
-@Component({
-  selector: 'product',
-  templateUrl: 'product-component.html',
-  styleUrls: ['product-component.scss']
-})
-export class ProductComponent implements OnInit {
+import { ProductApi } from 'src/app/Product/api/product-api';
+import { ProductCreateDialog } from 'src/app/Product/product-crreate-dialog/product-create-dialog-component';
+import { FunctionApi } from 'src/app/Function/api/function-api';
 
-    public productList : Array<ProductModel> = [];
-    public selectedItemList : Array<string> = [];
+@Component({
+  selector: 'er-page-list',
+  templateUrl: 'er-page-list-component.html',
+  styleUrls: ['er-page-list-component.scss']
+})
+export class ErPageList implements OnInit {
+
+    public contextList = {
+
+    };
+
+    @Input() public context : string="";
     @Input() public itemSelected : boolean = false;
-    // public classSelected : string = "";
+
+    public elementList : Array<any> = [];
+    public selectedItemList : Array<string> = [];
     classSelected:Subject<string> = new Subject();
 
 
     constructor(
       private productApi:ProductApi,
-      public dialog: MatDialog,
-      private router : Router
+      private functionApi:FunctionApi,
+      public dialog: MatDialog
       ){}
 
     ngOnInit(): void {
-        this.getProducts();
+        this.geElements();
         
     }
 
-    public getProducts = () =>{
-       this.productList = this.productApi.getProducts();
-       console.log("nova lista");
-       console.log(this.productList);
+    public geElements = () =>{
+
+      if(this.context === "Product"){
+        this.elementList = this.productApi.getProducts();
+      }
+      if(this.context === "Function"){
+        this.elementList = this.functionApi.getFunctions();
+      }
+        console.log("nova lista");
+        console.log(this.elementList);
     }
 
     public selectItem(id:string){
@@ -52,11 +63,7 @@ export class ProductComponent implements OnInit {
 
       if(!test)
       {
-        // this.classSelected=id+"true";
         this.selectedItemList.push(id);
-        
-      }else{
-        // this.classSelected=id+"false";
       }
      
       this.itemIsSelected(id);
@@ -92,7 +99,7 @@ export class ProductComponent implements OnInit {
 
     public removeElement(){
       alert("chamou pai remove");
-      let id:string=this.productList[0].id;
+      let id:string=this.elementList[0].id;
       this.productApi.deleteProduct(id);
     }
 

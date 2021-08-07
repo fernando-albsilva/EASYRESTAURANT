@@ -5,13 +5,13 @@ import { Subject } from 'rxjs';
 import { ProductModel } from 'src/app/Product/models/Product.model';
 
 @Component({
-  selector: 'product-card',
-  templateUrl: 'product-card-component.html',
-  styleUrls: ['product-card-component.scss']
+  selector: 'er-card-page-list',
+  templateUrl: 'er-card-page-list-component.html',
+  styleUrls: ['er-card-page-list-component.scss']
 })
-export class ProductCardComponent implements OnInit {
+export class ErCardPageList implements OnInit {
 
-    @Input() public product: ProductModel = new ProductModel();
+    @Input() public product: any;
     @Output() public itemSelected = new EventEmitter();
     @Input() changeClass : Subject<string>= new Subject();
    
@@ -21,7 +21,7 @@ export class ProductCardComponent implements OnInit {
     public unitValue:number=0.0;
     public unitCost:number=0.0;
     public isSelected:boolean=false;
-    // public product: ProductModel = new ProductModel();
+
 
     constructor (){
       

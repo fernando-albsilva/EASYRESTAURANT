@@ -1,40 +1,40 @@
-import { ProductCreateDialog } from './product-crreate-dialog/product-create-dialog-component';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {MatDialog,} from '@angular/material/dialog';
 
-import { ProductApi } from './api/product-api';
-import { ProductModel } from './models/Product.model';
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
-@Component({
-  selector: 'product',
-  templateUrl: 'product-component.html',
-  styleUrls: ['product-component.scss']
-})
-export class ProductComponent implements OnInit {
+import { FunctionApi } from './api/function-api';
+import { FunctionModel } from './Model/FunctionModel';
+// import { ProductCreateDialog } from './product-crreate-dialog/product-create-dialog-component';
 
-    public productList : Array<ProductModel> = [];
+
+
+@Component({
+  selector: 'function',
+  templateUrl: 'function-component.html',
+  styleUrls: ['function-component.scss']
+})
+export class FunctionComponent implements OnInit {
+
+    public elementList : Array<FunctionModel> = [];
     public selectedItemList : Array<string> = [];
     @Input() public itemSelected : boolean = false;
-    // public classSelected : string = "";
     classSelected:Subject<string> = new Subject();
 
 
     constructor(
-      private productApi:ProductApi,
-      public dialog: MatDialog,
-      private router : Router
+      private functionApi:FunctionApi,
+      public dialog: MatDialog
       ){}
 
     ngOnInit(): void {
-        this.getProducts();
+        this.getFunctions();
         
     }
 
-    public getProducts = () =>{
-       this.productList = this.productApi.getProducts();
+    public getFunctions = () =>{
+       this.elementList = this.functionApi.getFunctions();
        console.log("nova lista");
-       console.log(this.productList);
+       console.log(this.elementList);
     }
 
     public selectItem(id:string){
@@ -52,11 +52,8 @@ export class ProductComponent implements OnInit {
 
       if(!test)
       {
-        // this.classSelected=id+"true";
         this.selectedItemList.push(id);
         
-      }else{
-        // this.classSelected=id+"false";
       }
      
       this.itemIsSelected(id);
@@ -76,10 +73,10 @@ export class ProductComponent implements OnInit {
   
 
     public addElement(){
-      const dialogRef = this.dialog.open(ProductCreateDialog, {
-        height: '460px',
-        width: '600px'
-      });
+      // const dialogRef = this.dialog.open(ProductCreateDialog, {
+      //   height: '460px',
+      //   width: '600px'
+      // });
     }
 
     public editElement(){
@@ -92,8 +89,8 @@ export class ProductComponent implements OnInit {
 
     public removeElement(){
       alert("chamou pai remove");
-      let id:string=this.productList[0].id;
-      this.productApi.deleteProduct(id);
+      let id:string=this.elementList[0].id;
+      this.functionApi.deleteFunction(id);
     }
 
 

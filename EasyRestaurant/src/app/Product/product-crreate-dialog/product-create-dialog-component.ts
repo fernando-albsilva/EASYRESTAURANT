@@ -1,5 +1,10 @@
-import { Component, Inject, Output } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Component } from "@angular/core";
+import { MatDialogRef } from "@angular/material/dialog";
+
+import { ProductApi } from './../api/product-api';
+import { ProductModel } from 'src/app/Product/models/Product.model';
+
+
 
 @Component({
   selector: 'product-create-dialog',
@@ -9,19 +14,25 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export class ProductCreateDialog {
 
+  public product : ProductModel = new ProductModel();
 
   constructor(
-    public dialogRef: MatDialogRef<ProductCreateDialog>
+    public dialogRef: MatDialogRef<ProductCreateDialog>,
+    private api : ProductApi
     ) {}
 
-  onCancel(): void {
+  public onCancel = (): void => {
     alert("entrou");
     this.dialogRef.close();
   }
 
-  onSave(): void {
-    
-    this.dialogRef.close("salvou o objeto");
+  public onSave = (): void => {
+    this.api.createProduct(this.product);
+
+  }
+
+  public print() {
+    console.log(this.product.name);
   }
 
 }

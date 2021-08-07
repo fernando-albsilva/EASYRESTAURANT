@@ -1,19 +1,19 @@
-<div class="dialog-container">
+<form class="dialog-container">
   <span class="dialog-title">Criar Produto</span>
 
   <div class="dialog-chield-container">
     <span class="input-title">Nome do Produto:</span>
-    <input class="input green" type="text">
+    <input [(ngModel)]="product.name" name="productName" (blur)=print() class="input green" type="text" required>
   </div>
 
   <div class="dialog-chield-container">
     <span class="input-title">Valor Unitário: R$</span>
-    <input class="input green" type="text">
+    <input [(ngModel)]="product.unitValue" name="productUnitValue" class="input green" type="text">
   </div>
 
   <div class="dialog-chield-container">
     <span class="input-title">Custo Unitário: R$</span>
-    <input class="input green" type="text">
+    <input [(ngModel)]="product.cost" name="productCost" class="input green" type="text">
   </div>
 
   <div class="dialog-chield-container-last-chield">
@@ -21,6 +21,4 @@
     <button class="btn save" (click)="onSave()">Salvar</button>
     
   </div>
-
-
-</div>
+</form>

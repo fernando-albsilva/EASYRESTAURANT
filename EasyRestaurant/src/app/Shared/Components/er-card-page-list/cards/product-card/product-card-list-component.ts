@@ -5,11 +5,11 @@ import { Subject } from 'rxjs';
 import { ProductModel } from 'src/app/Product/models/Product.model';
 
 @Component({
-  selector: 'product-card',
-  templateUrl: 'product-card-component.html',
-  styleUrls: ['product-card-component.scss']
+  selector: 'product-card-list',
+  templateUrl: 'product-card-list-component.html',
+  styleUrls: ['product-card-list-component.scss']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardListComponent implements OnInit {
 
     @Input() public product: ProductModel = new ProductModel();
     @Output() public itemSelected = new EventEmitter();
@@ -21,7 +21,7 @@ export class ProductCardComponent implements OnInit {
     public unitValue:number=0.0;
     public unitCost:number=0.0;
     public isSelected:boolean=false;
-    // public product: ProductModel = new ProductModel();
+
 
     constructor (){
       
