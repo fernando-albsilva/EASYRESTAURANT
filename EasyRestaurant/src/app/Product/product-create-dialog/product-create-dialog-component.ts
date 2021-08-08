@@ -15,7 +15,7 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
 export class ProductCreateDialog implements OnInit{
 
   public product : ProductModel = new ProductModel();
-
+  public isNew: boolean = true;
 
   constructor(
     public dialogRef: MatDialogRef<ProductCreateDialog>,
@@ -25,6 +25,7 @@ export class ProductCreateDialog implements OnInit{
   
   ngOnInit(): void {
     if(this.data){
+      this.isNew = false;
       this.product = this.data;
     }
   }
@@ -35,6 +36,7 @@ export class ProductCreateDialog implements OnInit{
 
   public onSave = (): void => {
     this.api.createProduct(this.product);
+    this.dialogRef.close();
 
   }
 

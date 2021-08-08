@@ -1,5 +1,6 @@
 <form class="dialog-container">
-  <span class="dialog-title">Criar Produto</span>
+  <span *ngIf="isNew" class="dialog-title">Criar Produto</span>
+  <span *ngIf="!isNew" class="dialog-title">Editar Produto</span>
 
   <div class="dialog-chield-container">
     <span class="input-title">Nome do Produto:</span>
@@ -8,12 +9,12 @@
 
   <div class="dialog-chield-container">
     <span class="input-title">Valor Unitário: R$</span>
-    <input [(ngModel)]="product.unitValue" name="productUnitValue"  class="input green" type="text">
+    <input [(ngModel)]="product.unitValue" name="productUnitValue"  class="input green" type="number">
   </div>
 
   <div class="dialog-chield-container">
     <span class="input-title">Custo Unitário: R$</span>
-    <input [(ngModel)]="product.cost" name="productCost" class="input green" type="text">
+    <input [(ngModel)]="product.cost" name="productCost" class="input green" type="number">
   </div>
 
   <div class="dialog-chield-container-last-chield">

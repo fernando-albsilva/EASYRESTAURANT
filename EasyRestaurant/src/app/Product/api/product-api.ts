@@ -1,3 +1,4 @@
+import { ProductCommand, ProductDeleteCommand, ProductListDeleteCommand } from './../commands/Product.comandl';
 import { Injectable, OnInit } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
@@ -10,7 +11,7 @@ import { Guid } from "guid-typescript";
 @Injectable()
 export class ProductApi {
     
-    public apiUrl = `https://localhost:5101/Product`;
+    public apiUrl = `https://localhost:5101/Products`;
 
     constructor(private http:HttpClient){}
     
@@ -49,14 +50,25 @@ export class ProductApi {
            );    
     }
 
-     public deleteProduct(id:string):Observable<any>{
-        
-        //TODO resolver problema do endPoint e fazer a requisicao delete
-        // return this.http.delete(this.apiUrl+"Delete");
-        return this.http.post(this.apiUrl+"Delete",id);
-
+     public deleteProduct(id:string){
+      
+        let cmd = new ProductDeleteCommand();
+        cmd.id = id;
+        this.http.post(`${ this.apiUrl }/Delete`, cmd)
+        .subscribe(
+          resultado => {
+            console.log(resultado)
+          },
+          erro => {
+            if(erro.status == 400) {
+              console.log(erro);
+            }
+          }
+        );    
     
     }
+
+    //TODO Implementar metodo para excluir em lista
 
 
 }

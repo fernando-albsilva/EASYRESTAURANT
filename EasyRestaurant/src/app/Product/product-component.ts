@@ -93,7 +93,7 @@ export class ProductComponent implements OnInit {
         return element.id===this.selectedItemList[0];
       })[0];
 
-      console.log(newData.name.length);
+     
       const dialogRef = this.dialog.open(ProductCreateDialog, {
         height: '460px',
         width: '600px',
@@ -112,8 +112,9 @@ export class ProductComponent implements OnInit {
   }
 
   public removeElementEvent(){
-    alert("chamou pai remove");
-    let id:string=this.productList[0].id;
+    //TODO verificar e corrigir o metodo delete
+    alert("chamou avo remove");
+    let id:string=this.selectedItemList[0];
     this.productApi.deleteProduct(id);
   }
 
