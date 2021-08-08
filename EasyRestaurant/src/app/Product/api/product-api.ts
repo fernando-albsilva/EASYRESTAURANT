@@ -50,6 +50,22 @@ export class ProductApi {
            );    
     }
 
+    public updateProduct(cmd: ProductModel){
+       
+      // cmd.id=Guid.create()+"";
+      this.http.post(`${ this.apiUrl }/Update`, cmd)
+      .subscribe(
+        resultado => {
+          console.log(resultado)
+        },
+        erro => {
+          if(erro.status == 400) {
+            console.log(erro);
+          }
+        }
+      );    
+}
+
      public deleteProduct(id:string){
       
         let cmd = new ProductDeleteCommand();

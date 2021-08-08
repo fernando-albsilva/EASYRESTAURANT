@@ -6,13 +6,14 @@ import { ProductCreateDialog } from './product-create-dialog/product-create-dial
 import { ProductApi } from './api/product-api';
 import { ProductModel } from './models/Product.model';
 import { Subject } from 'rxjs';
+import { IerLeftSideMenu } from '../Shared/Components/er-left-side-menu/interface/er-left-side.interface';
 
 @Component({
   selector: 'product',
   templateUrl: 'product-component.html',
   styleUrls: ['product-component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, IerLeftSideMenu {
   
   @Input() public itemSelected : boolean = false;
 
@@ -107,15 +108,20 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  public searchElementEvent(){
-    alert("chamou pai search");
+  public searchElementEvent(textFilter:string){
+    //TODO implementar metodo que faca o filtro dos cards dos produtos
+    alert("chamou pai search:"+textFilter);
   }
 
   public removeElementEvent(){
-    //TODO verificar e corrigir o metodo delete
     alert("chamou avo remove");
-    let id:string=this.selectedItemList[0];
-    this.productApi.deleteProduct(id);
+    if(this.selectedItemList.length === 1)
+    {
+      let id:string=this.selectedItemList[0];
+      this.productApi.deleteProduct(id);
+    }else{
+      //TODO Implementar o método para deletar items em lote
+    }
   }
 
   public selectedItemListEvent(listOfSelectedItems:any){

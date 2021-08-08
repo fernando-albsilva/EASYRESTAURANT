@@ -94,8 +94,9 @@ export class ErPageList implements OnInit {
       this.editElementEvent.emit();
     }
 
-    public searchElement(){
-      this.searchElementEvent.emit();
+    public searchElement(event:any){
+      console.log(event.target.value);
+      this.searchElementEvent.emit(event.target.value);
     }
 
     public removeElement(){

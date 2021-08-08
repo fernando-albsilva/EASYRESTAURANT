@@ -35,7 +35,12 @@ export class ProductCreateDialog implements OnInit{
   }
 
   public onSave = (): void => {
-    this.api.createProduct(this.product);
+    if(this.isNew)
+    {
+      this.api.createProduct(this.product);
+    }else{
+      this.api.updateProduct(this.product);
+    }
     this.dialogRef.close();
 
   }

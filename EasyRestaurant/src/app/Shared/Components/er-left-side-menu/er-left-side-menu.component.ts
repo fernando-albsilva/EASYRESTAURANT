@@ -10,7 +10,7 @@ export class ErLeftSideMenu {
 
   @Output() addElement = new EventEmitter<any>();
   @Output() editElement = new EventEmitter<any>();
-  @Output() searchElement = new EventEmitter<any>();
+  // @Output() searchElement = new EventEmitter<any>();
   @Output() removeElement = new EventEmitter<any>();
 
   constructor () {}
@@ -23,9 +23,9 @@ export class ErLeftSideMenu {
     this.editElement.emit();
   }
 
-  public callFatherSearchElement(){
-    this.searchElement.emit();
-  }
+  // public callFatherSearchElement(){
+  //   this.searchElement.emit();
+  // }
 
   public callFatherRemoveElement(){
     this.removeElement.emit();

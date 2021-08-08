@@ -1,22 +1,26 @@
 <er-top-menu></er-top-menu>
 <div class="bg-color-default">
   <er-left-side-menu 
-    (addElement)="addElement()"
-    (editElement)="editElement()"
-    (searchElement)="searchElement()"
-    (removeElement)="removeElement()">
+  (addElement)="addElement()"
+  (editElement)="editElement()"
+ 
+  (removeElement)="removeElement()">
   </er-left-side-menu>
 
-    <div  class="container" >
-  
+  <div  class="container" >
 
-      <div *ngIf="context === 'Product'"> 
+    <div class="search-container">
+      <span class="material-icons-round green" >search</span>
+      <input type="text" class="input-search" (change)="searchElement($event)">
+    </div>
 
-        <product-card-list  *ngFor="let item of elementList" [product]="item"
-        (itemSelected)="selectItem($event)"
-        [changeClass]="classSelected">
-       </product-card-list>
-    
+    <div *ngIf="context === 'Product'" class="overflow"> 
+
+      <product-card-list  *ngFor="let item of elementList" [product]="item"
+      (itemSelected)="selectItem($event)"
+      [changeClass]="classSelected">
+     </product-card-list>
+
     </div>
 
     <div *ngIf="context === 'Function'"> 
@@ -24,11 +28,11 @@
       <function-card-list  *ngFor="let item of elementList" [function]="item"
       (itemSelected)="selectItem($event)"
       [changeClass]="classSelected">
-     </function-card-list>
-  
-  </div>
-
+      </function-card-list>
 
     </div>
+
+  </div>
+
 </div>
 
