@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit, IerLeftSideMenu {
   
   @Input() public itemSelected : boolean = false;
 
-  public productList : Array<ProductModel> = [];
+  public elementList : Array<ProductModel> = [];
   public selectedItemList : Array<string> = [];
   public classSelected:Subject<string> = new Subject();
 
@@ -33,11 +33,11 @@ export class ProductComponent implements OnInit, IerLeftSideMenu {
   }
 
   public getProducts = () =>{
-     this.productList = this.productApi.getProducts();
+     this.elementList = this.productApi.getProducts();
      console.log("nova lista");
      setTimeout(() => {
-       console.log(this.productList[2]);
-       console.log(this.productList[2].name.length);
+       console.log(this.elementList[2]);
+       console.log(this.elementList[2].name.length);
        
      }, 300);
   }
@@ -90,7 +90,7 @@ export class ProductComponent implements OnInit, IerLeftSideMenu {
     if(this.selectedItemList.length === 1)
     {
       console.log("entrou");
-      let newData : ProductModel =  this.productList.filter( (element )=>{
+      let newData : ProductModel =  this.elementList.filter( (element )=>{
         return element.id===this.selectedItemList[0];
       })[0];
 
@@ -108,10 +108,10 @@ export class ProductComponent implements OnInit, IerLeftSideMenu {
     }
   }
 
-  public searchElementEvent(textFilter:string){
-    //TODO implementar metodo que faca o filtro dos cards dos produtos
-    alert("chamou pai search:"+textFilter);
-  }
+  // public searchElementEvent(textFilter:string){
+  //   if(textFilter)
+  //   alert("chamou pai search:"+textFilter);
+  // }
 
   public removeElementEvent(){
     alert("chamou avo remove");
@@ -120,7 +120,7 @@ export class ProductComponent implements OnInit, IerLeftSideMenu {
       let id:string=this.selectedItemList[0];
       this.productApi.deleteProduct(id);
     }else{
-      //TODO Implementar o método para deletar items em lote
+      this.productApi.deleteMultiplesProducts(this.selectedItemList);
     }
   }
 

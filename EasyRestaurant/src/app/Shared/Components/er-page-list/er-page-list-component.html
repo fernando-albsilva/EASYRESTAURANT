@@ -3,7 +3,6 @@
   <er-left-side-menu 
   (addElement)="addElement()"
   (editElement)="editElement()"
- 
   (removeElement)="removeElement()">
   </er-left-side-menu>
 
@@ -11,12 +10,12 @@
 
     <div class="search-container">
       <span class="material-icons-round green" >search</span>
-      <input type="text" class="input-search" (change)="searchElement($event)">
+      <input type="text" class="input-search" (change)="searchElement($event)" spellcheck="false" autocomplete="off">
     </div>
 
     <div *ngIf="context === 'Product'" class="overflow"> 
 
-      <product-card-list  *ngFor="let item of elementList" [product]="item"
+      <product-card-list  *ngFor="let item of elementFiltredList" [product]="item"
       (itemSelected)="selectItem($event)"
       [changeClass]="classSelected">
      </product-card-list>

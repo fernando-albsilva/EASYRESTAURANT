@@ -1,20 +1,29 @@
 <div class="page-login-container bg-color-login">
     <div class="login-card">
-        <div class="form">
+        <form class="form"
+              [formGroup]="formlogin"
+              (ngSubmit)="executeLogin()">
             <div class="logo-container">
                 <img class="img-logo" src="../../assets/img/logoEasyRestaurant.png" alt="Logo">
                 <span class="green logo-title">Easy</span><span class="red logo-title">Restaurant</span>
             </div>
             <div class="input-container input-green">
                 <span class="material-icons-outlined green icon">person</span>
-                <input class="input green" type="text">
+                <input class="input green"
+                       type="text"
+                       [(ngModel)]="userNameInput"
+                       formControlName="userName">
             </div>
             <div class="input-container input-green">
                 <span class="material-icons-outlined green icon">lock</span>
-                <input class="input green" type="password">
+                <input class="input green"
+                       type="password"
+                       formControlName="password"
+                       [(ngModel)]="passwordInput"
+                       (change)="print()">
             </div>
-            <button routerLink="/home"  class="input-container input-red red">LOGIN</button>
-        </div>
+            <button type="submit" class="input-container input-red red">LOGIN</button>
+        </form>
     </div>
 </div>
 

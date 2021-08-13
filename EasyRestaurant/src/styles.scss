@@ -11,6 +11,7 @@ a,input,button{
     outline-style: none;
     text-decoration: none;
     border:none;
+    background-color: transparent;
 }
 
 div,span{
@@ -30,6 +31,12 @@ form{
 
 }
 
+button, .material-icons-round, .company-logo{
+-webkit-user-select: none;  
+-moz-user-select: none;     
+-ms-user-select: none;      
+user-select: none; 
+}
 .green{
     transition: color 0.7s ease-in-out;
     color: #26B373;

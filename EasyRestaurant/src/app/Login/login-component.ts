@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router,RouterModule } from '@angular/router';
 
 @Component({
@@ -6,12 +7,41 @@ import { Router,RouterModule } from '@angular/router';
   templateUrl: 'login-component.html',
   styleUrls: ['login-component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  constructor (private router: Router) {}
+  public formlogin:FormGroup;
+  public userNameInput:string="";
+  public passwordInput:string="";
+  
 
-  // navigateToHomePage()
-  // {
-  //   this.router.navigate(['page-home']);
-  // }
+  constructor (public fb:FormBuilder,
+               private router: Router) {
+                this.formlogin = this.fb.group({
+                  userName:["",Validators.required],
+                  password:["",Validators.required]
+               }) 
+               }
+
+  ngOnInit(): void {
+    
+    // this.formLogin = this.fb.group({
+    //    userName:["",Validators.required],
+    //    password:["",Validators.required]
+    // }) 
+  }
+
+  public executeLogin = () => {
+    
+    console.log("navegou;")
+    if(this.userNameInput === 'fernando' && this.passwordInput === '200790')
+    {
+      this.router.navigate(['/home']);
+    }
+  }
+
+  public print(){
+    console.log(this.userNameInput);
+    console.log(this.passwordInput);
+  }
+
 }

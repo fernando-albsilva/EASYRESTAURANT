@@ -1,6 +1,6 @@
-import { ProductCommand, ProductDeleteCommand, ProductListDeleteCommand } from './../commands/Product.comandl';
+import { DeleteProductListCommand } from './../commands/Product.comandl';
 import { Injectable, OnInit } from "@angular/core";
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ProductModel } from "../models/Product.model";
@@ -43,9 +43,7 @@ export class ProductApi {
                console.log(resultado)
              },
              erro => {
-               if(erro.status == 400) {
                  console.log(erro);
-               }
              }
            );    
     }
@@ -53,38 +51,47 @@ export class ProductApi {
     public updateProduct(cmd: ProductModel){
        
       // cmd.id=Guid.create()+"";
-      this.http.post(`${ this.apiUrl }/Update`, cmd)
+      this.http.put(`${ this.apiUrl }/Update`, cmd)
       .subscribe(
         resultado => {
           console.log(resultado)
         },
         erro => {
-          if(erro.status == 400) {
-            console.log(erro);
-          }
+            console.log(erro); 
         }
       );    
 }
 
      public deleteProduct(id:string){
       
-        let cmd = new ProductDeleteCommand();
-        cmd.id = id;
-        this.http.post(`${ this.apiUrl }/Delete`, cmd)
+        let params = new HttpParams();
+        params = params.append('Id',id);
+
+        this.http.delete(`${ this.apiUrl }/Delete`, { params : params})
         .subscribe(
           resultado => {
             console.log(resultado)
           },
           erro => {
-            if(erro.status == 400) {
               console.log(erro);
-            }
           }
-        );    
-    
+        );        
     }
 
-    //TODO Implementar metodo para excluir em lista
+    public deleteMultiplesProducts(idList:Array<string>){
+      
+      
+      this.http.post(`${ this.apiUrl }/DeleteByList`, idList)
+      .subscribe(
+        resultado => {
+          console.log(resultado)
+        },
+        erro => {
+            console.log(erro);
+        }
+      );     
+  }
+   
 
 
 }

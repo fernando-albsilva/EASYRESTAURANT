@@ -13,8 +13,8 @@ export class ProductDeleteCommand{
 
 }
 
-export class ProductListDeleteCommand{
+export class DeleteProductListCommand{
     
-    public id = [];
+    public id: Array<string>  = [];
 
 }
