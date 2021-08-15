@@ -10,7 +10,10 @@
 
     <div class="search-container">
       <span class="material-icons-round green" >search</span>
-      <input type="text" class="input-search" (change)="searchElement($event)" spellcheck="false" autocomplete="off">
+      <input type="text" class="input-search" (change)="searchElement($event)" spellcheck="false" autocomplete="off" #searchInputField>
+      <button class="search-button" (click)="clearSearch()">
+        <mat-icon class="material-icons-round green">close</mat-icon>
+      </button>
     </div>
 
     <div *ngIf="context === 'Product'" class="overflow"> 

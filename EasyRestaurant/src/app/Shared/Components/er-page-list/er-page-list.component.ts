@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Subject } from 'rxjs';
@@ -12,7 +12,8 @@ import { Subject } from 'rxjs';
 })
 export class ErPageList implements OnInit, OnChanges {
 
-    
+    @ViewChild('searchInputField') searchInputElement: ElementRef<HTMLInputElement> | undefined;  
+
     @Output() addElementEvent = new EventEmitter<any>();
     @Output() editElementEvent = new EventEmitter<any>();
     @Output() removeElementEvent = new EventEmitter<any>();
@@ -109,6 +110,18 @@ export class ErPageList implements OnInit, OnChanges {
             return false;
           }
       })
+    }
+
+    public clearSearch = () => {
+           
+      if(this.searchInputElement){
+        this.searchInputElement.nativeElement.value = "";
+        this.searchInputElement.nativeElement.blur();
+        this.elementFiltredList = this.elementList;
+      }
+       
+
+        
     }
 
     public removeElement = () => {

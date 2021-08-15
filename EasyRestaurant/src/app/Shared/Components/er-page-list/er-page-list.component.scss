@@ -37,6 +37,15 @@
             padding: 10px 30px;
             margin: 0px 10px 0px 10px;
 
+            .search-button{
+                cursor:pointer;
+            }
+
+            .search-button:active{
+                position:relative;
+                top: 1px;
+            }
+            
             .input-search{
                 background-color: transparent;
                 color: #26B373;
