@@ -1,4 +1,5 @@
 .product-card{
+    position: relative;
     height:80px ;
     min-width: 500px;
     background-color: #100e35;
@@ -11,6 +12,7 @@
     align-items: center;
     padding: 10px 30px;
     margin: 10px 10px 25px 10px;
+    z-index: 10;
     
     .icon{
         color:#a7274c;
@@ -50,13 +52,46 @@
     }
 }
 
-.card-selected{
-   
-    box-shadow: 0px 0px 6px 2px #2b6ac5;
 
-}
 
 .card-selected,.product-card:hover{
     cursor: pointer;
 }
-    
+
+.no-shadow{
+    box-shadow: none !important;
+}
+
+.card-selected {
+    --borderWidth: 3px;
+    // background: #1D1F20;
+    position: relative;
+    border-radius: var(--borderWidth);
+  }
+  .card-selected:after {
+    content: '';
+    position: absolute;
+    top: calc(-0.5 * var(--borderWidth));
+    left: calc(3 * var( --borderWidth));
+    height: calc(100% + var( --borderWidth) * 2 + -4px);
+    width: calc(100% + var( --borderWidth) * 2 + -24px);
+    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: 0;
+    animation: animatedgradient 3s ease alternate infinite;
+    background-size: 300% 300%;
+  }
+  
+  
+  @keyframes animatedgradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+  

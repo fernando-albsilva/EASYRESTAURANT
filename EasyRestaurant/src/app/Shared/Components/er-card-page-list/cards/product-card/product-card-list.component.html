@@ -1,14 +1,11 @@
-<div 
-  [ngClass]="{
-              'product-card':true,
-               'card-selected' : (isSelected)
-               }" 
-  (click)=sendItemId(product.id) >
+<div [ngClass]="{'card-selected' : (isSelected)}">
+<div [ngClass]="{'product-card':true,'no-shadow' : (isSelected)}" (click)=sendItemId(product.id) >
   
   
   <div class="card-first-chield-container">
 
-    <span class="material-icons-round icon">lunch_dining</span>
+    <!-- <mat-icon class="material-icons-round icon">lunch_dining</mat-icon> -->
+    <mat-icon class="material-icons-outlined icon">lunch_dining</mat-icon>
     <div class="card-chield-container">
       <span class="card-child-title">Nome</span>
       <span class="card-child-text">{{productName}}</span>
@@ -25,4 +22,13 @@
     <span class="card-child-text">R$ {{unitCost}}</span>
   </div>
   
+  
+  
 </div>
+</div>
+
+<!-- 
+[ngClass]="{
+  'product-card':true,
+   'card-selected' : (isSelected)
+   }"  -->
