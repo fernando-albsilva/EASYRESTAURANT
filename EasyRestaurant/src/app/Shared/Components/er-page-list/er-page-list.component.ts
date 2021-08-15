@@ -1,15 +1,16 @@
 import {MatDialog,} from '@angular/material/dialog';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 import { Subject } from 'rxjs';
+import { IerLeftSideMenu } from '../er-left-side-menu/interface/er-left-side.interface';
 
 
 @Component({
   selector: 'er-page-list',
-  templateUrl: 'er-page-list-component.html',
-  styleUrls: ['er-page-list-component.scss']
+  templateUrl: 'er-page-list.component.html',
+  styleUrls: ['er-page-list.component.scss']
 })
-export class ErPageList implements OnInit {
+export class ErPageList implements OnInit, OnChanges {
 
     
     @Output() addElementEvent = new EventEmitter<any>();
@@ -21,23 +22,38 @@ export class ErPageList implements OnInit {
     @Input() public itemSelected: boolean = false;
 
     @Input() public elementList: Array<any> = [];
+    @Input()  clearSelectList : Subject<any>= new Subject();
     
     public elementFiltredList: Array<any> = [];
     public selectedItemList : Array<string> = [];
-    classSelected:Subject<string> = new Subject();
+    public classSelected:Subject<string> = new Subject();
+   
 
 
     constructor(
-      public dialog: MatDialog
+      public dialog: MatDialog,
+      private cd: ChangeDetectorRef
       ){}
+  
+ 
 
     ngOnInit(): void {
         this.elementFiltredList = this.elementList;
+        this.clearSelectList.subscribe( () =>{
+            this.clearListOfSelectedItems();
+        });
     }
+    //TODO ver por que nao e chamado quando muda o elementList
 
-   
+    ngOnChanges(changes: SimpleChanges): void {
+     
+        console.log(changes.elementList.currentValue);  
+        this.elementFiltredList = changes.elementList.currentValue;
+       
+     
+    }
     public selectItem(id:string){
-      console.log(id);
+      // console.log(id);
       let test:boolean = false;
       this.classSelected.next(id);
       this.selectedItemList = this.selectedItemList.filter( (element )=>{
@@ -70,7 +86,11 @@ export class ErPageList implements OnInit {
       });
       return true;
     }
-  
+
+    public clearListOfSelectedItems(){
+      this.selectedItemList = [];
+    }
+
 
     public addElement(){
       this.addElementEvent.emit();

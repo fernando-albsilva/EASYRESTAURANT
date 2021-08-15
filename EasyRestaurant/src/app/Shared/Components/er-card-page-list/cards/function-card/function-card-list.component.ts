@@ -5,8 +5,8 @@ import { FunctionModel } from 'src/app/Function/Model/FunctionModel';
 
 @Component({
   selector: 'function-card-list',
-  templateUrl: 'function-card-list-component.html',
-  styleUrls: ['function-card-list-component.scss']
+  templateUrl: 'function-card-list.component.html',
+  styleUrls: ['function-card-list.component.scss']
 })
 export class FunctionCardListComponent implements OnInit {
 

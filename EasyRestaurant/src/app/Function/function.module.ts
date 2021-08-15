@@ -1,4 +1,4 @@
-import { FunctionComponent } from './function-component';
+import { FunctionComponent } from './function.component';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ProductRoutingModule } from './product.routing.module';
-import { ProductComponent } from './product-component';
-import { ProductCreateDialog } from './product-create-dialog/product-create-dialog-component';
+import { ProductComponent } from './product.component';
+import { ProductCreateDialog } from './product-create-dialog/product-create-dialog.component';
 import { SharedModule } from './../Shared/shared.module';
 
 

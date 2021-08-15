@@ -24,7 +24,7 @@
 
     <div *ngIf="context === 'Function'"> 
 
-      <function-card-list  *ngFor="let item of elementList" [function]="item"
+      <function-card-list  *ngFor="let item of elementFiltredList" [function]="item"
       (itemSelected)="selectItem($event)"
       [changeClass]="classSelected">
       </function-card-list>

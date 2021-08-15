@@ -1,0 +1,36 @@
+.snack-bar-container{
+      position: absolute;
+      bottom: 30px;
+      left: 0px;
+      right: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .message{
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 4px;
+            height: 100%;
+            max-width: 100%;
+      }
+
+      .valid{
+            background-color: #100e35;
+            border: 2px solid #26B373;
+            color:#26B373
+      }
+
+      .error{
+            background-color: #100e35;
+            border: 2px solid #D7436E;
+            color:#D7436E
+      }
+
+      .warning{
+            background-color: #100e35;
+            border: 2px solid #C959E1;
+            color:#C959E1
+      }
+}

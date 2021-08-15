@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Guid } from 'guid-typescript';
 import { Subject } from 'rxjs';
 
 import { ProductModel } from 'src/app/Product/models/Product.model';
 
 @Component({
   selector: 'product-card-list',
-  templateUrl: 'product-card-list-component.html',
-  styleUrls: ['product-card-list-component.scss']
+  templateUrl: 'product-card-list.component.html',
+  styleUrls: ['product-card-list.component.scss']
 })
 export class ProductCardListComponent implements OnInit {
 

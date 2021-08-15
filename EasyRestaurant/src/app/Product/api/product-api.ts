@@ -15,27 +15,17 @@ export class ProductApi {
 
     constructor(private http:HttpClient){}
     
-    public getProducts():Array<ProductModel>{
+    public getProducts():Observable<Array<ProductModel>>{
         let productList : Array<ProductModel> = [];
 
-        this.http.get(this.apiUrl+"/GetAll")
-        .subscribe((items:any) => {
-
-            let productModel = new ProductModel();
-            items.map( (item:any)=>{
-                productModel.id = item.id;
-                productModel.name = item.name.trim();
-                productModel.unitValue = item.unitValue;
-                productModel.cost = item.cost;
-                productList.push(productModel);
-                productModel = new ProductModel();
-            });
-        });
-        return productList;
+        return this.http.get(this.apiUrl+"/GetAll").pipe(map ( (element) => element as Array<ProductModel>));
+             
+        // return productList;
     }
 
-    public createProduct(cmd: ProductModel){
+    public createProduct = (cmd: ProductModel) => {
        
+      
            cmd.id=Guid.create()+"";
            this.http.post(`${ this.apiUrl }/Create`, cmd)
            .subscribe(
@@ -45,10 +35,11 @@ export class ProductApi {
              erro => {
                  console.log(erro);
              }
-           );    
+           );  
+            
     }
 
-    public updateProduct(cmd: ProductModel){
+    public updateProduct = (cmd: ProductModel) => {
        
       // cmd.id=Guid.create()+"";
       this.http.put(`${ this.apiUrl }/Update`, cmd)
@@ -62,23 +53,29 @@ export class ProductApi {
       );    
 }
 
-     public deleteProduct(id:string){
+     public deleteProduct = (id:string):Observable<any> => {
       
         let params = new HttpParams();
         params = params.append('Id',id);
 
-        this.http.delete(`${ this.apiUrl }/Delete`, { params : params})
-        .subscribe(
-          resultado => {
-            console.log(resultado)
-          },
-          erro => {
-              console.log(erro);
-          }
-        );        
+       return this.http.delete(`${ this.apiUrl }/Delete`, { params : params});
+        // .subscribe(
+        //   resultado => {
+        //     console.log(resultado)
+        //     return true;
+        //   },
+        //   erro => {
+        //       console.log(erro);
+        //       return false;
+        //   }
+        // );     
+        
+        
     }
 
-    public deleteMultiplesProducts(idList:Array<string>){
+
+    //TODO retornar um observable igual ao metodo deleteProduct
+    public deleteMultiplesProducts = (idList:Array<string>) => {
       
       
       this.http.post(`${ this.apiUrl }/DeleteByList`, idList)

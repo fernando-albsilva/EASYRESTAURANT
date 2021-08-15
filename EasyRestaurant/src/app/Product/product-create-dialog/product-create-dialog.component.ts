@@ -6,10 +6,11 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
 
 
 
+
 @Component({
   selector: 'product-create-dialog',
-  templateUrl: 'product-create-dialog-component.html',
-  styleUrls: ['product-create-dialog-component.scss']
+  templateUrl: 'product-create-dialog.component.html',
+  styleUrls: ['product-create-dialog.component.scss']
 })
 
 export class ProductCreateDialog implements OnInit{
@@ -41,6 +42,7 @@ export class ProductCreateDialog implements OnInit{
     }else{
       this.api.updateProduct(this.product);
     }
+   
     this.dialogRef.close();
 
   }

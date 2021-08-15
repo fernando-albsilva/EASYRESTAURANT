@@ -10,8 +10,8 @@ import { FunctionModel } from './Model/FunctionModel';
 
 @Component({
   selector: 'function',
-  templateUrl: 'function-component.html',
-  styleUrls: ['function-component.scss']
+  templateUrl: 'function.component.html',
+  styleUrls: ['function.component.scss']
 })
 export class FunctionComponent implements OnInit {
 

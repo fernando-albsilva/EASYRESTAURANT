@@ -1,14 +1,13 @@
-import { FunctionCardListComponent } from './Components/er-card-page-list/cards/function-card/function-card-list-component';
-
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { FunctionCardListComponent } from './Components/er-card-page-list/cards/function-card/function-card-list.component';
 import { ErLeftSideMenu } from './Components/er-left-side-menu/er-left-side-menu.component';
 import { ErTopMenu } from './Components/er-menu/er-top-menu.component';
-import { ErPageList } from './Components/er-page-list/er-page-list-component';
-import { ProductCardListComponent } from './Components/er-card-page-list/cards/product-card/product-card-list-component';
+import { ErPageList } from './Components/er-page-list/er-page-list.component';
+import { ProductCardListComponent } from './Components/er-card-page-list/cards/product-card/product-card-list.component';
+import { ErSnackBar } from './Components/er-snack-bar/er-snack-bar.component';
 
 @NgModule({
   imports: [
@@ -20,14 +19,16 @@ import { ProductCardListComponent } from './Components/er-card-page-list/cards/p
     ErLeftSideMenu,
     ErPageList,
     ProductCardListComponent,
-    FunctionCardListComponent
+    FunctionCardListComponent,
+    ErSnackBar
   ],
   declarations: [
     ErTopMenu,
     ErLeftSideMenu,
     ErPageList,
     ProductCardListComponent,
-    FunctionCardListComponent
+    FunctionCardListComponent,
+    ErSnackBar
   ],
 })
 export class SharedModule { }

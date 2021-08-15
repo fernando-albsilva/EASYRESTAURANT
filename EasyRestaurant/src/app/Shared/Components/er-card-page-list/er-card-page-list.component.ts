@@ -6,8 +6,8 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
 
 @Component({
   selector: 'er-card-page-list',
-  templateUrl: 'er-card-page-list-component.html',
-  styleUrls: ['er-card-page-list-component.scss']
+  templateUrl: 'er-card-page-list.component.html',
+  styleUrls: ['er-card-page-list.component.scss']
 })
 export class ErCardPageList implements OnInit {
 
