@@ -5,7 +5,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;  
-    // background: linear-gradient(14deg , #7E4C78 0%, #403763 100%);
+   
     padding: 30px 20px 20px 20px;
   
     .container{
@@ -13,8 +13,6 @@
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
-        // justify-content: space-between;
-        // align-items: center;        
         height: 100%;
         width: calc(100% - 100px);
         gap: 10px;

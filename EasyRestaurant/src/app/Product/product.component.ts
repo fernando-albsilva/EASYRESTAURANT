@@ -80,12 +80,9 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
   }
 
   public editElementEvent = () => {
-    console.log("chamou avo edit");
-    console.log(this.selectedItemList);
 
     if(this.selectedItemList.length === 1)
     {
-      console.log("entrou");
       let newData : ProductModel =  this.elementList.filter( (element )=>{
         if(element.id===this.selectedItemList[0])
         {
@@ -134,7 +131,7 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
   }
 
   public removeElementEvent = () => {
-    // console.log("chamou avo remove");
+  
     if(this.selectedItemList.length > 0)
     {
       if(this.selectedItemList.length === 1)

@@ -24,25 +24,9 @@ export class ProductApi {
 
   public createProduct = (cmd: ProductModel):Observable<any> => {
      
-    // cmd.id=Guid.create()+"";
-    // return  this.http.post<any>(`${ this.apiUrl }/Create`, cmd);
-        //  .subscribe(
-        //    resultado => {
-        //      console.log(resultado)
-        //    },
-        //    erro => {
-        //        console.log(erro);
-        //    }
-        //  );  
-        // for (let index = 0; index < 5; index++) {
-        //   cmd.id=Guid.create()+"";
-        //   cmd.name = index+"";
-        //   this.http.post<any>(`${ this.apiUrl }/Create`, cmd);
-        // }
         cmd.id=Guid.create()+"";
         return  this.http.post(`${ this.apiUrl }/Create`, cmd);
-       
-          
+    
   }
 
   public updateProduct = (cmd: ProductModel):Observable<any> => {

@@ -52,9 +52,7 @@ export class FunctionApi {
      public deleteFunction(id: string):Observable<any>{
         
         id = `{${id}}`;
-        //TODO resolver problema do endPoint e fazer a requisicao delete
-        // return this.http.delete(this.apiUrl+"Delete");
-        return this.http.post(this.apiUrl+"Delete",id);
+         return this.http.post(this.apiUrl+"Delete",id);
 
     
     }

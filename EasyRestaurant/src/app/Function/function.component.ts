@@ -4,7 +4,7 @@ import {MatDialog,} from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { FunctionApi } from './api/function-api';
 import { FunctionModel } from './Model/FunctionModel';
-// import { ProductCreateDialog } from './product-crreate-dialog/product-create-dialog-component';
+
 
 
 
@@ -33,12 +33,11 @@ export class FunctionComponent implements OnInit {
 
     public getFunctions = () =>{
        this.elementList = this.functionApi.getFunctions();
-       console.log("nova lista");
-       console.log(this.elementList);
+     
     }
 
     public selectItem(id:string){
-      console.log(id);
+    
       let test:boolean = false;
       this.classSelected.next(id);
       this.selectedItemList = this.selectedItemList.filter( (element )=>{
@@ -57,7 +56,7 @@ export class FunctionComponent implements OnInit {
       }
      
       this.itemIsSelected(id);
-      console.log(this.selectedItemList);
+     
     }
 
     public itemIsSelected(id:string):boolean{
@@ -73,14 +72,11 @@ export class FunctionComponent implements OnInit {
   
 
     public addElement(){
-      // const dialogRef = this.dialog.open(ProductCreateDialog, {
-      //   height: '460px',
-      //   width: '600px'
-      // });
+      
     }
 
     public editElement(){
-      // alert("chamou pai edit");
+     
     }
 
     public searchElement(){

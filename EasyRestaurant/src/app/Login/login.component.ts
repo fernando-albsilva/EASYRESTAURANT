@@ -24,15 +24,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     
-    // this.formLogin = this.fb.group({
-    //    userName:["",Validators.required],
-    //    password:["",Validators.required]
-    // }) 
   }
 
   public executeLogin = () => {
     
-    console.log("navegou;")
+   
     if(this.userNameInput === 'fernando' && this.passwordInput === '200790')
     {
       this.router.navigate(['/home']);
@@ -40,8 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   public print = () => {
-    console.log(this.userNameInput);
-    console.log(this.passwordInput);
+   
   }
 
 }

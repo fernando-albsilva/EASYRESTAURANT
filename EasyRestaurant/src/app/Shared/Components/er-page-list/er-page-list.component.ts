@@ -43,17 +43,16 @@ export class ErPageList implements OnInit, OnChanges {
             this.clearListOfSelectedItems();
         });
     }
-    //TODO ver por que nao e chamado quando muda o elementList
+    
 
     ngOnChanges(changes: SimpleChanges): void {
      
-        console.log(changes.elementList.currentValue);  
         this.elementFiltredList = changes.elementList.currentValue;
-       
-     
+          
     }
+
     public selectItem = (id:string) => {  
-      // console.log(id);
+     
       let test:boolean = false;
       this.classSelected.next(id);
       this.selectedItemList = this.selectedItemList.filter( (element )=>{
@@ -71,7 +70,6 @@ export class ErPageList implements OnInit, OnChanges {
       }
      
       this.itemIsSelected(id);
-      console.log(this.selectedItemList);
       this.selectedItemListEvent.emit(this.selectedItemList);
 
     }
