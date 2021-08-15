@@ -1,15 +1,8 @@
-import { Subject } from "rxjs";
+export interface IErLeftSideMenu {
 
-export interface IerLeftSideMenu {
+    addElementEvent():void;
 
-      selectedItemList : Array<string>;
-      classSelected:Subject<string>;
-      
-      addElementEvent():any;
-        
-      editElementEvent():any;
-        
-      removeElementEvent():any;
-      
-      selectedItemListEvent(listOfSelectedItems:any):any;
+    editElementEvent():void;
+
+    removeElementEvent():void;
 }

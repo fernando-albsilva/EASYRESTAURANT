@@ -1,8 +1,11 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
-import { ProductApi } from '../api/product-api';
+import { Subject } from "rxjs";
+
 import { ProductModel } from 'src/app/Product/models/Product.model';
+import { IErSnackBar } from './../../Shared/Components/er-snack-bar/Interface/IErSnackBar';
+import { PageListMessages } from "src/app/Shared/Components/er-page-list/Enum/PageListMessages";
 
 @Component({
   selector: 'product-create-dialog',
@@ -10,14 +13,15 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
   styleUrls: ['product-create-dialog.component.scss']
 })
 
-export class ProductCreateDialog implements OnInit{
+export class ProductCreateDialog implements OnInit, IErSnackBar{
 
   public product : ProductModel = new ProductModel();
   public isNew: boolean = true;
 
+  public messageSent:Subject<any> = new Subject();
+  
   constructor(
     public dialogRef: MatDialogRef<ProductCreateDialog>,
-    private api : ProductApi,
     @Inject(MAT_DIALOG_DATA) public data: ProductModel) {}
   
   
@@ -35,17 +39,26 @@ export class ProductCreateDialog implements OnInit{
   public onSave = (): void => {
     if(this.isNew)
     {
-      this.api.createProduct(this.product);
-    }else{
-      this.api.updateProduct(this.product);
+        if(this.product.name && this.product.unitValue && this.product.cost)
+        {
+          this.dialogRef.close({response:this.product,responseType:"save"});
+        }else{
+         this.messageSent.next({type:"error", messageSent : `${PageListMessages.allFieldsMustBeFill}`});
+        }
+    }
+    else
+    {
+      if(this.product.name && this.product.unitValue && this.product.cost)
+      {
+        this.dialogRef.close({response:this.product,responseType:"update"});
+      }
+      else
+      {
+       this.messageSent.next({type:"error", messageSent : `${PageListMessages.allFieldsMustBeFill}`});
+      }
     }
    
-    this.dialogRef.close();
-
   }
 
-  public print = () => {
-    console.log(this.product.name);
-  }
 
 }

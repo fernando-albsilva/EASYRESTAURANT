@@ -32,7 +32,7 @@ export class ErSnackBar implements OnInit {
         this.visable = true;
         setTimeout(() => {
           this.visable = false;
-        }, 3000);
+        }, 4000);
     }
 
 

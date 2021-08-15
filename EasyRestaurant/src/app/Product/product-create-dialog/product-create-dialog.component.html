@@ -1,25 +1,27 @@
-<form class="dialog-container" spellcheck="false" autocomplete="off">
+<form #f="ngForm" class="dialog-container" spellcheck="false" autocomplete="off" (ngSubmit)="onSave()">
   <span *ngIf="isNew" class="dialog-title">Criar Produto</span>
   <span *ngIf="!isNew" class="dialog-title">Editar Produto</span>
 
   <div class="dialog-chield-container">
     <span class="input-title">Nome do Produto:</span>
-    <input [(ngModel)]="product.name" name="productName" (blur)=print() class="input green" type="text" required>
+    <input [(ngModel)]="product.name" name="productName" class="input green" type="text" required>
   </div>
 
   <div class="dialog-chield-container">
     <span class="input-title">Valor Unitário: R$</span>
-    <input [(ngModel)]="product.unitValue" name="productUnitValue"  class="input green" type="number">
+    <input [(ngModel)]="product.unitValue" name="productUnitValue"  class="input green" type="number" required>
   </div>
 
   <div class="dialog-chield-container">
     <span class="input-title">Custo Unitário: R$</span>
-    <input [(ngModel)]="product.cost" name="productCost" class="input green" type="number">
+    <input [(ngModel)]="product.cost" name="productCost" class="input green" type="number" required>
   </div>
 
   <div class="dialog-chield-container-last-chield">
     <button class="btn cancel" (click)="onCancel()">Cancelar</button>
-    <button class="btn save" (click)="onSave()">Salvar</button>
+    <button class="btn save" type="submit" >Salvar</button>
     
   </div>
 </form>
+
+<er-snack-bar [messageRecived]="messageSent"></er-snack-bar>
