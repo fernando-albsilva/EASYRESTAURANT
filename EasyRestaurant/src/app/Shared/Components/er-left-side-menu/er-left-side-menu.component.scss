@@ -19,11 +19,11 @@
         align-items: center;
         cursor: pointer;
 
-        span{
-            transform: scale(1.4);
+        mat-icon{
+            transform: scale(1.2);
         }
-        span:hover{
-            transform: scale(1.5);
+        mat-icon:hover{
+            transform: scale(1.3);
             transition: color 0.7s ease-in-out;
             color:#d2a3dd ;
         }
