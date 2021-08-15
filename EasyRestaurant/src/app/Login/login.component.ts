@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  public print(){
+  public print = () => {
     console.log(this.userNameInput);
     console.log(this.passwordInput);
   }

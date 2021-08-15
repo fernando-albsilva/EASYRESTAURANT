@@ -1,12 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { ProductCreateDialog } from './product-create-dialog/product-create-dialog.component';
+import { Subject } from 'rxjs';
 
+import { ProductCreateDialog } from './product-create-dialog/product-create-dialog.component';
 import { ProductApi } from './api/product-api';
 import { ProductModel } from './models/Product.model';
-import { Subject } from 'rxjs';
-import { IerLeftSideMenu } from '../Shared/Components/er-left-side-menu/interface/er-left-side.interface';
 import { PageListMessages } from '../Shared/Components/er-page-list/Enum/PageListMessages';
 
 @Component({

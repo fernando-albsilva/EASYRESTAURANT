@@ -4,9 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ProductApi } from '../api/product-api';
 import { ProductModel } from 'src/app/Product/models/Product.model';
 
-
-
-
 @Component({
   selector: 'product-create-dialog',
   templateUrl: 'product-create-dialog.component.html',
@@ -47,7 +44,7 @@ export class ProductCreateDialog implements OnInit{
 
   }
 
-  public print() {
+  public print = () => {
     console.log(this.product.name);
   }
 

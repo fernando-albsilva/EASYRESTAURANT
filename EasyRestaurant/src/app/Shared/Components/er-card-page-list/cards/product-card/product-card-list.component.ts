@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { Subject } from 'rxjs';
 
 import { ProductModel } from 'src/app/Product/models/Product.model';
@@ -10,11 +11,11 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
 })
 export class ProductCardListComponent implements OnInit {
 
-    @Input() public product: ProductModel = new ProductModel();
     @Output() public itemSelected = new EventEmitter();
+    
+    @Input() public product: ProductModel = new ProductModel();
     @Input() changeClass : Subject<string>= new Subject();
    
-    
     public productId:string = "";
     public productName:string="";
     public unitValue:number=0.0;
@@ -40,12 +41,12 @@ export class ProductCardListComponent implements OnInit {
       });
     }
 
-    public sendItemId(id:string){
+    public sendItemId = (id:string) => {
       this.itemSelected.emit(id);
     }
 
    
-    public changeClassSelected(id:string){
+    public changeClassSelected = (id:string) => {
       if(this.productId === id && this.isSelected === true)
       {
         this.isSelected = false;

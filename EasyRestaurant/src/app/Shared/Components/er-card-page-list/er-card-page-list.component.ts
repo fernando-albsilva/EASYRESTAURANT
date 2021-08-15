@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Guid } from 'guid-typescript';
+
 import { Subject } from 'rxjs';
-
-import { ProductModel } from 'src/app/Product/models/Product.model';
-
 @Component({
   selector: 'er-card-page-list',
   templateUrl: 'er-card-page-list.component.html',
@@ -11,8 +8,9 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
 })
 export class ErCardPageList implements OnInit {
 
-    @Input() public product: any;
     @Output() public itemSelected = new EventEmitter();
+    
+    @Input() public product: any;
     @Input() changeClass : Subject<string>= new Subject();
    
     
@@ -41,12 +39,12 @@ export class ErCardPageList implements OnInit {
       });
     }
 
-    public sendItemId(id:string){
+    public sendItemId = (id:string) => {
       this.itemSelected.emit(id);
     }
 
    
-    public changeClassSelected(id:string){
+    public changeClassSelected = (id:string) => {
       if(this.productId === id && this.isSelected === true)
       {
         this.isSelected = false;

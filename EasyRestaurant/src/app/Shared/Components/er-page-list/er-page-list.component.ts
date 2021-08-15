@@ -1,8 +1,8 @@
-import {MatDialog,} from '@angular/material/dialog';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Subject } from 'rxjs';
-import { IerLeftSideMenu } from '../er-left-side-menu/interface/er-left-side.interface';
+
 
 
 @Component({
@@ -52,7 +52,7 @@ export class ErPageList implements OnInit, OnChanges {
        
      
     }
-    public selectItem(id:string){
+    public selectItem = (id:string) => {  
       // console.log(id);
       let test:boolean = false;
       this.classSelected.next(id);
@@ -76,7 +76,7 @@ export class ErPageList implements OnInit, OnChanges {
 
     }
 
-    public itemIsSelected(id:string):boolean{
+    public itemIsSelected = (id:string):boolean =>{
       let test:boolean = false;
       this.selectedItemList.filter( (element )=>{
         if(element===id)
@@ -87,20 +87,20 @@ export class ErPageList implements OnInit, OnChanges {
       return true;
     }
 
-    public clearListOfSelectedItems(){
+    public clearListOfSelectedItems = () => {
       this.selectedItemList = [];
     }
 
 
-    public addElement(){
+    public addElement = () => {
       this.addElementEvent.emit();
     }
 
-    public editElement(){
+    public editElement = () => {
       this.editElementEvent.emit();
     }
 
-    public searchElement(event:any){
+    public searchElement = (event:any) => {
       
       let textFilter = event.target.value;
       this.elementFiltredList = this.elementList.filter((element)=>{
@@ -113,7 +113,7 @@ export class ErPageList implements OnInit, OnChanges {
       })
     }
 
-    public removeElement(){
+    public removeElement = () => {
       this.removeElementEvent.emit();
     }
 

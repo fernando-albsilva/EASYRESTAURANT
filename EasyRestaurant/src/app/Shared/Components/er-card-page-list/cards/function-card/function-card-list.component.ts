@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Guid } from 'guid-typescript';
+
 import { Subject } from 'rxjs';
+
 import { FunctionModel } from 'src/app/Function/Model/FunctionModel';
 
 @Component({
@@ -10,8 +11,9 @@ import { FunctionModel } from 'src/app/Function/Model/FunctionModel';
 })
 export class FunctionCardListComponent implements OnInit {
 
-    @Input() public function: FunctionModel = new FunctionModel();
     @Output() public itemSelected = new EventEmitter();
+    
+    @Input() public function: FunctionModel = new FunctionModel();
     @Input() changeClass : Subject<string>= new Subject();
    
     
@@ -42,7 +44,7 @@ export class FunctionCardListComponent implements OnInit {
     }
 
    
-    public changeClassSelected(id:string){
+    public changeClassSelected = (id:string) => {
       if(this.functionId === id && this.isSelected === true)
       {
         this.isSelected = false;
