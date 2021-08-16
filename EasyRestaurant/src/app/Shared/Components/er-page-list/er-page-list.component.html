@@ -10,7 +10,7 @@
 
     <div class="search-container">
       <mat-icon class="material-icons-round green" >search</mat-icon>
-      <input type="text" class="input-search" (change)="searchElement($event)" spellcheck="false" autocomplete="off" #searchInputField>
+      <input type="text" class="input-search" (keyup)="searchElement($event)" spellcheck="false" autocomplete="off" #searchInputField>
       <button class="search-button" (click)="clearSearch()">
         <mat-icon class="material-icons-round green">close</mat-icon>
       </button>

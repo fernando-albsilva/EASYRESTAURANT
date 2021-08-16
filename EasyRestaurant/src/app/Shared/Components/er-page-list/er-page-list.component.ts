@@ -94,7 +94,7 @@ export class ErPageList implements OnInit, OnChanges, IErSnackBar {
     }
 
 
-    public addElement = () => {
+    public addElement = () => { 
       this.addElementEvent.emit();
     }
 
@@ -130,25 +130,34 @@ export class ErPageList implements OnInit, OnChanges, IErSnackBar {
     }
 
     private verifySelectedItems = (type:string) => {
+      
       if(!this.selectedItemList.length)
       {
         this.messageSent.next({type:"warning", messageSent : `${PageListMessages.selectAtLeastOneItem}`});
       }
       else
       {
-        if(this.selectedItemList.length > 1)
-        {
-          this.messageSent.next({type:"warning", messageSent : `${PageListMessages.onlyOneItemUpdatePermited}`});
-        }
-        else
-        {
-          switch(type) 
+        switch(type) 
+        { 
+          
+          case 'edit': 
           { 
-            case 'edit': { this.editElementEvent.emit(); break; } 
-            case 'remove': { this.removeElementEvent.emit(); break; } 
-            default: { break; } 
-          } 
-        }
+            if(this.selectedItemList.length > 1)
+            {
+              this.messageSent.next({type:"warning", messageSent : `${PageListMessages.onlyOneItemUpdatePermited}`});
+              break;
+            }
+            else
+            {
+              this.editElementEvent.emit(); break;
+            }
+          }
+          
+          case 'remove': { this.removeElementEvent.emit(); break; } 
+          
+          default: { break; } 
+        } 
+        
       }
 
     }
