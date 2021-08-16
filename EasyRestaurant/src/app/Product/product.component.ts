@@ -22,6 +22,7 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
   public selectedItemList : Array<string> = [];
   public clearListOfSelectedItems:Subject<any> = new Subject();
   public messageSent:Subject<any> = new Subject();
+ 
   
 
   constructor(
@@ -34,8 +35,8 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
   }
 
   public getProducts = () => {
-        this.productApi.getProducts().subscribe(response =>{
-        this.elementList = response;
+        this.productApi.getProducts().subscribe((response:Array<ProductModel>) =>{
+        this.elementList = this.sortListByName(response);
      });
   }
 
@@ -119,7 +120,7 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
           }
         }
       });
-         
+
   }
 
   public removeElementEvent = () => {
@@ -165,7 +166,18 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
     this.selectedItemList=listOfSelectedItems;
   }
 
+  private sortListByName = (list:Array<ProductModel>):Array<ProductModel> =>{
 
+    return list.sort((a,b)=>{
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    });
+  }
 
 }
 
