@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChange
 import { MatDialog } from '@angular/material/dialog';
 
 import { Subject } from 'rxjs';
+import { PageListMessages } from './Enum/PageListMessages';
+import { IErSnackBar } from '../er-snack-bar/Interface/IErSnackBar';
 
 
 
@@ -10,7 +12,7 @@ import { Subject } from 'rxjs';
   templateUrl: 'er-page-list.component.html',
   styleUrls: ['er-page-list.component.scss']
 })
-export class ErPageList implements OnInit, OnChanges {
+export class ErPageList implements OnInit, OnChanges, IErSnackBar {
 
     @ViewChild('searchInputField') searchInputElement: ElementRef<HTMLInputElement> | undefined;  
 
@@ -23,11 +25,12 @@ export class ErPageList implements OnInit, OnChanges {
     @Input() public itemSelected: boolean = false;
 
     @Input() public elementList: Array<any> = [];
-    @Input()  clearSelectList : Subject<any>= new Subject();
+    @Input() clearSelectList : Subject<any>= new Subject();
     
     public elementFiltredList: Array<any> = [];
     public selectedItemList : Array<string> = [];
     public classSelected:Subject<string> = new Subject();
+    public messageSent: Subject<any> = new Subject();
    
 
 
@@ -96,7 +99,11 @@ export class ErPageList implements OnInit, OnChanges {
     }
 
     public editElement = () => {
-      this.editElementEvent.emit();
+     this.verifySelectedItems('edit');
+    }
+
+    public removeElement = () => {
+      this.verifySelectedItems('remove');
     }
 
     public searchElement = (event:any) => {
@@ -119,13 +126,31 @@ export class ErPageList implements OnInit, OnChanges {
         this.searchInputElement.nativeElement.blur();
         this.elementFiltredList = this.elementList;
       }
-       
-
-        
+             
     }
 
-    public removeElement = () => {
-      this.removeElementEvent.emit();
+    private verifySelectedItems = (type:string) => {
+      if(!this.selectedItemList.length)
+      {
+        this.messageSent.next({type:"warning", messageSent : `${PageListMessages.selectAtLeastOneItem}`});
+      }
+      else
+      {
+        if(this.selectedItemList.length > 1)
+        {
+          this.messageSent.next({type:"warning", messageSent : `${PageListMessages.onlyOneItemUpdatePermited}`});
+        }
+        else
+        {
+          switch(type) 
+          { 
+            case 'edit': { this.editElementEvent.emit(); break; } 
+            case 'remove': { this.removeElementEvent.emit(); break; } 
+            default: { break; } 
+          } 
+        }
+      }
+
     }
 
 

@@ -81,8 +81,6 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
 
   public editElementEvent = () => {
 
-    if(this.selectedItemList.length === 1)
-    {
       let newData : ProductModel =  this.elementList.filter( (element )=>{
         if(element.id===this.selectedItemList[0])
         {
@@ -121,20 +119,7 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
           }
         }
       });
-      
-      
-    }
-    else{
-      if(!this.selectedItemList.length)
-      {
-        this.messageSent.next({type:"warning", messageSent : `${PageListMessages.selectAtLeastOneItem}`});
-      }
-      else
-      {
-        this.messageSent.next({type:"warning", messageSent : `${PageListMessages.onlyOneItemUpdatePermited}`});
-      }
-    }
-    
+         
   }
 
   public removeElementEvent = () => {
