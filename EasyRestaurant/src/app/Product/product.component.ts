@@ -125,7 +125,14 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
       
     }
     else{
-      this.messageSent.next({type:"warning", messageSent : `${PageListMessages.onlyOneItemUpdatePermited}`});
+      if(!this.selectedItemList.length)
+      {
+        this.messageSent.next({type:"warning", messageSent : `${PageListMessages.selectAtLeastOneItem}`});
+      }
+      else
+      {
+        this.messageSent.next({type:"warning", messageSent : `${PageListMessages.onlyOneItemUpdatePermited}`});
+      }
     }
     
   }
@@ -163,6 +170,9 @@ export class ProductComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
           }
         );       
       }
+    }
+    else{
+      this.messageSent.next({type:"warning", messageSent : `${PageListMessages.selectAtLeastOneItem}`});
     }
   }
 
