@@ -1,10 +1,11 @@
-import { FunctionComponent } from './function.component';
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import { SharedModule } from '../Shared/shared.module';
+import { FunctionComponent } from './function.component';
+import { FunctionCreateDialog } from './function-create-dialog/function-create-dialog.component';
 
 
 @NgModule({
@@ -12,13 +13,17 @@ import { SharedModule } from '../Shared/shared.module';
     CommonModule,
     SharedModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule
     ],
   exports:[
-    FunctionComponent
+    FunctionComponent,
+    FunctionCreateDialog
    ],
   declarations: [
-    FunctionComponent
+    FunctionComponent,
+    FunctionCreateDialog
+
   ],
 })
 export class FunctionModule { }

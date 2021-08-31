@@ -1,6 +1,6 @@
 export class FunctionModel{
     
-    public id:string="";
+    public id:number = 0;
     public type:string="";
   
 }

@@ -18,8 +18,7 @@ export class FunctionCardListComponent implements OnInit {
    
     
     public functionId:string = "";
-    public functionType:string = "";
-
+    public functionType:string="";
     public isSelected:boolean=false;
 
 
@@ -30,7 +29,7 @@ export class FunctionCardListComponent implements OnInit {
     ngOnInit(): void {
       if(this.function.type !== "")
       {
-        this.functionId = this.function.id;
+        this.functionId = this.function.id.toString();
         this.functionType = this.function.type;
       }
 

@@ -16,6 +16,7 @@
       </button>
     </div>
 
+    <!--- Product context -->
     <div *ngIf="context === 'Product'" class="overflow"> 
 
       <product-card-list  *ngFor="let item of elementFiltredList" [product]="item"
@@ -25,7 +26,8 @@
 
     </div>
 
-    <div *ngIf="context === 'Function'"> 
+    <!--- Function context -->
+    <div *ngIf="context === 'Function'" class="overflow"> 
 
       <function-card-list  *ngFor="let item of elementFiltredList" [function]="item"
       (itemSelected)="selectItem($event)"

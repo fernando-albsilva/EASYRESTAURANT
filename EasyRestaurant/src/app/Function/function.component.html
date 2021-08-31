@@ -1,24 +1,9 @@
-<!-- <er-top-menu></er-top-menu>
-<div class="bg-color-default">
-  <er-left-side-menu 
-    (addElement)="addElement()"
-    (editElement)="editElement()"
-    (searchElement)="searchElement()"
-    (removeElement)="removeElement()">
-  </er-left-side-menu>
-
-    <div class="container" >
-    
-          <product-card *ngFor="let product of productList" [product]="product"
-           (itemSelected)="selectItem($event)"
-           [changeClass]="classSelected"
-           >
-          </product-card>
-      
-    </div>
-</div> -->
-
-<er-page-list context="Function"></er-page-list>
-
-
-<!-- [classSelected]="classSelected" -->
+<er-page-list context="Function"
+    [elementList]="elementList"
+    [clearSelectList]="clearListOfSelectedItems"
+    (addElementEvent)="addElementEvent()"
+    (editElementEvent)="editElementEvent()"
+    (removeElementEvent)="removeElementEvent()"
+    (selectedItemListEvent)="selectedItemListEvent($event)">
+  </er-page-list>
+  <er-snack-bar [messageRecived]="messageSent"></er-snack-bar>

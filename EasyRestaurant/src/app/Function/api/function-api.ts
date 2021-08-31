@@ -16,46 +16,37 @@ export class FunctionApi {
 
     constructor(private http:HttpClient){}
     
-    public getFunctions():Array<FunctionModel>{
-        let functionList : Array<FunctionModel> = [];
-
-        this.http.get(this.apiUrl+"/GetAll")
-        .subscribe((items:any) => {
-
-            let functionModel = new FunctionModel();
-            items.map( (item:any)=>{
-              functionModel.id = item.id;
-              functionModel.type = item.type;
-              functionList.push(functionModel);
-              functionModel = new FunctionModel();
-            });
-        });
-        return functionList;
+    public getFunctions():Observable<Array<FunctionModel>>{
+ 
+      return this.http.get(this.apiUrl+"/GetAll").pipe(map ( (element) => element as Array<FunctionModel>));
+   
     }
 
-    public createFunction(cmd: FunctionModel){
-       
-           cmd.id=Guid.create()+"";
-           this.http.post(`${ this.apiUrl }/Create`, cmd)
-           .subscribe(
-             resultado => {
-               console.log(resultado)
-             },
-             erro => {
-               if(erro.status == 400) {
-                 console.log(erro);
-               }
-             }
-           );    
+    public createFunction = (cmd: FunctionModel):Observable<any> => {
+     
+      cmd.id=0;
+      return  this.http.post(`${ this.apiUrl }/Create`, cmd);
+  
     }
 
-     public deleteFunction(id: string):Observable<any>{
-        
-        id = `{${id}}`;
-         return this.http.post(this.apiUrl+"Delete",id);
+    public updateFunction = (cmd: FunctionModel):Observable<any> => {
+     
+      return this.http.put<any>(`${ this.apiUrl }/Update`, cmd);
+    }
+  
 
+    public deleteFunction = (id:string):Observable<any> => {
+    
+      let params = new HttpParams();
+      params = params.append('Id',id);
+  
+      return this.http.delete<any>(`${ this.apiUrl }/Delete`, { params : params});         
+    }
+  
+    public deleteMultiplesFunctions = (idList:Array<string>):Observable<any> => {
+      
+      return this.http.post<any>(`${ this.apiUrl }/DeleteByList`, idList);
     
     }
-
 
 }

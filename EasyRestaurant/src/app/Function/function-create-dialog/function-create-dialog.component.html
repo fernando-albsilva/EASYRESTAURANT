@@ -1,0 +1,17 @@
+<form class="dialog-container" spellcheck="false" autocomplete="off" >
+  <span *ngIf="isNew" class="dialog-title">Criar Função</span>
+  <span *ngIf="!isNew" class="dialog-title">Editar Função</span>
+
+  <div class="dialog-chield-container">
+    <span class="input-title">Nome da função:</span>
+    <input [(ngModel)]="function.type" name="functionName" class="input green" type="text" >
+  </div>
+
+  <div class="dialog-chield-container-last-chield">
+    <button class="btn cancel" (click)="onCancel()">Cancelar</button>
+    <button class="btn save"  (click)="onSave()" >Salvar</button>
+    
+  </div>
+</form>
+
+<er-snack-bar [messageRecived]="messageSent"></er-snack-bar>
