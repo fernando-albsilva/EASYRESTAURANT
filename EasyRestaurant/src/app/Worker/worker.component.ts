@@ -97,48 +97,49 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
 
   public editElementEvent = () => {
 
-      let newData : WorkerFlatModel =  this.elementList.filter( (element )=>{
-        if(element.worker_Id===this.selectedItemList[0])
-        {
-          element.name = element.name.trim();
-        }
-        return element.worker_Id===this.selectedItemList[0];
-      })[0];
 
-      const dialogRef = this.dialog.open(WorkerCreateDialog, {
-        height: '700px',
-        width: '900px',
-        data: { 
-          id: newData.worker_Id,
-          name: newData.name,
-          cpf: newData.cpf,
-          phone_number: newData.phone_Number,
-          adress: newData.address,
-          email: newData.email,
-          function: newData.type
-        }
-      });
+    let workerFlatData : WorkerFlatModel =  this.elementList.filter( (element )=>{
+      if(element.worker_Id===this.selectedItemList[0])
+      {
+        element.name = element.name.trim();
+      }
+      return element.worker_Id===this.selectedItemList[0];
+    })[0];
+
+    this.workerApi.getFunctions().subscribe((result:Array<FunctionModel>)=>{
+
+          let newDatafunctionlist = new Functions(result) ;
+          
+          const dialogRef = this.dialog.open(WorkerCreateDialog, {
+            height: '700px',
+            width: '900px',
+            data: {
+              functionList: newDatafunctionlist,
+              typeOfDialog: 'edit',
+              workerFlat: workerFlatData
+            }
+          });
       
-      dialogRef.afterClosed().subscribe( (element:any) => {
-        if(element)
-        {
-          if(element.responseType === 'update')
-          {
-            this.workerApi.updateWorker(element.response).subscribe(
-              result => {
-                console.log(result)
-                this.getWorkers();
-                this.messageSent.next({type:"valid", messageSent : `${PageListMessages.workerUpdatedSucessfull}`});
-                this.clearListOfSelectedItems.next();
-              },
-              erro => {
-                  console.log(erro);
+          dialogRef.afterClosed().subscribe( (element:any) => {
+            if(element)
+            {
+              if(element.responseType === 'update')
+              {
+                this.workerApi.updateWorker(element.response).subscribe(
+                  result => {
+                    console.log(result)
+                    this.getWorkers();
+                    this.messageSent.next({type:"valid", messageSent : `${PageListMessages.workerUpdatedSucessfull}`});
+                    this.clearListOfSelectedItems.next();
+                  },
+                  erro => {
+                      console.log(erro);
+                  }
+                );     
               }
-            );     
-          }
-        }
+            }
+          });
       });
-
   }
 
   public removeElementEvent = () => {

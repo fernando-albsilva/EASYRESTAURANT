@@ -94,6 +94,7 @@
 }
 
 
+//mat select
 mat-form-field{
     width: 100%;
     border-radius: 4px;
@@ -122,7 +123,10 @@ mat-form-field{
       
 }
 
-
+::ng-deep .mat-select-panel{
+    background-color:#100e35 !important;
+    border: 2px solid #26B373;
+}
 
 .ng-tns-c72-2{
     background-color:#100e35;

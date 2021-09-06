@@ -1,3 +1,4 @@
+import { WorkerFlatModel } from './../models/Worker.model';
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
@@ -29,15 +30,35 @@ export class WorkerCreateDialog implements OnInit, IErSnackBar{
   
   
   ngOnInit(): void {
-    if(this.data.typeOfDialog !== 'create'){
-      this.isNew = false;
-      this.worker = this.data;
-    }
+   
     this.functions = this.data.functionList;
     console.log( this.functions.functionList);
-
+    if(this.data.typeOfDialog === 'edit'){
+      this.isNew = false;
+      this.populateWorker(this.data.workerFlat);
+    }
   }
-  public changeType(){
+
+  public populateWorker = (workerFlat : WorkerFlatModel) => {
+      this.worker.worker_Id = workerFlat.worker_Id;
+      this.worker.name = workerFlat.name;
+      this.worker.cpf = workerFlat.cpf;
+      this.worker.phone_Number = workerFlat.phone_Number;
+      this.worker.address = workerFlat.address;
+      this.worker.email = workerFlat.email;
+      
+      this.functions.functionList.forEach(element => {
+        if(element.type === workerFlat.type)
+          {
+            this.worker.function.type = element.type;
+            this.worker.function.id = element.id;
+          }
+      });  
+      
+      console.log( this.worker);
+  }
+
+  public changeType = () => {
 
     this.functions.functionList.forEach(element => {
       if(element.id === this.worker.function.id)
