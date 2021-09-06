@@ -1,0 +1,30 @@
+<div [ngClass]="{'card-selected' : (isSelected)}">
+  <div [ngClass]="{'card':true,'no-shadow' : (isSelected)}"
+       (click)=sendItemId(worker_id.toString())>
+
+    <div class="card-first-chield-container">
+      <span class="material-icons-round icon">face</span>
+
+      <div class="card-chield-container">
+        <span class="card-child-title">Nome</span>
+        <span class="card-child-text">{{name}}</span>
+      </div>
+    </div>
+
+    <div class="card-chield-container">
+      <span class="card-child-title">Função</span>
+      <span class="card-child-text">{{type}}</span>
+    </div>
+
+    <div class="card-chield-container">
+      <span class="card-child-title">Telefone</span>
+      <span class="card-child-text">{{phone_number}}</span>
+    </div>
+
+    <div class="card-chield-container">
+      <span class="card-child-title">Email</span>
+      <span class="card-child-text">{{email}}</span>
+    </div>
+    
+  </div>
+</div>

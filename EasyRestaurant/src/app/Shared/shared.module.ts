@@ -9,6 +9,8 @@ import { ErTopMenu } from './Components/er-menu/er-top-menu.component';
 import { ErPageList } from './Components/er-page-list/er-page-list.component';
 import { ProductCardListComponent } from './Components/er-card-page-list/cards/product-card/product-card-list.component';
 import { ErSnackBar } from './Components/er-snack-bar/er-snack-bar.component';
+import { WorkerCardListComponent } from './Components/er-card-page-list/cards/worker-card/worker-card-list.component';
+
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { ErSnackBar } from './Components/er-snack-bar/er-snack-bar.component';
     ErPageList,
     ProductCardListComponent,
     FunctionCardListComponent,
+    WorkerCardListComponent,
     ErSnackBar
   ],
   declarations: [
@@ -31,6 +34,7 @@ import { ErSnackBar } from './Components/er-snack-bar/er-snack-bar.component';
     ErPageList,
     ProductCardListComponent,
     FunctionCardListComponent,
+    WorkerCardListComponent,
     ErSnackBar
   ],
 })

@@ -1,22 +1,25 @@
+import { WorkerModule } from './Worker/worker.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import {MatDialogModule, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-import { HomeModule } from './Home/home.module';
-import { LoginModule } from './Login/login.module';
 import { AppComponent } from './app.component';
-import { ProductApi } from './Product/api/product-api';
+
 import { SharedModule } from './Shared/shared.module';
 import { ProductModule } from './Product/product.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FunctionApi } from './Function/api/function-api';
+import { HomeModule } from './Home/home.module';
+import { LoginModule } from './Login/login.module';
 import { FunctionModule } from './Function/function.module';
+
+import { ProductApi } from './Product/api/product-api';
+import { FunctionApi } from './Function/api/function-api';
+import { WorkerApi } from './Worker/api/worker-api';
 
 
 @NgModule({
@@ -37,12 +40,14 @@ import { FunctionModule } from './Function/function.module';
     SharedModule,
     ProductModule,
     HomeModule,
-    FunctionModule
+    FunctionModule,
+    WorkerModule
   
   ],
   providers: [
     ProductApi,
-    FunctionApi
+    FunctionApi,
+    WorkerApi
   ],
   bootstrap: [AppComponent]
 })

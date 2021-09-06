@@ -33,6 +33,15 @@
       (itemSelected)="selectItem($event)"
       [changeClass]="classSelected">
       </function-card-list>
+  </div>
+  
+     <!--- Worker context -->
+    <div *ngIf="context === 'Worker'" class="overflow"> 
+
+      <worker-card-list  *ngFor="let item of elementFiltredList" [worker]="item"
+      (itemSelected)="selectItem($event)"
+      [changeClass]="classSelected">
+      </worker-card-list>
 
     </div>
 

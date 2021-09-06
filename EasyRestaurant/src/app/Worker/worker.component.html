@@ -1,0 +1,9 @@
+<er-page-list context="Worker"
+    [elementList]="elementList"
+    [clearSelectList]="clearListOfSelectedItems"
+    (addElementEvent)="addElementEvent()"
+    (editElementEvent)="editElementEvent()"
+    (removeElementEvent)="removeElementEvent()"
+    (selectedItemListEvent)="selectedItemListEvent($event)">
+  </er-page-list>
+  <er-snack-bar [messageRecived]="messageSent"></er-snack-bar>
