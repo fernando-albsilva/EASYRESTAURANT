@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Subject } from 'rxjs';
@@ -35,8 +35,7 @@ export class ErPageList implements OnInit, OnChanges, IErSnackBar {
 
 
     constructor(
-      public dialog: MatDialog,
-      private cd: ChangeDetectorRef
+      public dialog: MatDialog
       ){}
   
  
@@ -161,7 +160,6 @@ export class ErPageList implements OnInit, OnChanges, IErSnackBar {
       }
 
     }
-
 
 }
 
