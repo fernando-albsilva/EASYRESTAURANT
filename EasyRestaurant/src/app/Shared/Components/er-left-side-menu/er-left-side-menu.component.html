@@ -1,15 +1,19 @@
 <div class="side-left-menu-container">
 
-    <div class="left-menu-chield">
+    <div *ngIf="buttonAdd" class="left-menu-chield">
       <mat-icon class="material-icons-round blue" (click)="callFatherAddElement()">add_circle_outline</mat-icon>
     </div>
 
-    <div class="left-menu-chield">
+    <div *ngIf="buttonEdit" class="left-menu-chield">
       <mat-icon class="material-icons-round orange" (click)="callFatherEditElement()">edit</mat-icon>
     </div>
 
-    <div class="left-menu-chield">
+    <div *ngIf="buttonRemove" class="left-menu-chield">
       <mat-icon class="material-icons-round red" (click)="callFatherRemoveElement()">remove_circle_outline</mat-icon>
+    </div>
+
+    <div *ngIf="buttonDetail" class="left-menu-chield">
+      <mat-icon class="material-icons-round green" (click)="callFatherDetailElement()">description</mat-icon>
     </div>
 
 </div>

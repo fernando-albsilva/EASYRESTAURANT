@@ -1,3 +1,4 @@
+import { WorkerDetailDialog } from './worker-detail-dialog/worker-detail-dialog.component';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,7 +25,8 @@ import { WorkerCreateDialog } from './worker-create-dialog/worker-create-dialog.
    ],
   declarations: [
     WorkerComponent,
-    WorkerCreateDialog
+    WorkerCreateDialog,
+    WorkerDetailDialog
   ],
 })
 export class WorkerModule { }

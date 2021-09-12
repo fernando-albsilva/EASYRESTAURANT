@@ -5,7 +5,9 @@ export enum PageListMessages {
   productUpdatedSucessfull = " Produto atualizado com sucesso",
   allFieldsMustBeFill = " Todos os campos devem ser preenchidos",
   onlyOneItemUpdatePermited = " Somente é permitido alterar um item por cada vez.",
+  onlyOneItemDetailPermited = " Somente é permitido detalhar um item por cada vez.",
   selectAtLeastOneItem = " Selecione pelo menos um item.",
-  workerCreatedSucessfull = "workerCreatedSucessfull",
-  workerUpdatedSucessfull = "workerUpdatedSucessfull"
+  workerCreatedSucessfull = " Trabalhador criado com sucesso ",
+  workerUpdatedSucessfull = " Trabalhador alterado com sucesso "
+  
 }

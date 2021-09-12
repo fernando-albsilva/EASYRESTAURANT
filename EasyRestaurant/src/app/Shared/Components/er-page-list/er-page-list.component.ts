@@ -19,8 +19,12 @@ export class ErPageList implements OnInit, OnChanges, IErSnackBar {
     @Output() addElementEvent = new EventEmitter<any>();
     @Output() editElementEvent = new EventEmitter<any>();
     @Output() removeElementEvent = new EventEmitter<any>();
+    @Output() detailElementEvent = new EventEmitter<any>();
+    
     @Output() selectedItemListEvent = new EventEmitter<any>();
 
+    @Input() public erLeftSideMenuButtonsList: Array<string>=[];
+    
     @Input() public context: string="";
     @Input() public itemSelected: boolean = false;
 
@@ -104,6 +108,10 @@ export class ErPageList implements OnInit, OnChanges, IErSnackBar {
     public removeElement = () => {
       this.verifySelectedItems('remove');
     }
+    
+    public detailElement = () => {
+      this.verifySelectedItems('detail');
+    }
 
     public searchElement = (event:any) => {
       
@@ -149,6 +157,19 @@ export class ErPageList implements OnInit, OnChanges, IErSnackBar {
             else
             {
               this.editElementEvent.emit(); break;
+            }
+          }
+
+          case 'detail': 
+          { 
+            if(this.selectedItemList.length > 1)
+            {
+              this.messageSent.next({type:"warning", messageSent : `${PageListMessages.onlyOneItemDetailPermited}`});
+              break;
+            }
+            else
+            {
+              this.detailElementEvent.emit(); break;
             }
           }
           

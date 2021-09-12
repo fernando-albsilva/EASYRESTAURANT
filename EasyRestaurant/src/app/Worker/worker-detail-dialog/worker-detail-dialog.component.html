@@ -1,0 +1,38 @@
+<form class="dialog-container" spellcheck="false" autocomplete="off" >
+  <span class="dialog-title">Descrição do Trabalhador</span>
+
+  <div class="dialog-chield-container">
+    <span class="input-title">Nome :</span>
+    <span class="input green">{{worker.name}}</span>
+  </div>
+
+  <div class="dialog-chield-container">
+    <span class="input-title">Cpf :</span>
+    <span class="input green">{{worker.cpf}}</span>
+  </div>
+
+  <div class="dialog-chield-container">
+    <span class="input-title">Telefone :</span>
+    <span class="input green">{{worker.phone_Number}}</span>
+  </div>
+
+  <div class="dialog-chield-container">
+    <span class="input-title">Endereço :</span>
+    <span class="input green">{{worker.address}}</span>
+  </div>
+
+  <div class="dialog-chield-container">
+    <span class="input-title">Email :</span>
+    <span class="input green">{{worker.email}}</span>
+  </div>
+
+  <div class="dialog-chield-container">
+    <span class="input-title">Função :</span>
+    <span class="input green">{{worker.function.type}}</span>
+  </div>
+
+  <div class="dialog-chield-container-last-chield">
+    <button class="btn cancel" (click)="onCancel()">Fechar</button>
+  </div>
+
+</form>

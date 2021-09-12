@@ -10,6 +10,7 @@ import { Functions, WorkerFlatModel, WorkerModel } from './models/Worker.model';
 import { WorkerApi } from './api/worker-api';
 import { WorkerCreateDialog } from './worker-create-dialog/worker-create-dialog.component';
 import { FunctionModel } from '../Function/Model/FunctionModel';
+import { WorkerDetailDialog } from './worker-detail-dialog/worker-detail-dialog.component';
 
 @Component({
   selector: 'worker',
@@ -41,58 +42,54 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
      });
   }
 
-  public itemIsSelected(id:string):boolean{
-    let test:boolean = false;
-    this.selectedItemList.filter( (element )=>{
-      if(element===id)
-      {
-        test=true; 
-      }
-    });
-    return true;
-  }
-
+  // public itemIsSelected(id:string):boolean{
+  //   let test:boolean = false;
+  //   this.selectedItemList.filter( (element )=>{
+  //     if(element===id)
+  //     {
+  //       test=true; 
+  //     }
+  //   });
+  //   return test;
+  // }
 
   public addElementEvent = () =>{
 
     this.workerApi.getFunctions().subscribe((result:Array<FunctionModel>)=>{
+ 
+      let newDatafunctionlist = new Functions(result) ;
 
-    
-        let newDatafunctionlist = new Functions(result) ;
-
-        const dialogRef = this.dialog.open(WorkerCreateDialog, {
-          height: '700px',
-          width: '900px',
-          data: { 
-            functionList: newDatafunctionlist,
-            typeOfDialog: 'create'
-          }
-        });
-   
-  
-
-    dialogRef.afterClosed().subscribe( (element:any) => {
-      if(element)
-      {
-        if(element.responseType === 'save')
-        {
-          this.workerApi.createWorker(element.response).subscribe(
-            result => {
-              console.log(result)
-              this.getWorkers();
-              this.messageSent.next({type:"valid", messageSent : `${PageListMessages.workerCreatedSucessfull}`});
-              this.clearListOfSelectedItems.next();
-            },
-            erro => {
-                console.log(erro);
-            }
-          );     
+      const dialogRef = this.dialog.open(WorkerCreateDialog, {
+        height: '700px',
+        width: '900px',
+        data: { 
+          functionList: newDatafunctionlist,
+          typeOfDialog: 'create'
         }
-      }
-      
-    });
+      });
+   
+      dialogRef.afterClosed().subscribe( (element:any) => {
+        if(element)
+        {
+          if(element.responseType === 'save')
+          {
+            this.workerApi.createWorker(element.response).subscribe(
+              result => {
+                console.log(result)
+                this.getWorkers();
+                this.messageSent.next({type:"valid", messageSent : `${PageListMessages.workerCreatedSucessfull}`});
+                this.clearListOfSelectedItems.next();
+              },
+              erro => {
+                  console.log(erro);
+              }
+            );     
+          }
+        }
+        
+      });
 
-  });  
+    });  
   }
 
   public editElementEvent = () => {
@@ -179,6 +176,26 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
     else{
       this.messageSent.next({type:"warning", messageSent : `${PageListMessages.selectAtLeastOneItem}`});
     }
+  }
+
+  public detailElementEvent = () => {
+    let workerFlatData : WorkerFlatModel =  this.elementList.filter( (element )=>{
+      if(element.worker_Id===this.selectedItemList[0])
+      {
+        element.name = element.name.trim();
+      }
+      return element.worker_Id===this.selectedItemList[0];
+    })[0];
+    console.log(workerFlatData);
+
+    const dialogRef = this.dialog.open(WorkerDetailDialog, {
+      height: '700px',
+      width: '900px',
+      data: {
+        typeOfDialog: 'detail',
+        workerFlat: workerFlatData
+      }
+    });
   }
 
   public selectedItemListEvent = (listOfSelectedItems:any) => {

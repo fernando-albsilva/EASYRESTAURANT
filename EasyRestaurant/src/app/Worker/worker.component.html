@@ -1,9 +1,11 @@
 <er-page-list context="Worker"
     [elementList]="elementList"
     [clearSelectList]="clearListOfSelectedItems"
+    [erLeftSideMenuButtonsList]="['add','edit','remove','detail']"
     (addElementEvent)="addElementEvent()"
     (editElementEvent)="editElementEvent()"
     (removeElementEvent)="removeElementEvent()"
+    (detailElementEvent)="detailElementEvent()"
     (selectedItemListEvent)="selectedItemListEvent($event)">
   </er-page-list>
   <er-snack-bar [messageRecived]="messageSent"></er-snack-bar>
