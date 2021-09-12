@@ -13,7 +13,9 @@ import { LoginComponent } from './login.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  exports:[],
+  exports:[
+    LoginComponent
+  ],
   declarations: [
     LoginComponent
   ],

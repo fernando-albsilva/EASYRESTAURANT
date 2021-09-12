@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { HomeComponent } from './Home/home.component';
 import { FunctionComponent } from './Function/function.component';
 import { LoginComponent } from './Login/login.component';
-import { HomeComponent } from './Home/home.component';
 import { ProductComponent } from './Product/product.component';
-import { ErPageList } from './Shared/Components/er-page-list/er-page-list.component';
 import { WorkerComponent } from './Worker/worker.component';
 
 
@@ -15,7 +14,6 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent},
   { path: 'function', component: FunctionComponent},
   { path: 'worker', component: WorkerComponent},
-  { path: 'page-list', component: ErPageList},
   { path: '**', component: LoginComponent }
 ];
 

@@ -42,17 +42,6 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
      });
   }
 
-  // public itemIsSelected(id:string):boolean{
-  //   let test:boolean = false;
-  //   this.selectedItemList.filter( (element )=>{
-  //     if(element===id)
-  //     {
-  //       test=true; 
-  //     }
-  //   });
-  //   return test;
-  // }
-
   public addElementEvent = () =>{
 
     this.workerApi.getFunctions().subscribe((result:Array<FunctionModel>)=>{

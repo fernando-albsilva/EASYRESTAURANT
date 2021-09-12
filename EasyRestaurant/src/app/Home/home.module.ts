@@ -1,24 +1,26 @@
-import { CommonModule } from '@angular/common';
+import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SharedModule } from '../Shared/shared.module';
 
-import { HomeComponent } from './home.component';
 
-import { HomeRoutingModule } from './home.routing';
 
 @NgModule({
   imports: [
     CommonModule,
-    HomeRoutingModule,
-    SharedModule
-  ],
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule
+
+    ],
   exports:[
-  ],
+   ],
   declarations: [
     HomeComponent
   ],
-  providers: [
-    
-  ]
 })
 export class HomeModule { }

@@ -12,14 +12,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { SharedModule } from './Shared/shared.module';
-import { ProductModule } from './Product/product.module';
 import { HomeModule } from './Home/home.module';
+import { ProductModule } from './Product/product.module';
 import { LoginModule } from './Login/login.module';
 import { FunctionModule } from './Function/function.module';
 
 import { ProductApi } from './Product/api/product-api';
 import { FunctionApi } from './Function/api/function-api';
 import { WorkerApi } from './Worker/api/worker-api';
+
+
 
 
 @NgModule({
@@ -39,9 +41,9 @@ import { WorkerApi } from './Worker/api/worker-api';
     LoginModule,
     SharedModule,
     ProductModule,
-    HomeModule,
     FunctionModule,
-    WorkerModule
+    WorkerModule,
+    HomeModule
   
   ],
   providers: [
