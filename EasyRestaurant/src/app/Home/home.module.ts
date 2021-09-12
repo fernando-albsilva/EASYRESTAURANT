@@ -5,6 +5,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../Shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
+import { TableComponent } from './components/table.component';
 
 
 
@@ -14,13 +16,15 @@ import { SharedModule } from '../Shared/shared.module';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
 
     ],
   exports:[
    ],
   declarations: [
-    HomeComponent
+    HomeComponent,
+    TableComponent
   ],
 })
 export class HomeModule { }

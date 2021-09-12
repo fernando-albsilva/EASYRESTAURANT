@@ -1,1 +1,95 @@
-<p>home works!</p>
+<er-top-menu></er-top-menu>
+
+<div class="home-container bg-color-default">
+
+      <!-- Resume -->
+      <div class="resume-container"></div>
+
+      <!-- Main -->
+      <div class="main-container">
+            
+            <!-- Main Menu -->
+            <div class="main-menu-container">
+                 
+                        <!-- table button -->
+                        <button class="btn-main-menu" (click)="changeDisplayTableCommand('table')">
+                              <mat-icon class="material-icons-round icon">restaurant</mat-icon>
+                              <span  class="chield-text">Mesa</span>
+                        </button>
+
+                        <!-- command button -->
+                        <button class="btn-main-menu" (click)="changeDisplayTableCommand('command')">
+                              <mat-icon class="material-icons-round icon">style</mat-icon>
+                              <span  class="chield-text">Comanda</span>
+                        </button>
+               
+            </div>
+            <!-- /Main Menu  -->
+
+            
+            <!-- Table/Command Change Container Controller -->
+            <div class="main-content-container" *ngIf=" optionDisplayTableCommandContent === 'table' ">
+                 
+                  <!-- table quantity / filter container -->
+                  <div class="main-table-quantity-filter-container" >
+                        
+                       <div class="table-quantity-container">
+          
+                              <mat-form-field appearance="fill">
+                                    <mat-label>Total de mesas:</mat-label>
+                                    <mat-select  (selectionChange)="refreshTableListBySelectedNumber($event.value)">
+                                      <mat-option *ngFor="let option of tableSelectOptions" [value]="option">
+                                        {{option}}
+                                      </mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+
+                       </div>
+
+                       <!-- Table Number Filter -->
+                       <div class="filter-container">
+
+                                 <mat-icon class="filter-icon blue">search</mat-icon>
+                                
+                                 <span class="label-text blue">Numero : </span>
+                                
+                                 <input type="text" class="input-search blue" (keyup)="filterTableByNumberChange()" spellcheck="false" autocomplete="off" #searchTableByNumberInputField>
+                                
+                                 <button class="search-clear-button" (click)="clearTableSearchInout('searchTableByNumberInputField')">
+                                    <mat-icon class="material-icons-round blue">close</mat-icon>
+                                 </button>
+
+                       </div>
+ 
+                       <!-- Table Cliente Name Filter -->
+                       <div class="filter-container" >
+                              
+                              <mat-icon class="filter-icon blue">search</mat-icon>
+                              
+                              <span class="label-text blue">Cliente : </span>
+                              
+                              <input type="text"  class="input-search blue" (keyup)="filterTableByClientNameChange()" spellcheck="false" autocomplete="off" #searchTableClienteNameInputField>
+                              
+                              <button class="search-clear-button" (click)="clearTableSearchInout('searchTableClienteNameInputField')">
+                                    <mat-icon class="material-icons-round blue">close</mat-icon>
+                              </button>
+                     
+                        </div>
+                  </div>
+                  
+                  <!-- tables icons -->
+                  <div class="main-tables-icons-container">
+                        <table class="table-container" *ngFor="let table of listOfTable"
+                        [tableNumber]="table.id"
+                        [isTableOccupy]="table.isOccupy"></table>
+                  </div>
+            </div >
+            <!-- /Table/Command Change Container Controller  -->
+
+        
+
+      </div>
+
+      <!-- Additional Info -->
+      <div class="additional-info-container"></div>
+</div>

@@ -1,0 +1,5 @@
+<div class="mesa-container">
+      <img *ngIf="!isTableOccupy" class="table-img" src="../../../assets/icons/dinner-table-green.png" alt="Mesa+{{tableNumber}}"> 
+      <img *ngIf="isTableOccupy" class="table-img" src="../../../assets/icons/dinner-table-orange.png" alt="Mesa+{{tableNumber}}"> 
+      <span [ngClass]="{'green': !isTableOccupy, 'orange': isTableOccupy}"  >Mesa {{tableNumber}}</span>
+</div>

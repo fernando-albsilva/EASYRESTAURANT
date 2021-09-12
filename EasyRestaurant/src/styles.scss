@@ -4,7 +4,7 @@ html,body,app-root{
     padding: 0px;
     font-family: roboto;
     height: 100vh;
-    overflow-y:hidden;
+    overflow:hidden;
 }
 
 a,input,button{
@@ -79,8 +79,9 @@ user-select: none;
 }
 
 .bg-color-default{
-   
-    background: radial-gradient(circle, #020024 10%, #6d317d 109%, #5E2D7F 98%);
+    // background: radial-gradient(circle, #020024 10%, #6d317d 109%, #5E2D7F 98%);
+    background: radial-gradient(circle, #190131f7 10%, #6d317d 109%, #5E2D7F 98%);
+
 }
 
 .bg-color-login{
