@@ -6,7 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../Shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
-import { TableComponent } from './components/table.component';
+import { TableComponent } from './components/table/table.component';
+import { TableEditingDialogComponent } from './components/table-editing-dialog/table-editing-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -17,14 +19,16 @@ import { TableComponent } from './components/table.component';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
 
     ],
   exports:[
    ],
   declarations: [
     HomeComponent,
-    TableComponent
+    TableComponent,
+    TableEditingDialogComponent
   ],
 })
 export class HomeModule { }

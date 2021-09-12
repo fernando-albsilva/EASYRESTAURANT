@@ -11,16 +11,22 @@
             <!-- Main Menu -->
             <div class="main-menu-container">
                  
-                        <!-- table button -->
+                        <!-- Table button -->
                         <button class="btn-main-menu" (click)="changeDisplayTableCommand('table')">
                               <mat-icon class="material-icons-round icon">restaurant</mat-icon>
                               <span  class="chield-text">Mesa</span>
                         </button>
 
-                        <!-- command button -->
+                        <!-- Command button -->
                         <button class="btn-main-menu" (click)="changeDisplayTableCommand('command')">
                               <mat-icon class="material-icons-round icon">style</mat-icon>
                               <span  class="chield-text">Comanda</span>
+                        </button>
+
+                         <!-- Table edit button -->
+                         <button class="btn-main-menu" (click)="editTable()">
+                              <mat-icon class="material-icons-round icon orange">edit</mat-icon>
+                              <span  class="chield-text orange">Editar</span>
                         </button>
                
             </div>
@@ -79,9 +85,12 @@
                   
                   <!-- tables icons -->
                   <div class="main-tables-icons-container">
-                        <table class="table-container" *ngFor="let table of listOfTable"
+                        <table *ngFor="let table of listOfTable"
+                        class="table-container" 
+                        [ngClass]="{'table-container':true,'table-selected': isTableSelected(table.id)}"
                         [tableNumber]="table.id"
-                        [isTableOccupy]="table.isOccupy"></table>
+                        [isTableOccupy]="table.isOccupy"
+                        (click)="selectThisTable(table.id)"></table>
                   </div>
             </div >
             <!-- /Table/Command Change Container Controller  -->
@@ -93,3 +102,4 @@
       <!-- Additional Info -->
       <div class="additional-info-container"></div>
 </div>
+<er-snack-bar [messageRecived]="messageSent"></er-snack-bar>

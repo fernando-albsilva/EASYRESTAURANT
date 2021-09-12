@@ -174,10 +174,20 @@
                   border-radius: 4px;
                   box-sizing: border-box;
               }
+
+              .table-container:active{
+               position: relative;
+               top: 1px;
+            }
               
-              .table-container{
-                cursor: pointer;  
-              }
+          .table-container{
+            cursor: pointer;  
+          }
+
+          .table-selected{
+              border:2px solid #2B6AC5;
+             
+          }
         }
     }
 

@@ -1,26 +1,36 @@
+import { TableEditingDialogComponent } from './components/table-editing-dialog/table-editing-dialog.component';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { IErSnackBar } from '../Shared/Components/er-snack-bar/Interface/IErSnackBar';
+import { HomeMessages } from './homeMessages/HomeMessages';
 import { TableModel } from './models/TableModel';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, IErSnackBar {
 
+  //TableRelated
   @ViewChild('searchTableByNumberInputField') searchTableByNumberInputField: ElementRef<HTMLInputElement> | undefined;  
   @ViewChild('searchTableClienteNameInputField') searchTableClienteNameInputField: ElementRef<HTMLInputElement> | undefined;  
   
+  
   public optionDisplayTableCommandContent: string = "table";
-
-  //TableRelated
   public maxTablesAvailable:number = 50;
   public tableSelectOptions:Array<number> = [];
   public listOfTable:Array<TableModel> = [];
-
+  public listOfSelectedTables:Array<number> = [];
+  
   //CommandsRelated
   
-  constructor() { }
+
+  //erSanckBar
+  public messageSent: Subject<any> = new Subject<any>();
+
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.fillTotalTables();
@@ -32,11 +42,20 @@ export class HomeComponent implements OnInit {
 
   //Related Table functions
   public refreshTableListBySelectedNumber = (totalNumberOfTables:number) => {
-    this.listOfTable = [];
-    for (let index = 1; index <= totalNumberOfTables; index++) {
-      let table = new TableModel()
-      table.id=index;
-      this.listOfTable.push(table);  
+    if(this.listOfSelectedTables.length === 0)
+    {
+      this.listOfTable = [];
+      for (let index = 1; index <= totalNumberOfTables; index++) {
+        let table = new TableModel()
+        table.id=index;
+        this.listOfTable.push(table);  
+      }
+    }
+    else
+    {
+      //TODO
+      // implementar funcionalidade para nao permitir apagar uma mesa ativa ou selecionada
+      this.messageSent.next({type:"warning", messageSent : `${HomeMessages.canNotChangeTotalTableIfHasAnySelectedOrActive}`});
     }
   }
 
@@ -79,5 +98,88 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  public selectThisTable = (tableId: number) => {
+    let teste = this.listOfSelectedTables.find((element) => element === tableId);
+    console.log(teste);
+    if(teste === undefined)
+    {
+      this.listOfSelectedTables.push(tableId);
+    }
+    else
+    {
+      this.listOfSelectedTables = this.listOfSelectedTables.filter((element)=>{
+        if (element === tableId)
+        {
+          return false;
+        }
+        else
+        {
+          return true;
+        }
+      });
+    } 
+    console.log(this.listOfSelectedTables);
+  }
+
+  public isTableSelected = (tableId: number):boolean => {
+    
+    let isSelected : boolean = false;
+    this.listOfSelectedTables.forEach( element => {
+      if(element === tableId)
+      {
+        isSelected = true;
+      }
+    })
+
+    return isSelected;
+  }
+
+  public editTable = () => {
+    
+    if(this.listOfSelectedTables.length === 0)
+    {
+      this.messageSent.next({type:"warning", messageSent : `${HomeMessages.oneItemMustBeSelected}`});
+      return false;
+    }
+
+    if(this.listOfSelectedTables.length > 1)
+    {
+      this.messageSent.next({type:"warning", messageSent : `${HomeMessages.onlyOneItemMustBeSelectedToEdit}`});
+      return false;
+    }
+    
+    if(this.listOfSelectedTables.length === 1)
+    {
+      this.openTableEditDialog();
+    }
+
+    return false;
+  }
+
+  public openTableEditDialog = () => {
+    let table : TableModel =  this.listOfTable.filter( element =>{
+        if(element.id == this.listOfSelectedTables[0])
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+    })[0];
+
+    const dialogRef = this.dialog.open(TableEditingDialogComponent, {
+      height: '90vh',
+      width: '90vw',
+      data: {
+        tableData: table
+      }
+    });
+
+    dialogRef.afterClosed().subscribe( (element:any) => {
+      console.log(element);
+    });
+    
+  }
   // End //Related Table functions
 }
