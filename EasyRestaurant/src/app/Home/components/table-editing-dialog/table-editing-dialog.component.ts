@@ -22,4 +22,8 @@ export class TableEditingDialogComponent implements OnInit {
     console.log(this.table);
   }
 
+  public closeDialog = () => {
+    this.dialogRef.close();
+  }
+
 }

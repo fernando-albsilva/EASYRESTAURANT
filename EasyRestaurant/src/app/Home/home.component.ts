@@ -170,7 +170,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
 
     const dialogRef = this.dialog.open(TableEditingDialogComponent, {
       height: '90vh',
-      width: '90vw',
+      width: '95vw',
       data: {
         tableData: table
       }
