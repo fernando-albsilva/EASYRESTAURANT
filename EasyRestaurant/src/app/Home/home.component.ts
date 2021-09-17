@@ -172,7 +172,9 @@ export class HomeComponent implements OnInit, IErSnackBar {
       height: '90vh',
       width: '95vw',
       data: {
-        tableData: table
+        id: table.id,
+        isOccupy: table.isOccupy,
+        products: table.products
       }
     });
 

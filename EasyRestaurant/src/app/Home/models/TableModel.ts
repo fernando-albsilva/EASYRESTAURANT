@@ -4,3 +4,8 @@ export class TableModel {
       public isOccupy:boolean = false;
       public products: Array<ProductModel> = [];
 }
+
+export class WaiterModel {
+      public worker_id: string = "";
+      public name: string = "";
+}

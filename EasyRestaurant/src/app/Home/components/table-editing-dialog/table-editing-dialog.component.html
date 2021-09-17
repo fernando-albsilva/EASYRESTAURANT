@@ -7,11 +7,132 @@
       <!-- Content container -->
       <div class="main-container">
 
+            <!-- First Card -->
             <div class="content-container">
+                  <span class="content-title green">Mesa: {{table.id}}</span>
+                  
+                  <!-- Input Container 2 inputs -->
+                  <div class="input-container">
 
+                        <div class="first-input">
+                              <span class="input-label green">Cliente: </span>
+                              <input type="text" class="input green">
+                        </div>
+                      
+                        <div class="first-input">
+                              <span class="input-label green">Garçom: </span>
+
+                             <!-- TODO implementar select de Waiter falta o bind correto -->
+                              <mat-form-field appearance="fill">
+                                    <mat-label>Nome</mat-label>
+                                    <mat-select [(ngModel)]="selectedWaiter.worker_id" name="waiter" (selectionChange)="changeType()">
+                                      <mat-option *ngFor="let waiter of waiters" [value]="waiter.worker_id">
+                                        {{waiter.name}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                        </div>
+                        
+                  </div>
+
+                  <!-- Info Container -->
+                  <div class="info-card-container">
+                        <span class="input-label green"> Informações</span>
+                        <div class="info-content">
+                              <div class="info-row">
+                                    <span class="info-text">Cliente:</span>
+                                    <span class="info-text">João dos santos</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Cliente:</span>
+                                    <span class="info-text">João dos santos</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Cliente:</span>
+                                    <span class="info-text">João dos santos</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Cliente:</span>
+                                    <span class="info-text">João dos santos</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Cliente:</span>
+                                    <span class="info-text">João dos santos</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Cliente:</span>
+                                    <span class="info-text">João dos santos</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Cliente:</span>
+                                    <span class="info-text">João dos santos</span>
+                              </div>
+                        </div>
+                        
+                        <button class="btn-start-table">
+                              <span class="input-label green">Iniciar Mesa</span>
+                        </button>
+                  </div>
             </div>
 
+            <!-- Sencond/Midlle Card -->
             <div class="content-container">
+                  <span class="content-title green">Incluir</span>
+                  
+                  <!-- Input Container 2 inputs -->
+                  <div class="input-container">
+                        
+                        <div class="first-input">
+                              <span class="input-label green">Produto: </span>
+                              <input type="text" class="input green">
+                        </div>
+                      
+                        <div class="first-input">
+                              <span class="input-label green">Quantidade: </span>
+                              <input type="text" class="input green">
+                        </div>
+                        
+                  </div>
+
+                  <!-- Info Container -->
+                  <div class="info-card-container">
+
+                        <span class="input-label green"> Produto  a ser incluido</span>
+                        <div class="info-content">
+                              <div class="info-row">
+                                    <span class="info-text">Produto:</span>
+                                    <span class="info-text">Coca-Cola</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Valor Unitário:</span>
+                                    <span class="info-text">R$ 15,00</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Quantidade:</span>
+                                    <span class="info-text">2 Unidades</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Total:</span>
+                                    <span class="info-text">R$30,00</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Conta:</span>
+                                    <span class="info-text">R$35,00</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">10%</span>
+                                    <span class="info-text">R$3,50</span>
+                              </div>
+                              <div class="info-row">
+                                    <span class="info-text">Total:</span>
+                                    <span class="info-text">R$38,50</span>
+                              </div>
+                        </div>
+                        
+                        <button class="btn-start-table">
+                              <span class="input-label green">Iniciar Mesa</span>
+                        </button>
+                  </div>
 
             </div>
 

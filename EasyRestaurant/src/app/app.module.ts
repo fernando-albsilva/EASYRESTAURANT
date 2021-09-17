@@ -1,3 +1,4 @@
+import { HomeApi } from './Home/api/Home.api';
 import { WorkerModule } from './Worker/worker.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -49,7 +50,8 @@ import { WorkerApi } from './Worker/api/worker-api';
   providers: [
     ProductApi,
     FunctionApi,
-    WorkerApi
+    WorkerApi,
+    HomeApi
   ],
   bootstrap: [AppComponent]
 })
