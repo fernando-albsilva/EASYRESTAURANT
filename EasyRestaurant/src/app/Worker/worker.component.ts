@@ -18,14 +18,14 @@ import { WorkerDetailDialog } from './worker-detail-dialog/worker-detail-dialog.
   styleUrls: ['worker.component.scss']
 })
 export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
-  
- 
+
+
   public elementList : Array<WorkerFlatModel> = [];
   public selectedItemList : Array<string> = [];
   public clearListOfSelectedItems:Subject<any> = new Subject();
   public messageSent:Subject<any> = new Subject();
- 
-  
+
+
 
   constructor(
     private workerApi:WorkerApi,
@@ -33,7 +33,7 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
     ){}
 
   ngOnInit(): void {
-      this.getWorkers();   
+      this.getWorkers();
   }
 
   public getWorkers = () => {
@@ -45,18 +45,18 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
   public addElementEvent = () =>{
 
     this.workerApi.getFunctions().subscribe((result:Array<FunctionModel>)=>{
- 
+
       let newDatafunctionlist = new Functions(result) ;
 
       const dialogRef = this.dialog.open(WorkerCreateDialog, {
         height: '700px',
         width: '900px',
-        data: { 
+        data: {
           functionList: newDatafunctionlist,
           typeOfDialog: 'create'
         }
       });
-   
+
       dialogRef.afterClosed().subscribe( (element:any) => {
         if(element)
         {
@@ -72,30 +72,30 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
               erro => {
                   console.log(erro);
               }
-            );     
+            );
           }
         }
-        
+
       });
 
-    });  
+    });
   }
 
   public editElementEvent = () => {
 
 
     let workerFlatData : WorkerFlatModel =  this.elementList.filter( (element )=>{
-      if(element.worker_Id===this.selectedItemList[0])
+      if(element.id===this.selectedItemList[0])
       {
         element.name = element.name.trim();
       }
-      return element.worker_Id===this.selectedItemList[0];
+      return element.id===this.selectedItemList[0];
     })[0];
 
     this.workerApi.getFunctions().subscribe((result:Array<FunctionModel>)=>{
 
           let newDatafunctionlist = new Functions(result) ;
-          
+
           const dialogRef = this.dialog.open(WorkerCreateDialog, {
             height: '700px',
             width: '900px',
@@ -105,7 +105,7 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
               workerFlat: workerFlatData
             }
           });
-      
+
           dialogRef.afterClosed().subscribe( (element:any) => {
             if(element)
             {
@@ -121,7 +121,7 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
                   erro => {
                       console.log(erro);
                   }
-                );     
+                );
               }
             }
           });
@@ -129,7 +129,7 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
   }
 
   public removeElementEvent = () => {
-  
+
     if(this.selectedItemList.length > 0)
     {
       if(this.selectedItemList.length === 1)
@@ -146,7 +146,7 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
             erro => {
                 console.log(erro);
             }
-          );     
+          );
       }else{
         this.workerApi.deleteMultiplesWorkers(this.selectedItemList)
         .subscribe(
@@ -159,7 +159,7 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
           erro => {
               console.log(erro);
           }
-        );       
+        );
       }
     }
     else{
@@ -169,11 +169,11 @@ export class WorkerComponent implements OnInit, IErSnackBar, IErLeftSideMenu {
 
   public detailElementEvent = () => {
     let workerFlatData : WorkerFlatModel =  this.elementList.filter( (element )=>{
-      if(element.worker_Id===this.selectedItemList[0])
+      if(element.id===this.selectedItemList[0])
       {
         element.name = element.name.trim();
       }
-      return element.worker_Id===this.selectedItemList[0];
+      return element.id===this.selectedItemList[0];
     })[0];
     console.log(workerFlatData);
 

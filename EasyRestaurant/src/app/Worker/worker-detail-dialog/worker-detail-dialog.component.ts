@@ -17,21 +17,21 @@ import { WorkerModel } from "../models/Worker.model";
 export class WorkerDetailDialog implements OnInit{
 
   public worker : WorkerModel = new WorkerModel();
-  
+
   constructor(
     public dialogRef: MatDialogRef<WorkerDetailDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
-  
-  
+
+
   ngOnInit(): void {
       this.populateWorker(this.data.workerFlat);
   }
 
   public populateWorker = (workerFlat : WorkerFlatModel) => {
-      this.worker.worker_Id = workerFlat.worker_Id;
+      this.worker.id = workerFlat.id;
       this.worker.name = workerFlat.name;
       this.worker.cpf = workerFlat.cpf;
-      this.worker.phone_Number = workerFlat.phone_Number;
+      this.worker.phoneNumber = workerFlat.phoneNumber;
       this.worker.address = workerFlat.address;
       this.worker.email = workerFlat.email;
       this.worker.function.type = workerFlat.type;
@@ -41,6 +41,6 @@ export class WorkerDetailDialog implements OnInit{
     this.dialogRef.close();
   }
 
- 
+
 
 }

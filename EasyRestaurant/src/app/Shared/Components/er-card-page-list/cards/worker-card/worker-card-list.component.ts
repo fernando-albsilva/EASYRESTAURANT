@@ -12,10 +12,10 @@ import { WorkerFlatModel } from './../../../../../Worker/models/Worker.model';
 export class WorkerCardListComponent implements OnInit {
 
     @Output() public itemSelected = new EventEmitter();
-    
+
     @Input() public worker: WorkerFlatModel = new WorkerFlatModel();
     @Input() changeClass : Subject<string>= new Subject();
-   
+
     public isSelected:boolean=false;
 
     public worker_id : string = "";
@@ -28,20 +28,20 @@ export class WorkerCardListComponent implements OnInit {
 
 
     constructor (){
-      
-     
+
+
     }
 
     ngOnInit(): void {
-      
-     this.worker_id = this.worker.worker_Id.toString();
+
+     this.worker_id = this.worker.id.toString();
      this.name = this.worker.name;
      this.cpf = this.worker.cpf;
-     this.phone_number = this.worker.phone_Number;
+     this.phone_number = this.worker.phoneNumber;
      this.adress = this.worker.address;
      this.email = this.worker.email;
      this.type = this.worker.type;
-    
+
 
       this.changeClass.subscribe( element =>{
         this.changeClassSelected(element);
@@ -52,7 +52,7 @@ export class WorkerCardListComponent implements OnInit {
       this.itemSelected.emit(id);
     }
 
-   
+
     public changeClassSelected = (id:string) => {
       if(this.worker_id === id && this.isSelected === true)
       {

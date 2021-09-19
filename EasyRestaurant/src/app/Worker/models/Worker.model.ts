@@ -1,25 +1,25 @@
 import { FunctionModel } from 'src/app/Function/Model/FunctionModel';
 export class WorkerModel{
-    
-    public worker_Id : string = "";
+
+    public id : string = "";
     public name : string = "";
     public cpf : string = "";
-    public phone_Number : string = "";
+    public phoneNumber : string = "";
     public address : string = "";
     public email : string = "";
-    public function : FunctionModel = new FunctionModel();   
+    public function : FunctionModel = new FunctionModel();
 
 }
 
 export class WorkerFlatModel{
-    
-    public worker_Id : string = "";
+
+    public id : string = "";
     public name : string = "";
     public cpf : string = "";
-    public phone_Number : string = "";
+    public phoneNumber : string = "";
     public address : string = "";
     public email : string = "";
-    public type : string = "";   
+    public type : string = "";
 
 
 }

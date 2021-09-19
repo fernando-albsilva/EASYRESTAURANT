@@ -22,15 +22,15 @@ export class WorkerCreateDialog implements OnInit, IErSnackBar{
   public isNew: boolean = true;
 
   public messageSent:Subject<any> = new Subject();
-  
+
 
   constructor(
     public dialogRef: MatDialogRef<WorkerCreateDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
-  
-  
+
+
   ngOnInit(): void {
-   
+
     this.functions = this.data.functionList;
     console.log( this.functions.functionList);
     if(this.data.typeOfDialog === 'edit'){
@@ -40,21 +40,21 @@ export class WorkerCreateDialog implements OnInit, IErSnackBar{
   }
 
   public populateWorker = (workerFlat : WorkerFlatModel) => {
-      this.worker.worker_Id = workerFlat.worker_Id;
+      this.worker.id = workerFlat.id;
       this.worker.name = workerFlat.name;
       this.worker.cpf = workerFlat.cpf;
-      this.worker.phone_Number = workerFlat.phone_Number;
+      this.worker.phoneNumber = workerFlat.phoneNumber;
       this.worker.address = workerFlat.address;
       this.worker.email = workerFlat.email;
-      
+
       this.functions.functionList.forEach(element => {
         if(element.type === workerFlat.type)
           {
             this.worker.function.type = element.type;
             this.worker.function.id = element.id;
           }
-      });  
-      
+      });
+
       console.log( this.worker);
   }
 
@@ -65,8 +65,8 @@ export class WorkerCreateDialog implements OnInit, IErSnackBar{
         {
           this.worker.function.type = element.type
         }
-    });  
-  
+    });
+
   }
 
   public onCancel = (): void => {
@@ -78,7 +78,7 @@ export class WorkerCreateDialog implements OnInit, IErSnackBar{
     {
         if(this.worker.name &&
            this.worker.cpf &&
-           this.worker.phone_Number &&
+           this.worker.phoneNumber &&
            this.worker.address &&
            this.worker.email &&
            this.worker.function.type &&
@@ -93,7 +93,7 @@ export class WorkerCreateDialog implements OnInit, IErSnackBar{
     {
       if(this.worker.name &&
         this.worker.cpf &&
-        this.worker.phone_Number &&
+        this.worker.phoneNumber &&
         this.worker.address &&
         this.worker.email &&
         this.worker.function.type &&
@@ -106,7 +106,7 @@ export class WorkerCreateDialog implements OnInit, IErSnackBar{
        this.messageSent.next({type:"error", messageSent : `${PageListMessages.allFieldsMustBeFill}`});
       }
     }
-   
+
   }
 
 
