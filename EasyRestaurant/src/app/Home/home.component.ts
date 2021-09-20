@@ -14,18 +14,18 @@ import { MatDialog } from '@angular/material/dialog';
 export class HomeComponent implements OnInit, IErSnackBar {
 
   //TableRelated
-  @ViewChild('searchTableByNumberInputField') searchTableByNumberInputField: ElementRef<HTMLInputElement> | undefined;  
-  @ViewChild('searchTableClienteNameInputField') searchTableClienteNameInputField: ElementRef<HTMLInputElement> | undefined;  
-  
-  
+  @ViewChild('searchTableByNumberInputField') searchTableByNumberInputField: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('searchTableClienteNameInputField') searchTableClienteNameInputField: ElementRef<HTMLInputElement> | undefined;
+
+
   public optionDisplayTableCommandContent: string = "table";
   public maxTablesAvailable:number = 50;
   public tableSelectOptions:Array<number> = [];
   public listOfTable:Array<TableModel> = [];
   public listOfSelectedTables:Array<number> = [];
-  
+
   //CommandsRelated
-  
+
 
   //erSanckBar
   public messageSent: Subject<any> = new Subject<any>();
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
       for (let index = 1; index <= totalNumberOfTables; index++) {
         let table = new TableModel()
         table.id=index;
-        this.listOfTable.push(table);  
+        this.listOfTable.push(table);
       }
     }
     else
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
     if(!!this.searchTableByNumberInputField)
     {
       let inputText = this.searchTableByNumberInputField.nativeElement.value;
-      this.searchTableByNumberInputField.nativeElement.value = inputText.replace(/\D/g, '');  
+      this.searchTableByNumberInputField.nativeElement.value = inputText.replace(/\D/g, '');
     }
   }
 
@@ -71,14 +71,14 @@ export class HomeComponent implements OnInit, IErSnackBar {
     if(!!this.searchTableClienteNameInputField)
     {
       let inputText = this.searchTableClienteNameInputField.nativeElement.value;
-      this.searchTableClienteNameInputField.nativeElement.value = inputText.replace(/[^a-zA-Z]+/g, '');  
+      this.searchTableClienteNameInputField.nativeElement.value = inputText.replace(/[^a-zA-Z]+/g, '');
     }
   }
 
   private fillTotalTables = () => {
     this.tableSelectOptions = [];
     for (let index = 1; index <= this.maxTablesAvailable; index++) {
-      this.tableSelectOptions.push(index);  
+      this.tableSelectOptions.push(index);
       let table = new TableModel()
       table.id=index;
       this.listOfTable.push(table);
@@ -100,7 +100,6 @@ export class HomeComponent implements OnInit, IErSnackBar {
 
   public selectThisTable = (tableId: number) => {
     let teste = this.listOfSelectedTables.find((element) => element === tableId);
-    console.log(teste);
     if(teste === undefined)
     {
       this.listOfSelectedTables.push(tableId);
@@ -117,12 +116,12 @@ export class HomeComponent implements OnInit, IErSnackBar {
           return true;
         }
       });
-    } 
-    console.log(this.listOfSelectedTables);
+    }
+    // console.log(this.listOfSelectedTables);
   }
 
   public isTableSelected = (tableId: number):boolean => {
-    
+
     let isSelected : boolean = false;
     this.listOfSelectedTables.forEach( element => {
       if(element === tableId)
@@ -135,7 +134,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
   }
 
   public editTable = () => {
-    
+
     if(this.listOfSelectedTables.length === 0)
     {
       this.messageSent.next({type:"warning", messageSent : `${HomeMessages.oneItemMustBeSelected}`});
@@ -147,7 +146,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
       this.messageSent.next({type:"warning", messageSent : `${HomeMessages.onlyOneItemMustBeSelectedToEdit}`});
       return false;
     }
-    
+
     if(this.listOfSelectedTables.length === 1)
     {
       this.openTableEditDialog();
@@ -158,7 +157,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
 
   public openTableEditDialog = () => {
     let table : TableModel =  this.listOfTable.filter( element =>{
-        if(element.id == this.listOfSelectedTables[0])
+        if(element.id === this.listOfSelectedTables[0])
         {
           return true;
         }
@@ -174,14 +173,30 @@ export class HomeComponent implements OnInit, IErSnackBar {
       data: {
         id: table.id,
         isOccupy: table.isOccupy,
+        clientName: table.clientName,
+        waiter: table.waiter,
         products: table.products
       }
     });
 
-    dialogRef.afterClosed().subscribe( (element:any) => {
-      console.log(element);
+    dialogRef.afterClosed().subscribe( (returnedEditedTable:TableModel) => {
+
+      //TODO ver por que a mesa nao está guardando a mesa devolvida ao sair do edit dialog
+      //Revisar isso aqui
+      this.listOfTable.map( (table) => {
+        if(table.id === returnedEditedTable.id)
+        {
+          table = returnedEditedTable;
+          console.log(`Preencheu mesa : ${table.id}`);
+          console.log(`mesa devolvida ${table}`)
+          console.log(table)
+
+        }
+      })
+
+      console.log(`lista nova de mesas gerada `)
+      console.log(this.listOfTable)
     });
-    
   }
   // End //Related Table functions
 }

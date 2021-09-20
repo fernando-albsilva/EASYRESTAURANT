@@ -10,50 +10,55 @@
             <!-- First Card -->
             <div class="content-container">
                   <span class="content-title green">Mesa: {{table.id}}</span>
-                  
+
                   <!-- Input Container 2 inputs -->
                   <div class="input-container">
 
                         <div class="first-input">
-                              <span class="input-label green">Cliente: </span>
-                              <input type="text" class="input green">
-                        </div>
-                      
-                        <div class="first-input">
-                              <span class="input-label green">Garçom: </span>
+                            <span class="input-label green">Garçom: </span>
 
-                             <!-- TODO implementar select de Waiter falta o bind correto -->
-                              <mat-form-field appearance="fill">
-                                    <mat-label>Nome</mat-label>
-                                    <mat-select [(ngModel)]="selectedWaiter.worker_id" name="waiter" (selectionChange)="changeType()">
-                                      <mat-option *ngFor="let waiter of waiters" [value]="waiter.worker_id">
-                                        {{waiter.name}}
-                                      </mat-option>
-                                    </mat-select>
-                                  </mat-form-field>
+                                <!-- Waiter Select -->
+                                <mat-form-field appearance="fill">
+                                  <mat-label>Nome</mat-label>
+                                  <mat-select [(ngModel)]="table.waiter.workerId" name="waiter" (selectionChange)="waiterHasBeenChanged($event.value)">
+                                    <mat-option *ngFor="let waiter of waiters" [value]="waiter.workerId">
+                                      {{waiter.name}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
                         </div>
-                        
+
+                        <!-- Client Name -->
+                        <div class="first-input">
+                              <span class="input-label green">Cliente: </span>
+                              <input [(ngModel)]="table.clientName"  name="clientName" type="text" class="input green">
+                        </div>
+
+
+
                   </div>
 
                   <!-- Info Container -->
                   <div class="info-card-container">
+                      <ng-container *ngIf="table.isOccupy">
+
                         <span class="input-label green"> Informações</span>
                         <div class="info-content">
                               <div class="info-row">
                                     <span class="info-text">Cliente:</span>
-                                    <span class="info-text">João dos santos</span>
+                                    <span class="info-text">{{table.clientName}}</span>
                               </div>
                               <div class="info-row">
-                                    <span class="info-text">Cliente:</span>
-                                    <span class="info-text">João dos santos</span>
+                                    <span class="info-text">Garçom:</span>
+                                    <span class="info-text">{{table.waiter.name}}</span>
                               </div>
                               <div class="info-row">
-                                    <span class="info-text">Cliente:</span>
-                                    <span class="info-text">João dos santos</span>
+                                    <span class="info-text">Inicio:</span>
+                                    <span class="info-text">{{startTimeHtmlBinder}}</span>
                               </div>
                               <div class="info-row">
-                                    <span class="info-text">Cliente:</span>
-                                    <span class="info-text">João dos santos</span>
+                                    <span class="info-text">Duração:</span>
+                                    <span class="info-text">{{durationTimeHtmlBinder}}</span>
                               </div>
                               <div class="info-row">
                                     <span class="info-text">Cliente:</span>
@@ -68,9 +73,10 @@
                                     <span class="info-text">João dos santos</span>
                               </div>
                         </div>
-                        
-                        <button class="btn-start-table">
-                              <span class="input-label green">Iniciar Mesa</span>
+
+                      </ng-container>
+                        <button [ngClass]="{'btn-start-table': true,'btn-disabled': canNotStartTable()}"  (click)="startTable()">
+                              <span [ngClass]="{'input-label green': true, 'label-button-disable': canNotStartTable() }">Iniciar Mesa</span>
                         </button>
                   </div>
             </div>
@@ -78,20 +84,33 @@
             <!-- Sencond/Midlle Card -->
             <div class="content-container">
                   <span class="content-title green">Incluir</span>
-                  
+
                   <!-- Input Container 2 inputs -->
                   <div class="input-container">
-                        
-                        <div class="first-input">
-                              <span class="input-label green">Produto: </span>
-                              <input type="text" class="input green">
-                        </div>
-                      
-                        <div class="first-input">
-                              <span class="input-label green">Quantidade: </span>
-                              <input type="text" class="input green">
-                        </div>
-                        
+
+
+                    <div class="first-input">
+
+                          <span class="input-label green">Produto: </span>
+
+                          <!-- Product Select -->
+                          <mat-form-field appearance="fill">
+                            <mat-label>Nome</mat-label>
+                            <mat-select   (selectionChange)="productHasBeenChanged($event.value)">
+                              <mat-option *ngFor="let product of products" [value]="product.id">
+                                {{product.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                     </div>
+
+
+                    <div class="first-input">
+                          <span class="input-label green">Quantidade: </span>
+                          <input [(ngModel)]="productToAdd.quantity" name="quantity" type="number" class="input green">
+                    </div>
+
                   </div>
 
                   <!-- Info Container -->
@@ -128,9 +147,9 @@
                                     <span class="info-text">R$38,50</span>
                               </div>
                         </div>
-                        
-                        <button class="btn-start-table">
-                              <span class="input-label green">Iniciar Mesa</span>
+
+                        <button [ngClass]="{'btn-start-table': true,'btn-disabled': canNotStartTable()}"  >
+                              <span [ngClass]="{'input-label green': true, 'label-button-disable':canNotStartTable() }" (click)="addProductToTable()">Incluir Produto</span>
                         </button>
                   </div>
 
@@ -142,3 +161,4 @@
 
       </div>
 </div>
+<er-snack-bar [messageRecived]="messageSent"></er-snack-bar>
