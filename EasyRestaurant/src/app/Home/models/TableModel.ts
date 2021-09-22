@@ -1,10 +1,10 @@
-import { ProductModel } from './../../Product/models/Product.model';
 export class TableModel {
       public id: number = 0;
       public isOccupy:boolean = false;
       public clientName: string = "";
       public waiter: WaiterModel = new WaiterModel();
       public products: Array<ProductForTableList> = [];
+      public startTime: TableStartTime = new TableStartTime();
 }
 
 export class WaiterModel {

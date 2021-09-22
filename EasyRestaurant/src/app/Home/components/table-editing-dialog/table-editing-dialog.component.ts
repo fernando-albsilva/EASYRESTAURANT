@@ -21,7 +21,6 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   public products: Array<ProductModel> = []
   public productToAdd:ProductForTableList = new ProductForTableList();
   public selectedWaiter: WaiterModel = new WaiterModel;
-  public tableStartTime: TableStartTime = new TableStartTime();
   public startTimeHtmlBinder: string = "";
   public durationTimeHtmlBinder: string = "";
   public subscriptions: Array<Subscription> = [];
@@ -54,6 +53,7 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
       if(this.table.isOccupy)
       {
         this.startCountingTime();
+        this.bindStartTimeToHtml();
       }
       // console.log(this.table);
 
@@ -65,7 +65,7 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   }
 
   public closeDialog = () => {
-    this.dialogRef.close(this.table);
+      this.dialogRef.close(this.table);
   }
 
   public waiterHasBeenChanged = (waiterId: string) => {
@@ -85,7 +85,7 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
     }
     else{
       this.fillStartTime();
-      this.startTimeHtmlBinder = `${this.tableStartTime.hour} : ${this.tableStartTime.min} : ${this.tableStartTime.sec}`;
+      this.bindStartTimeToHtml();
       this.table.isOccupy = true;
       this.startCountingTime();
     }
@@ -121,9 +121,9 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
 
   private fillStartTime = () => {
     let today = new Date();
-    this.tableStartTime.hour =  today.getHours();
-    this.tableStartTime.min =  today.getMinutes();
-    this.tableStartTime.sec =  today.getSeconds();
+    this.table.startTime.hour =  today.getHours();
+    this.table.startTime.min =  today.getMinutes();
+    this.table.startTime.sec =  today.getSeconds();
   }
 
   private startCountingTime = () => {
@@ -134,9 +134,9 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
 
   private findDurationOfTable = () => {
       let inicialTimeInSeconds =
-        (this.tableStartTime.hour * 3600) +
-        (this.tableStartTime.min * 60) +
-        (this.tableStartTime.sec);
+        (this.table.startTime.hour * 3600) +
+        (this.table.startTime.min * 60) +
+        (this.table.startTime.sec);
 
       this.durationTimeHtmlBinder = this.calcDuration(inicialTimeInSeconds);
       // console.log(inicialTimeInSeconds);
@@ -170,5 +170,14 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
       return number.toString();
     }
   }
+
+  private bindStartTimeToHtml = () => {
+    this.startTimeHtmlBinder =
+         `${this.needZeroBeforeNumber(this.table.startTime.hour)} :
+          ${this.needZeroBeforeNumber(this.table.startTime.min)} :
+          ${this.needZeroBeforeNumber(this.table.startTime.sec)}`;
+  }
+
+
   //TODO pensar como vai ser o objeto devolvido para lista de mesas
 }

@@ -175,7 +175,8 @@ export class HomeComponent implements OnInit, IErSnackBar {
         isOccupy: table.isOccupy,
         clientName: table.clientName,
         waiter: table.waiter,
-        products: table.products
+        products: table.products,
+        startTime: table.startTime
       }
     });
 
@@ -183,20 +184,42 @@ export class HomeComponent implements OnInit, IErSnackBar {
 
       //TODO ver por que a mesa nao está guardando a mesa devolvida ao sair do edit dialog
       //Revisar isso aqui
-      this.listOfTable.map( (table) => {
-        if(table.id === returnedEditedTable.id)
-        {
-          table = returnedEditedTable;
-          console.log(`Preencheu mesa : ${table.id}`);
-          console.log(`mesa devolvida ${table}`)
-          console.log(table)
 
-        }
-      })
-
+     if(returnedEditedTable.isOccupy)
+     {
+        this.pushEditedTableInList(returnedEditedTable)
+     }
+     else
+     {
+        this.clearTableReturned(returnedEditedTable.id)
+     }
       console.log(`lista nova de mesas gerada `)
       console.log(this.listOfTable)
     });
+  }
+
+
+  private pushEditedTableInList = (editedTable:TableModel) =>{
+    this.listOfTable = this.listOfTable.map( (table) => {
+      if(table.id === editedTable.id)
+      {
+        table = editedTable;
+        console.log(`Preencheu mesa : ${table.id}`);
+       }
+       return table;
+     });
+  }
+
+  private clearTableReturned = (editedTableid:number) => {
+    this.listOfTable = this.listOfTable.map( (table) => {
+      if(table.id === editedTableid)
+      {
+        table = new TableModel();
+        table.id = editedTableid;
+        console.log(`Limpou mesa mesa : ${table.id}`);
+       }
+       return table;
+     });
   }
   // End //Related Table functions
 }
