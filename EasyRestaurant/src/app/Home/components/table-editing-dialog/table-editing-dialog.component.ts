@@ -47,14 +47,12 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
     this.table = this.data;
     this.subscriptions.push(this.homeApi.getWaiters().subscribe( (result)=>{
         this.waiters = result;
-        // console.log(this.waiters);
       }, err =>{
         console.log(err);
       }));
 
       this.subscriptions.push(this.homeApi.getProducts().subscribe( (result)=>{
         this.products = result;
-        // console.log(this.products);
       }, err =>{
         console.log(err);
       }));
@@ -65,8 +63,6 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
         this.bindStartTimeToHtml();
         this.populateAccountTable();
       }
-      // console.log(this.table);
-
   }
 
   ngOnDestroy(){
@@ -86,7 +82,6 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
         this.table.waiter.name = waiter.name;
       }
     });
-    // console.log(this.table);
   }
 
   public startTable = () => {
@@ -164,9 +159,6 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   }
 
   public deleteProductFromAccountList = (id:string) => {
-    console.log("chamou com id:",id)
-    console.log("lista atual:")
-    console.log(this.table.products)
     this.table.products = this.table.products.filter( product => {
       if( product.id === id)
       {
@@ -177,8 +169,6 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
         return true;
       }
     });
-    console.log("lista apos filtro:")
-    console.log(this.table.products)
 
     this.updateTableData();
   }
@@ -211,7 +201,6 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
         (this.table.startTime.sec);
 
       this.durationTimeHtmlBinder = this.calcDuration(inicialTimeInSeconds);
-      // console.log(inicialTimeInSeconds);
   };
 
   private calcDuration = (inicialTimeInSeconds:number): string => {
