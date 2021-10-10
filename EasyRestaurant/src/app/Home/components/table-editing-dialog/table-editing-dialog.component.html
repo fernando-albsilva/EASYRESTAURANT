@@ -60,7 +60,7 @@
                                     <span class="info-text">Duração:</span>
                                     <span class="info-text">{{durationTimeHtmlBinder}}</span>
                               </div>
-                              <div class="info-row">
+                              <!-- <div class="info-row">
                                     <span class="info-text">Cliente:</span>
                                     <span class="info-text">João dos santos</span>
                               </div>
@@ -71,7 +71,7 @@
                               <div class="info-row">
                                     <span class="info-text">Cliente:</span>
                                     <span class="info-text">João dos santos</span>
-                              </div>
+                              </div> -->
                         </div>
 
                       </ng-container>
@@ -96,7 +96,7 @@
                           <!-- Product Select -->
                           <mat-form-field appearance="fill">
                             <mat-label>Nome</mat-label>
-                            <mat-select   (selectionChange)="productHasBeenChanged($event.value)">
+                            <mat-select   (selectionChange)="productHasBeenChanged($event.value)" [(ngModel)]="productSelectedValue" [disabled]="!isTableStarted()">
                               <mat-option *ngFor="let product of products" [value]="product.id">
                                 {{product.name}}
                               </mat-option>
@@ -114,48 +114,83 @@
                   </div>
 
                   <!-- Info Container -->
-                  <div class="info-card-container">
-
+                  <div class="info-card-container" >
+                    <ng-container *ngIf="!!productSelectedValue">
                         <span class="input-label green"> Produto  a ser incluido</span>
                         <div class="info-content">
                               <div class="info-row">
                                     <span class="info-text">Produto:</span>
-                                    <span class="info-text">Coca-Cola</span>
+                                    <span class="info-text">{{ productToAdd.name }}</span>
                               </div>
                               <div class="info-row">
                                     <span class="info-text">Valor Unitário:</span>
-                                    <span class="info-text">R$ 15,00</span>
+                                    <span class="info-text">{{ 'R$ '+ (productToAdd.unitValue).toFixed(2) }}</span>
                               </div>
                               <div class="info-row">
                                     <span class="info-text">Quantidade:</span>
-                                    <span class="info-text">2 Unidades</span>
+                                    <span class="info-text">{{ productToAdd.quantity }}</span>
+                              </div>
+                              <div class="info-row">
+                                <span class="info-text">10%</span>
+                                <span class="info-text">{{ 'R$ '+ ((productToAdd.unitValue * productToAdd.quantity) * 0.1).toFixed(2) }}</span>
                               </div>
                               <div class="info-row">
                                     <span class="info-text">Total:</span>
-                                    <span class="info-text">R$30,00</span>
+                                    <span class="info-text">{{ 'R$ '+ (productToAdd.unitValue * productToAdd.quantity).toFixed(2) }}</span>
                               </div>
-                              <div class="info-row">
-                                    <span class="info-text">Conta:</span>
-                                    <span class="info-text">R$35,00</span>
-                              </div>
-                              <div class="info-row">
+                              <!-- <div class="info-row">
                                     <span class="info-text">10%</span>
                                     <span class="info-text">R$3,50</span>
                               </div>
                               <div class="info-row">
                                     <span class="info-text">Total:</span>
                                     <span class="info-text">R$38,50</span>
-                              </div>
+                              </div> -->
                         </div>
-
-                        <button [ngClass]="{'btn-start-table': true,'btn-disabled': canNotStartTable()}"  >
-                              <span [ngClass]="{'input-label green': true, 'label-button-disable':canNotStartTable() }" (click)="addProductToTable()">Incluir Produto</span>
+                      </ng-container>
+                        <button [ngClass]="{'btn-start-table': true,'btn-disabled': includeProductIsDisabled() }" [disabled]="includeProductIsDisabled()" (click)="addProductToTable()"   >
+                              <span [ngClass]="{'input-label green': true, 'label-button-disable':includeProductIsDisabled() }" >Incluir  Produto</span>
                         </button>
                   </div>
 
             </div>
 
-            <div class="content-container">
+            <!-- Third Card -->
+            <div class="content-container content-last-card-container">
+              <span class="content-title green">Conta</span>
+
+              <!-- Input Container 2 inputs -->
+              <div class="input-container last-card-input-container">
+
+                <!-- Table of products -->
+
+
+              </div>
+
+              <!-- Info Container -->
+              <div class="info-card-container  last-info-card" >
+                <ng-container *ngIf="table.isOccupy">
+                    <span class="input-label green"> Detalhes da conta</span>
+                    <div class="info-content">
+                          <div class="info-row">
+                                <span class="info-text">Conta:</span>
+                                <span class="info-text">{{ 'R$ '+ calcTotalAccountWithoutTenPerCent() }}</span>
+                          </div>
+                          <div class="info-row">
+                                <span class="info-text">10%</span>
+                                <span class="info-text">{{ 'R$ '+ calcTenPerCentOfAccount() }}</span>
+                          </div>
+                          <div class="info-row">
+                                <span class="info-text">Total c/ 10%:</span>
+                                <span class="info-text">{{ 'R$ '+ calcTotalAccountWithTenPerCent() }}</span>
+                          </div>
+                    </div>
+                  </ng-container>
+                    <button [ngClass]="{'btn-start-table': true,'btn-disabled': !table.isOccupy }" [disabled]="!table.isOccupy"  >
+                          <span [ngClass]="{'input-label green': true, 'label-button-disable':!table.isOccupy }" >Fechar Conta</span>
+                    </button>
+              </div>
+
 
             </div>
 
