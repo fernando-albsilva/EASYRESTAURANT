@@ -21,6 +21,7 @@ import { FunctionModule } from './Function/function.module';
 import { ProductApi } from './Product/api/product-api';
 import { FunctionApi } from './Function/api/function-api';
 import { WorkerApi } from './Worker/api/worker-api';
+import { ErMessages } from './services/er-messages';
 
 
 
@@ -45,13 +46,14 @@ import { WorkerApi } from './Worker/api/worker-api';
     FunctionModule,
     WorkerModule,
     HomeModule
-  
+
   ],
   providers: [
     ProductApi,
     FunctionApi,
     WorkerApi,
-    HomeApi
+    HomeApi,
+    ErMessages
   ],
   bootstrap: [AppComponent]
 })

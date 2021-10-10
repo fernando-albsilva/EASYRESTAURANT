@@ -1,10 +1,10 @@
-import { TableEditingDialogComponent } from './components/table-editing-dialog/table-editing-dialog.component';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { TableEditingDialogComponent } from './components/table-editing-dialog/table-editing-dialog.component';
 import { Subject } from 'rxjs';
 import { IErSnackBar } from '../Shared/Components/er-snack-bar/Interface/IErSnackBar';
-import { HomeMessages } from './homeMessages/HomeMessages';
 import { TableModel } from './models/TableModel';
 import { MatDialog } from '@angular/material/dialog';
+import { ErMessages } from '../services/er-messages';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +30,9 @@ export class HomeComponent implements OnInit, IErSnackBar {
   //erSanckBar
   public messageSent: Subject<any> = new Subject<any>();
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    private erMessages: ErMessages,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.fillTotalTables();
@@ -55,7 +57,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
     {
       //TODO
       // implementar funcionalidade para nao permitir apagar uma mesa ativa ou selecionada
-      this.messageSent.next({type:"warning", messageSent : `${HomeMessages.canNotChangeTotalTableIfHasAnySelectedOrActive}`});
+      this.messageSent.next({type:"warning", messageSent : `${this.erMessages.canNotChangeTotalTableIfHasAnySelectedOrActive}`});
     }
   }
 
@@ -137,13 +139,13 @@ export class HomeComponent implements OnInit, IErSnackBar {
 
     if(this.listOfSelectedTables.length === 0)
     {
-      this.messageSent.next({type:"warning", messageSent : `${HomeMessages.oneItemMustBeSelected}`});
+      this.messageSent.next({type:"warning", messageSent : `${this.erMessages.oneItemMustBeSelected}`});
       return false;
     }
 
     if(this.listOfSelectedTables.length > 1)
     {
-      this.messageSent.next({type:"warning", messageSent : `${HomeMessages.onlyOneItemMustBeSelectedToEdit}`});
+      this.messageSent.next({type:"warning", messageSent : `${this.erMessages.onlyOneItemMustBeSelectedToEdit}`});
       return false;
     }
 
@@ -169,7 +171,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
 
     const dialogRef = this.dialog.open(TableEditingDialogComponent, {
       height: '90vh',
-      width: '95vw',
+      width:'100vw',
       data: {
         id: table.id,
         isOccupy: table.isOccupy,

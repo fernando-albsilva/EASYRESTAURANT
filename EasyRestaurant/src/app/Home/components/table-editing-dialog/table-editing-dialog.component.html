@@ -163,6 +163,39 @@
               <div class="input-container last-card-input-container">
 
                 <!-- Table of products -->
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z8 account-product-table">
+                   <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef>Produto</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+                  </ng-container>
+
+                  <!-- UnitValue Column -->
+                  <ng-container matColumnDef="unitValue">
+                    <mat-header-cell *matHeaderCellDef>Valor Unitário</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{ 'R$ '+ element.unitValue }} </mat-cell>
+                  </ng-container>
+
+                  <!-- Quantity Column -->
+                  <ng-container matColumnDef="quantity">
+                    <mat-header-cell *matHeaderCellDef>Quantidade</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{ element.quantity }} </mat-cell>
+                  </ng-container>
+
+                  <!-- Total Column -->
+                  <ng-container matColumnDef="totalColumn">
+                    <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      {{ 'R$ '+((element.unitValue * element.quantity).toFixed(2)) }}
+                      <mat-icon (click)="deleteProductFromAccountList(element.id)">delete</mat-icon>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                </mat-table>
+
 
 
               </div>

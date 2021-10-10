@@ -1,5 +1,5 @@
 
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, Subscription } from 'rxjs';
 import { ProductModel } from 'src/app/Product/models/Product.model';
@@ -7,7 +7,9 @@ import { ProductModel } from 'src/app/Product/models/Product.model';
 import { HomeApi } from './../../api/Home.api';
 import { TableModel, WaiterModel, ProductForTableList, TableStartTime } from './../../models/TableModel';
 import { IErSnackBar } from './../../../Shared/Components/er-snack-bar/Interface/IErSnackBar';
-import { HomeMessages } from '../../homeMessages/HomeMessages';
+import { ErMessages } from 'src/app/services/er-messages';
+import { MatTable } from '@angular/material/table';
+
 
 @Component({
   selector: 'table-editing-dialog',
@@ -16,6 +18,9 @@ import { HomeMessages } from '../../homeMessages/HomeMessages';
 })
 export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackBar {
 
+
+  @ViewChild(MatTable) tableView: MatTable<ProductForTableList> | undefined;
+
   public table: TableModel = new TableModel();
   public waiters: Array<WaiterModel> = []
   public products: Array<ProductModel> = []
@@ -23,11 +28,15 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   public selectedWaiter: WaiterModel = new WaiterModel;
   public startTimeHtmlBinder: string = "";
   public durationTimeHtmlBinder: string = "";
+  public productSelectedValue: any;
   public subscriptions: Array<Subscription> = [];
   public messageSent: Subject<any> = new Subject<any>();
+  public displayedColumns: string[] = ['name', 'unitValue', 'quantity', 'totalColumn'];
+  public dataSource: Array<ProductForTableList> = [];
   private timeCounterReference: any;
 
   constructor(
+    private erMessages: ErMessages,
     public dialogRef: MatDialogRef<TableEditingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TableModel,
     private homeApi: HomeApi
@@ -54,6 +63,7 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
       {
         this.startCountingTime();
         this.bindStartTimeToHtml();
+        this.populateAccountTable();
       }
       // console.log(this.table);
 
@@ -81,7 +91,7 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
 
   public startTable = () => {
     if(this.canNotStartTable()){
-      this.messageSent.next({type:"warning", messageSent : `${HomeMessages.haveToFillWaiterAndClientName}`});
+      this.messageSent.next({type:"warning", messageSent : `${this.erMessages.haveToFillWaiterAndClientName}`});
     }
     else{
       this.fillStartTime();
@@ -92,7 +102,6 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   }
 
   public canNotStartTable = () =>{
-    // console.log(this.table)
     if(this.table.clientName === "" || this.table.waiter.workerId === ""){
       return true;
     }
@@ -103,20 +112,83 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
 
   public productHasBeenChanged = (productId: string) =>{
 
-    this.products.forEach((product) => {
+    this.products.findIndex((product) => {
       if(product.id === productId)
       {
         this.productToAdd.set(product.id,product.name,product.unitValue,product.cost);
+        return true;
       }
+      return false;
     });
 
   }
 
   public addProductToTable = () => {
     this.table.products.push(this.productToAdd)
-    console.log(`Produto : ${this.productToAdd.name} adicionado na lista.`)
+    this.updateTableData();
     this.productToAdd = new ProductForTableList();
+    this.clearProductInfoAndSelectBox();
 
+  }
+
+  public includeProductIsDisabled = () => {
+    if(this.productToAdd.id === "" && this.productToAdd.quantity == 0)
+    {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  public isTableStarted = () => {
+    return this.table.isOccupy;
+  }
+
+  public calcTenPerCentOfAccount = () => {
+    let total = parseFloat(this.calcTotalAccountWithoutTenPerCent());
+    return (total*0.1).toFixed(2);
+  }
+
+  public calcTotalAccountWithoutTenPerCent  = () => {
+    let total = 0;
+    this.table.products.forEach( product => {
+      total += (product.unitValue * product.quantity);
+    });
+    return total.toFixed(2);
+  }
+
+  public calcTotalAccountWithTenPerCent = () => {
+    let total = (parseFloat(this.calcTotalAccountWithoutTenPerCent())*1.1).toFixed(2);
+    return total;
+  }
+
+  public deleteProductFromAccountList = (id:string) => {
+    console.log("chamou com id:",id)
+    console.log("lista atual:")
+    console.log(this.table.products)
+    this.table.products = this.table.products.filter( product => {
+      if( product.id === id)
+      {
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    });
+    console.log("lista apos filtro:")
+    console.log(this.table.products)
+
+    this.updateTableData();
+  }
+
+  private clearProductInfoAndSelectBox = () =>{
+    this.productSelectedValue = undefined;
+  }
+
+  private populateAccountTable(){
+    //TODO popula a tabela com os produtos adicionados na conta
   }
 
   private fillStartTime = () => {
@@ -176,6 +248,11 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
          `${this.needZeroBeforeNumber(this.table.startTime.hour)} :
           ${this.needZeroBeforeNumber(this.table.startTime.min)} :
           ${this.needZeroBeforeNumber(this.table.startTime.sec)}`;
+  }
+
+  private updateTableData = () => {
+    this.dataSource = this.table.products;
+    this.tableView?.renderRows();
   }
 
 
