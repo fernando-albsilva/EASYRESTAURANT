@@ -16,4 +16,8 @@ export class ErMessages {
 
   public haveToFillWaiterAndClientName: string = " Só é permitido iniciar com cliente e garçom preenchidos.";
 
+  public quantityOfProductCanNotBeZero: string = " Quantidade de produto não pode ser zero.";
+
+  public thisTableAlredyIsStarted: string = " Essa mesa já foi iniciada.";
+
 }

@@ -182,22 +182,32 @@ export class HomeComponent implements OnInit, IErSnackBar {
       }
     });
 
-    dialogRef.afterClosed().subscribe( (returnedEditedTable:TableModel) => {
+    dialogRef.afterClosed().subscribe( (dataReceived:any) => {
+      if(dataReceived.closeType === 'normal')
+      {
+        this.handleDefaultTableUpdatesJobs(dataReceived.table);
+      }
+      else
+      {
+        if(dataReceived.closeType === 'finishTable')
+        {
+            //TODO implementar como vai ser a sequencia de uma finalização de mesa
+        }
+      }
+     });
+  }
 
-      //TODO ver por que a mesa nao está guardando a mesa devolvida ao sair do edit dialog
-      //Revisar isso aqui
-
-     if(returnedEditedTable.isOccupy)
+  private handleDefaultTableUpdatesJobs = (tableReturned:TableModel) => {
+    if(tableReturned.isOccupy)
      {
-        this.pushEditedTableInList(returnedEditedTable)
+        this.pushEditedTableInList(tableReturned)
      }
      else
      {
-        this.clearTableReturned(returnedEditedTable.id)
+        this.clearTableReturned(tableReturned.id)
      }
-      console.log(`lista nova de mesas gerada `)
-      console.log(this.listOfTable)
-    });
+      // console.log(`lista nova de mesas gerada `)
+      // console.log(this.listOfTable)
   }
 
 

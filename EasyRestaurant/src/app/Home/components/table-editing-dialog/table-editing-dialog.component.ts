@@ -1,14 +1,15 @@
 
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, Subscription } from 'rxjs';
-import { ProductModel } from 'src/app/Product/models/Product.model';
+import { MatTable } from '@angular/material/table';
 
 import { HomeApi } from './../../api/Home.api';
-import { TableModel, WaiterModel, ProductForTableList, TableStartTime } from './../../models/TableModel';
+import { TableModel, WaiterModel, ProductForTableList } from './../../models/TableModel';
 import { IErSnackBar } from './../../../Shared/Components/er-snack-bar/Interface/IErSnackBar';
 import { ErMessages } from 'src/app/services/er-messages';
-import { MatTable } from '@angular/material/table';
+import { ProductModel } from 'src/app/Product/models/Product.model';
+import { ConfirmDialogData, ErConfirmDialog } from './../../../Shared/Components/er-confirm-dialog/er-confirm-dialog.component';
 
 
 @Component({
@@ -38,9 +39,12 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   constructor(
     private erMessages: ErMessages,
     public dialogRef: MatDialogRef<TableEditingDialogComponent>,
+    public erConfirmDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: TableModel,
-    private homeApi: HomeApi
-    ) {}
+    private homeApi: HomeApi)
+    {
+      this.dialogRef.disableClose = true;
+    }
 
 
   ngOnInit(){
@@ -70,8 +74,8 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
     clearInterval(this.timeCounterReference);
   }
 
-  public closeDialog = () => {
-      this.dialogRef.close(this.table);
+  public closeDialog = (closeType:string) => {
+      this.dialogRef.close({table:this.table,closeType});
   }
 
   public waiterHasBeenChanged = (waiterId: string) => {
@@ -85,15 +89,23 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   }
 
   public startTable = () => {
-    if(this.canNotStartTable()){
-      this.messageSent.next({type:"warning", messageSent : `${this.erMessages.haveToFillWaiterAndClientName}`});
+    if(!this.table.isOccupy)
+    {
+      if(this.canNotStartTable()){
+        this.messageSent.next({type:"warning", messageSent : `${this.erMessages.haveToFillWaiterAndClientName}`});
+      }
+      else{
+        this.fillStartTime();
+        this.bindStartTimeToHtml();
+        this.table.isOccupy = true;
+        this.startCountingTime();
+      }
     }
-    else{
-      this.fillStartTime();
-      this.bindStartTimeToHtml();
-      this.table.isOccupy = true;
-      this.startCountingTime();
+    else
+    {
+      this.messageSent.next({type:"warning", messageSent : `${this.erMessages.thisTableAlredyIsStarted}`});
     }
+
   }
 
   public canNotStartTable = () =>{
@@ -119,11 +131,20 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   }
 
   public addProductToTable = () => {
-    this.table.products.push(this.productToAdd)
-    this.updateTableData();
-    this.productToAdd = new ProductForTableList();
-    this.clearProductInfoAndSelectBox();
-
+    if(this.productToAdd.quantity <= 0)
+    {
+      this.messageSent.next({type:"error", messageSent : `${this.erMessages.quantityOfProductCanNotBeZero}`});
+    }
+    else
+    {
+      if(!!this.productSelectedValue)
+      {
+        this.table.products.push(this.productToAdd)
+        this.updateTableData();
+        this.productToAdd = new ProductForTableList();
+        this.clearProductInfoAndSelectBox();
+      }
+    }
   }
 
   public includeProductIsDisabled = () => {
@@ -159,18 +180,39 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   }
 
   public deleteProductFromAccountList = (id:string) => {
-    this.table.products = this.table.products.filter( product => {
-      if( product.id === id)
-      {
-        return false;
-      }
-      else
-      {
-        return true;
-      }
+
+    let dataToSend =  new ConfirmDialogData();
+    dataToSend.set(
+      'Aviso!',
+      'Você realmente deseja remover esse produto?',
+      'orange'
+    )
+
+    const confirmdialogRef = this.erConfirmDialog.open(ErConfirmDialog, {
+      height: '250px',
+      width:'400px',
+      data: dataToSend
     });
 
-    this.updateTableData();
+    confirmdialogRef.afterClosed().subscribe( (optionSelected:string) => {
+        if(optionSelected === 'confirm')
+        {
+          this.table.products = this.table.products.filter( product => {
+            if( product.id === id)
+            {
+              return false;
+            }
+            else
+            {
+              return true;
+            }
+          });
+
+          this.updateTableData();
+        }
+    });
+
+
   }
 
   private clearProductInfoAndSelectBox = () =>{
@@ -178,7 +220,7 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   }
 
   private populateAccountTable(){
-    //TODO popula a tabela com os produtos adicionados na conta
+    this.updateTableData();
   }
 
   private fillStartTime = () => {

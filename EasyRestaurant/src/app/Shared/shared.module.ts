@@ -10,6 +10,7 @@ import { ErPageList } from './Components/er-page-list/er-page-list.component';
 import { ProductCardListComponent } from './Components/er-card-page-list/cards/product-card/product-card-list.component';
 import { ErSnackBar } from './Components/er-snack-bar/er-snack-bar.component';
 import { WorkerCardListComponent } from './Components/er-card-page-list/cards/worker-card/worker-card-list.component';
+import { ErConfirmDialog } from './Components/er-confirm-dialog/er-confirm-dialog.component';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { WorkerCardListComponent } from './Components/er-card-page-list/cards/wo
     CommonModule,
     RouterModule,
     MatIconModule
-    
+
   ],
   exports:[
     ErTopMenu,
@@ -26,7 +27,8 @@ import { WorkerCardListComponent } from './Components/er-card-page-list/cards/wo
     ProductCardListComponent,
     FunctionCardListComponent,
     WorkerCardListComponent,
-    ErSnackBar
+    ErSnackBar,
+    ErConfirmDialog
   ],
   declarations: [
     ErTopMenu,
@@ -35,7 +37,8 @@ import { WorkerCardListComponent } from './Components/er-card-page-list/cards/wo
     ProductCardListComponent,
     FunctionCardListComponent,
     WorkerCardListComponent,
-    ErSnackBar
+    ErSnackBar,
+    ErConfirmDialog
   ],
 })
 export class SharedModule { }

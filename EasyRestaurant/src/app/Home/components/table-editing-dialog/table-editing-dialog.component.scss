@@ -45,7 +45,7 @@
 
       .main-container{
             width: 100%;
-            height: 100%;
+            height: 93%;
             display: flex;
             flex-wrap: nowrap;
             align-items: center;
@@ -54,7 +54,7 @@
             padding: 15px 0px 5px 0px;
 
             .content-container{
-                  width: 28%;
+                  width: 25%;
                   height: 100%;
                   border: 2px solid #AF4FCB;
                   border-radius: 4px;
@@ -179,7 +179,7 @@
             }
 
             .content-last-card-container{
-              width: 42%;
+              width: 49%;
             }
       }
 }
@@ -270,18 +270,71 @@ mat-form-field{
   height: 100%;
 }
 
-.mat-cell{
-  padding: 0px !important;
-  overflow-wrap: break-word !important;
-  word-wrap: break-word !important;
-  justify-content: space-between;
-  word-break: break-word !important;
-  -ms-hyphens: auto !important;
-  -moz-hyphens: auto !important;
-  -webkit-hyphens: auto !important;
-  hyphens: auto !important;
+.delete-product-icon{
+  color: #D7436E ;
+}
+.delete-product-icon:hover{
+  cursor: pointer ;
+}
+.delete-product-icon:active{
+  position: relative ;
+  top: 1px;
 }
 
-.mat-header-cell{
+/////////////////////////////////////// table
+
+
+.mat-table{
+  background-color: transparent !important;
+}
+
+.mat-header-cell,.mat-cell{
   padding: 0px !important;
 }
+
+.mat-row{
+  border-bottom-color: rgb(38 179 115 / 60%) !important;
+
+  &::ng-deep .mat-cell{
+      color:#26B373
+  }
+}
+
+.mat-header-row {
+  border-bottom-color: rgb(38 179 115 / 60%) !important;
+
+  &::ng-deep .mat-header-cell{
+      color:#26B373
+  }
+}
+
+.last-cell{
+  justify-content: space-between !important;
+}
+
+.first-cell{
+  width: 40% !important;
+}
+//estiliza linha inferior de items por página da páginação
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color:  #26B373 !important;
+}
+
+//estiliza fonte do número de items de página na páginação
+::ng-deep .mat-select-value-text{
+
+  ::ng-deep span{
+  color: #26B373;
+  }
+}
+
+//estiliza background da linha par
+.mat-row:nth-child(even){
+  background-color: transparent;
+}
+
+//estiliza background da linha ímpar
+.mat-row:nth-child(odd){
+  background-color: transparent;
+}
+

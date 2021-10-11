@@ -1,7 +1,7 @@
 <div class="table-dialog-container">
       <div class="header-container">
             <span class="header-title">Controle de Mesa</span>
-            <button class="btn-voltar" (click)="closeDialog()">Voltar</button>
+            <button class="btn-voltar" (click)="closeDialog('normal')">Voltar</button>
       </div>
 
       <!-- Content container -->
@@ -166,8 +166,8 @@
                 <mat-table [dataSource]="dataSource" class="mat-elevation-z8 account-product-table">
                    <!-- Name Column -->
                   <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef>Produto</mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef class="first-cell">Produto</mat-header-cell>
+                    <mat-cell *matCellDef="let element" class="first-cell"> {{ element.name }} </mat-cell>
                   </ng-container>
 
                   <!-- UnitValue Column -->
@@ -185,9 +185,13 @@
                   <!-- Total Column -->
                   <ng-container matColumnDef="totalColumn">
                     <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                      {{ 'R$ '+((element.unitValue * element.quantity).toFixed(2)) }}
-                      <mat-icon (click)="deleteProductFromAccountList(element.id)">delete</mat-icon>
+                    <mat-cell *matCellDef="let element" class="last-cell">
+                      <span>
+                        {{ 'R$ '+((element.unitValue * element.quantity).toFixed(2)) }}
+                      </span>
+                      <button (click)="deleteProductFromAccountList(element.id)">
+                        <mat-icon class="delete-product-icon">delete_forever</mat-icon>
+                      </button>
                     </mat-cell>
                   </ng-container>
 
@@ -219,7 +223,7 @@
                           </div>
                     </div>
                   </ng-container>
-                    <button [ngClass]="{'btn-start-table': true,'btn-disabled': !table.isOccupy }" [disabled]="!table.isOccupy"  >
+                    <button [ngClass]="{'btn-start-table': true,'btn-disabled': !table.isOccupy }" [disabled]="!table.isOccupy" (click)="closeDialog('finishTable')" >
                           <span [ngClass]="{'input-label green': true, 'label-button-disable':!table.isOccupy }" >Fechar Conta</span>
                     </button>
               </div>
