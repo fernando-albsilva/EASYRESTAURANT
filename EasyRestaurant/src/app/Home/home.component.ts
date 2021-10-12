@@ -5,6 +5,8 @@ import { IErSnackBar } from '../Shared/Components/er-snack-bar/Interface/IErSnac
 import { TableModel } from './models/TableModel';
 import { MatDialog } from '@angular/material/dialog';
 import { ErMessages } from '../services/er-messages';
+import { InvoiceCommand, TableCommand } from './commands/HomeCommands';
+import { HomeApi } from './api/Home.api';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
 
   constructor(
     private erMessages: ErMessages,
+    private homeApi: HomeApi,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -192,6 +195,7 @@ export class HomeComponent implements OnInit, IErSnackBar {
         if(dataReceived.closeType === 'finishTable')
         {
             //TODO implementar como vai ser a sequencia de uma finalização de mesa
+            this.handleFinishTableJobs(dataReceived.table);
         }
         else
         {
@@ -214,6 +218,22 @@ export class HomeComponent implements OnInit, IErSnackBar {
 
   private handleCancelTableUpdateJobs = (tableReturned:TableModel) => {
     this.clearTableReturned(tableReturned.id);
+  }
+
+  private handleFinishTableJobs = (table:TableModel) => {
+      let tableCommand =
+        new TableCommand(
+          table.clientName,
+          table.waiter.workerId,
+          table.products);
+
+      let invoiceCommand = new InvoiceCommand(tableCommand);
+
+      this.homeApi.createInvoice(invoiceCommand).subscribe (result =>{
+        console.log(result);
+      },err => {
+        console.log(err);
+      });
   }
 
   private pushEditedTableInList = (editedTable:TableModel) =>{

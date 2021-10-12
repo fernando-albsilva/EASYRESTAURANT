@@ -1,4 +1,4 @@
-import { WaiterModel } from './../models/TableModel';
+import { TableModel, WaiterModel } from './../models/TableModel';
 import { Injectable,  } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Guid } from "guid-typescript";
 import { ProductModel } from 'src/app/Product/models/Product.model';
+import { InvoiceCommand } from '../commands/HomeCommands';
 
 
 
@@ -31,6 +32,12 @@ export class HomeApi {
 
   }
 
+  public createInvoice = (cmd: InvoiceCommand):Observable<any> => {
+
+    cmd.id=Guid.create()+"";
+    return  this.http.post(`${ this.apiUrl }/CreateInvoice`, cmd);
+
+}
 
 
 
