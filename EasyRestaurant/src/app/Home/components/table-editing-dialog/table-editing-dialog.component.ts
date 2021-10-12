@@ -180,21 +180,13 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
   }
 
   public deleteProductFromAccountList = (id:string) => {
-
-    let dataToSend =  new ConfirmDialogData();
-    dataToSend.set(
+    let confirmDialog = this.callConfimrDialog(
       'Aviso!',
       'Você realmente deseja remover esse produto?',
       'orange'
     )
 
-    const confirmdialogRef = this.erConfirmDialog.open(ErConfirmDialog, {
-      height: '250px',
-      width:'400px',
-      data: dataToSend
-    });
-
-    confirmdialogRef.afterClosed().subscribe( (optionSelected:string) => {
+    confirmDialog.afterClosed().subscribe( (optionSelected:string) => {
         if(optionSelected === 'confirm')
         {
           this.table.products = this.table.products.filter( product => {
@@ -207,12 +199,46 @@ export class TableEditingDialogComponent implements OnInit, OnDestroy, IErSnackB
               return true;
             }
           });
-
           this.updateTableData();
         }
     });
 
 
+  }
+
+  public cancelTable = () => {
+
+    let confirmDialog = this.callConfimrDialog (
+      'Aviso!',
+      'Você ira apagar todos os dados referente a essa mesa em andamento, tem certeza que deseja cancelar essa conta?',
+      'orange'
+    )
+
+    confirmDialog.afterClosed().subscribe( (optionSelected:string) => {
+          if(optionSelected === 'confirm')
+          {
+            this.closeDialog('cancelTable');
+          }
+    });
+  }
+
+  private callConfimrDialog(title:string,message:string,messaColor?:string,titleColor?:string)
+  {
+    let dataToSend =  new ConfirmDialogData();
+    dataToSend.set(
+      title,
+      message,
+      titleColor,
+      messaColor
+    )
+
+    const confirmdialogRef = this.erConfirmDialog.open(ErConfirmDialog, {
+      height: '250px',
+      width:'400px',
+      data: dataToSend
+    });
+
+    return confirmdialogRef;
   }
 
   private clearProductInfoAndSelectBox = () =>{

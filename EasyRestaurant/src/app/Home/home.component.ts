@@ -193,23 +193,28 @@ export class HomeComponent implements OnInit, IErSnackBar {
         {
             //TODO implementar como vai ser a sequencia de uma finalização de mesa
         }
+        else
+        {
+          if(dataReceived.closeType === 'cancelTable')
+          {
+            this.handleCancelTableUpdateJobs(dataReceived.table);
+          }
+        }
       }
      });
   }
 
   private handleDefaultTableUpdatesJobs = (tableReturned:TableModel) => {
-    if(tableReturned.isOccupy)
-     {
-        this.pushEditedTableInList(tableReturned)
-     }
-     else
-     {
-        this.clearTableReturned(tableReturned.id)
-     }
-      // console.log(`lista nova de mesas gerada `)
-      // console.log(this.listOfTable)
+    if(tableReturned.isOccupy) {
+      this.pushEditedTableInList(tableReturned)
+    }else{
+      this.clearTableReturned(tableReturned.id);
+    }
   }
 
+  private handleCancelTableUpdateJobs = (tableReturned:TableModel) => {
+    this.clearTableReturned(tableReturned.id);
+  }
 
   private pushEditedTableInList = (editedTable:TableModel) =>{
     this.listOfTable = this.listOfTable.map( (table) => {

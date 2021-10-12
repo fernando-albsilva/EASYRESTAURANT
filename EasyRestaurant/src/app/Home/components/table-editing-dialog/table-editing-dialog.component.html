@@ -223,9 +223,14 @@
                           </div>
                     </div>
                   </ng-container>
-                    <button [ngClass]="{'btn-start-table': true,'btn-disabled': !table.isOccupy }" [disabled]="!table.isOccupy" (click)="closeDialog('finishTable')" >
-                          <span [ngClass]="{'input-label green': true, 'label-button-disable':!table.isOccupy }" >Fechar Conta</span>
+                  <div class="cancel-table-and-finosh-buttons-container">
+                    <button [ngClass]="{'btn-cancel-table': true,'btn-disabled': !table.isOccupy }" [disabled]="!table.isOccupy" (click)="cancelTable()" >
+                      <span [ngClass]="{'input-label red': true, 'label-button-disable':!table.isOccupy }" >Cancelar Conta</span>
                     </button>
+                    <button [ngClass]="{'btn-finish-table': true,'btn-disabled': !table.isOccupy }" [disabled]="!table.isOccupy" (click)="closeDialog('finishTable')" >
+                      <span [ngClass]="{'input-label blue': true, 'label-button-disable':!table.isOccupy }" >Fechar Conta</span>
+                    </button>
+                  </div>
               </div>
 
 

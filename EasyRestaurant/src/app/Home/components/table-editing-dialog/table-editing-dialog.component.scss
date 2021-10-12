@@ -156,6 +156,24 @@
                               border-radius: 4px;
                         }
 
+                        .btn-cancel-table{
+                              height: 40px;
+                              width: 100%;
+                              box-sizing: border-box;
+                              padding: 10px 10px;
+                              border: 2px solid #D7436E;
+                              border-radius: 4px;
+                        }
+
+                        .btn-finish-table{
+                              height: 40px;
+                              width: 100%;
+                              box-sizing: border-box;
+                              padding: 10px 10px;
+                              border: 2px solid #2B6AC5;
+                              border-radius: 4px;
+                        }
+
                         .btn-disabled{
                           border: 2px solid #757575;
                         }
@@ -175,6 +193,11 @@
                   }
                .last-info-card{
                 height: calc(50% - 40px);
+
+                .cancel-table-and-finosh-buttons-container{
+                  display: flex;
+                  gap: 20px;
+                }
                }
             }
 
@@ -338,3 +361,12 @@ mat-form-field{
   background-color: transparent;
 }
 
+
+button:hover{
+  cursor: pointer;
+}
+
+button:active{
+  position: relative;
+  top: 1px;
+}
